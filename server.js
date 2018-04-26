@@ -6,15 +6,24 @@ var engine = require('ejs-mate');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
+var flash = require('connect-flash');
+
+
+var router = express.Router();
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/lms');
+require('./config/passport');
+
+mongoose.Promise = global.Promise;
+//mongoose.connect('mongodb://localhost/lms');
 
 app.use(express.static('public'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.use(cookieParser());
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
@@ -25,18 +34,27 @@ app.use(session({
 	store : new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
-app.get('/',function(req, res, next){
-	res.render('index');
-});
+app.use(flash());
 
-app.get('/employee',function(req, res, next){
-	res.render('employee');
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/owner',function(req, res, next){
-	res.render('owner');
-});
+require('./routes/user') (app,passport);
 
+// // catch 404 and forward to error handler
+// app.use(function(req,res,next){
+// 	next(createError(404));
+// });
+
+// //error handler
+// app.use(function(err,req,res,next){
+// 	res.locals.message = err.message;
+// 	res.locals.error = res.app.get('env') === 'development' ? err : {};
+
+// 	//error page
+// 	res.status(err.status || 500);
+// 	res.render('error');
+// });
 
 app.listen(3000, function(){
 	console.log("App running on port 3000");
