@@ -1,4 +1,5 @@
 <% layout('layout/management') %>
+<head><link rel="stylesheet" type="text/css" href="/css/employee.css"></head>
 
 <body class="fix-header fix-sidebar">
 	<div id="main-wrapper">
@@ -8,89 +9,101 @@
 		<% include partials/sidebar %>		
 
 		<div class="page-wrapper">
-			<div class="col-sm-7 ">
-          <h3>Current Sales</h3>
-            <div class="table-responsive"style="height: 512px;overflow:auto;> <!-- style="height: 400px ;overflow:auto; -->
-                <table class="table table-primary" id="salesTable">
-                  <thead id="table-head">
-                    <tr>
-                      <th scope="col">#<%=item[0].productName%></th>
-                      <th scope="col" id="barcode">Item ID</th>
-                      <th scope="col">Item Name</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Item Price</th>
-                    </tr>
-                  </thead>
-                </table>
+      <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Checkout</h3> </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Checkout</li>
+                    </ol>
+                </div>
             </div>
-      </div>
-      <div class="col-sm-3">
-        <div id="avatar">
-          <!-- <img src="images/user.svg"  width="40" height="40" alt="Employee Avatar"> -->
-          <p> Employee Name</p>
-          <!-- <a class="btn btn-primary" href="#" role="button">Log out</a> -->
-          <table class="table" id="rightTable">
-            <tr>
-              <th scope="col">SubTotal</th>
-              <td scope="col" id="sub_total">0</td>
-            </tr>
-            <tr>
-              <th scope="col">Promotion</th>
-              <td scope="col" id="promotion">0</td>
-            </tr>
-            <tr>
-              <th scope="col">Tax</th>
-              <td scope="col" id="tax">0</td>
-            </tr>
-            <tr>
-              <th scope="col">Item ID</th>
-              <td scope="col">
-                <input type="text" id="item_id">
-              </td>
-            </tr>
-            <tr>
-              <th scope="col">Quantity</th>
-              <td scope="col">  <input type="number" name="quantity" min="1" value=1 id="quantity"></td>
-            </tr>
-            <tr>
-              <th scope="col">Total</th>
-              <td scope="col" id="sum">0</td>
-            </tr>
-          </table>
-          <table>
-            <tbody>
+            <!-- End Bread crumb --> 
+      <div class="row bg-white m-l-0 m-r-0 box-shadow ">
+  			<div class="col-lg-8">
+              <div class="table-responsive"style="height: 512px;overflow:auto;> <!-- style="height: 400px ;overflow:auto; -->
+                  <table class="table table-primary" id="salesTable">
+                    <thead id="table-head">
+                      <tr>
+                        <th scope="col">#<%=item[0].productName%></th>
+                        <th scope="col" id="barcode">Item ID</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Item Price</th>
+                      </tr>
+                    </thead>
+                  </table>
+              </div>
+        </div>
+        <div class="col-lg-4">
+          <div id="avatar">
+            <!-- <img src="images/user.svg"  width="40" height="40" alt="Employee Avatar"> -->
+            <!-- <a class="btn btn-primary" href="#" role="button">Log out</a> -->
+            <table class="table" id="rightTable">
               <tr>
-                <th>
-                  <button type="button" class="btn" id="add_btn" onclick="addFunc()">Add Item</button>
-                </th>
-                <th>
-                  <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
-                </th>
+                <th scope="col">SubTotal</th>
+                <td scope="col" id="sub_total">0</td>
               </tr>
               <tr>
-                <th>
-                  <button type="button" class="btn" id="scan_btn">Scan Barcode</button>
-                </th>
-                <th>
-                  <button type="button" class="btn promBtn" onclick="promFunc(20)">20%</button>
-                </th>
+                <th scope="col">Promotion</th>
+                <td scope="col" id="promotion">0</td>
               </tr>
               <tr>
-                <th>
-                  <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
-                </th>
-                <th>
-                  <button type="button" class="btn promBtn" onclick="promFunc(50)">50%</button>
-                </th>
+                <th scope="col">Tax</th>
+                <td scope="col" id="tax">0</td>
               </tr>
               <tr>
-                <td colspan="2" rowspan="2">
-                  <button type="button" class="btn" id="pay_btn" onclick="payFunc()">Pay</button>
+                <th scope="col">Item ID</th>
+                <td scope="col">
+                  <input type="text" id="item_id">
                 </td>
               </tr>
-            </tr>
-          </tbody>
-          </table>
+              <tr>
+                <th scope="col">Quantity</th>
+                <td scope="col">  <input type="number" name="quantity" min="1" value=1 id="quantity"></td>
+              </tr>
+              <tr>
+                <th scope="col">Total</th>
+                <td scope="col" id="sum">0</td>
+              </tr>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <th>
+                    <button type="button" class="btn" id="add_btn" onclick="addFunc()">Add Item</button>
+                  </th>
+                  <th>
+                    <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    <button type="button" class="btn" id="scan_btn">Scan Barcode</button>
+                  </th>
+                  <th>
+                    <button type="button" class="btn promBtn" onclick="promFunc(20)">20%</button>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
+                  </th>
+                  <th>
+                    <button type="button" class="btn promBtn" onclick="promFunc(50)">50%</button>
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2" rowspan="2">
+                    <button type="button" class="btn" id="pay_btn" onclick="payFunc()">Pay</button>
+                  </td>
+                </tr>
+              </tr>
+            </tbody>
+            </table>
+        </div>
       </div>
       <!-- Modal for Pay button-->
       <div id="myModal" class="modal fade" role="dialog">
@@ -148,7 +161,6 @@
       </div>
     </div>
 <script>
-    alert("connected");
     function addFunc() {
     if (document.getElementById("item_id").value == null) {
       alert("Please enter item id");

@@ -6,16 +6,6 @@ router.get('/', (req, res, next) =>{
 	res.render('index', {title: 'Login || myLittleShop'});
 });
 
-router.get('/app', (req, res, next) =>{
-  res.render('checkout', {title: 'Checkout || myLittleShop'});
-});
-
-router.get('/employee', (req, res, next) =>{
-	var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
-	res.render('employee', {title: 'Employee || myLittleShop',item : shop2SoldDrink});
-});
-
 router.post("/", function (req, res, next) {
 
   if (req.body.username &&
@@ -59,17 +49,8 @@ router.post("/", function (req, res, next) {
   }
 });
 
-router.get('/owner', (req, res, next) =>{
-	res.render('owner', {title: 'Owner || myLittleShop'});
-
-});
-
-router.get('/signup', (req, res, next) =>{
-	res.render('signup', {title: 'Signup || myLittleShop'});
-
-});
-
 router.get('/home', (req,res, next) =>{
   res.render('dashboard', {title: 'Dashboard || myLittleShop'});
 })
+
 module.exports = router;
