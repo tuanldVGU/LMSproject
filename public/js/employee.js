@@ -36,7 +36,7 @@ function payFunc() {
 	// $("#myModal").find('.p').val('xxx');
 	$("#myModal").modal("show");	
 	// window.alert("Total: "+ sub_total*(100-promotion)/100 * 0.9);
-	myTable = document.getElementById("product");
+	myTable = document.getElementById("salesTable");
 	var rowCount = myTable.rows.length; while(--rowCount) myTable.deleteRow(rowCount);
 	document.getElementById("sub_total").innerHTML = 0;
 	document.getElementById("tax").innerHTML = 0;
