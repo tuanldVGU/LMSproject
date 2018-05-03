@@ -1,4 +1,4 @@
-var data = document.getElementById('yy').value
+
 var sub_total=0;
 var promotion=0;
 

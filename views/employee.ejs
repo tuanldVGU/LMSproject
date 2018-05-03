@@ -201,6 +201,26 @@ function payFunc() {
 	document.getElementById("promotion").innerHTML = 0;
 
 }
+var del = document.getElementById('pay_btn')
+
+del.addEventListener('click', function () {
+  fetch('employee', {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'name': 'Darth Vader'
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json()
+  }).
+  then(data => {
+    console.log("hello"+data)
+    window.location.reload()
+  })
+})
  </script>
 
 <script type="text/javascript" src="/js/employee.js"></script>

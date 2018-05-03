@@ -50,6 +50,9 @@ MongoClient.connect(url, function(err, client) {
     }
     console.log(docs.shop1.sold_drink[1])
     app.set('data',docs)
+    app.put('/employee', (req,res)=>{
+      console.log("hello"+req.body.name)
+    })
     //console.log(docs.barcode);
     
   });
