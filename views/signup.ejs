@@ -1,0 +1,16 @@
+<% layout('layout') %>
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">	
+</head>
+<div class="login-page">
+	<div class="form">
+		<h3>Sign up</h3><br>
+		 <form class="register-form" action="/signup" method="post">
+		      <input type="text" name="username" placeholder="Username"/>
+		      <input type="password" name="Password" placeholder="password"/>
+		      <input type="text" name="role" placeholder="Role"/>
+		      <button>Create</button>
+		      <p class="message">Already registered? <a href="/">Sign In</a></p>
+   		 </form>
+	</div>
+</div>

@@ -13,6 +13,30 @@ passport.deserializeUser((id,done)=>{
 	});
 });
 
+passport.use('local.signup', new LocalStrategy({
+	usrnameField: 'usrname',
+	passwrdField: 'password',
+	passReqToCallback: true
+},(req, usrname,password,done) =>{
+	User.findOne({'usrname': usrname},(err,user)=>{
+		if (err){
+			return done(err);
+		}
+		if (user){
+			return done(null, false);
+		}
+
+		var newUser = new User();
+		newUser.usrname = req.body.usrname;
+		newUser.password = newUser.encryptPassword(req.body.password);
+		newUser.role = req.body.role;
+
+		newUser.save((err)=>{
+			return done(null, newUser);
+		})
+	})
+}));
+
 passport.use('local.login', new LocalStrategy({
 	usrnameField: 'usrname',
 	passwrdField: 'password',
