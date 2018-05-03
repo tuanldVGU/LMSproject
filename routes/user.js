@@ -1,11 +1,16 @@
 module.exports = (app,passport) => {
-	app.get('/', (req, res, next) =>{
+
+	app.get('/employee', (req, res, next) =>{
+		var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
+		var shop2SoldDrink = shop1SoldDrink;
+		app.get('/', (req, res, next) =>{
 		res.render('index', {title: 'Login || myLittleShop'});
 
 	});
-
-	app.get('/employee', (req, res, next) =>{
-		res.render('employee', {title: 'Employee || myLittleShop'});
+		res.render('employee', {
+			title: 'Employee || myLittleShop',
+			item : shop2SoldDrink
+		});
 
 	});
 
