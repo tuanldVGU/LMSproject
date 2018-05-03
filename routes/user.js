@@ -6,6 +6,10 @@ router.get('/', (req, res, next) =>{
 	res.render('index', {title: 'Login || myLittleShop'});
 });
 
+router.get('/app', (req, res, next) =>{
+  res.render('checkout', {title: 'Checkout || myLittleShop'});
+});
+
 router.get('/employee', (req, res, next) =>{
 	var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
   var shop2SoldDrink = shop1SoldDrink;
