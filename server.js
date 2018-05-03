@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var debug = require('debug')('mylittleshop:server');
 
+const PORT = process.env.PORT || 3000
+
 var app = express();
 
 /*
@@ -100,6 +102,6 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-app.listen(3000, function(){
+app.listen(PORT, function(){
 	console.log("App running on port 3000");
 })

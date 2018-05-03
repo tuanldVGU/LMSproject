@@ -6,8 +6,8 @@ function startScanner(){
 			type : "LiveStream",
 			target: document.querySelector('#scanner-container'),
 			constraints:{
-				width:800,
-				height: 500,
+				width:400,
+				height: 200,
 				facingMode: "environment"
 			},
 		},
@@ -81,8 +81,17 @@ function startScanner(){
 document.getElementById("scan_btn").addEventListener("click", function () {
 	if (isScanning) {
 		Quagga.stop();
+		isScanning=false;
 	} else {
 		startScanner();
 		$("#camModal").modal("toggle");
 	}
+}, false);
+
+
+
+
+document.getElementById("webcamBtn").addEventListener("click", function () {
+		Quagga.stop();
+		isScanning=false;
 }, false);

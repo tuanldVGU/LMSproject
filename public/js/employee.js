@@ -42,7 +42,7 @@ function payFunc() {
 	document.getElementById("tax").innerHTML = 0;
 	document.getElementById("sum").innerHTML = 0;
 	document.getElementById("promotion").innerHTML = 0;
-
+	startScanner();
 }
 function promFunc(value) {
 	document.getElementById("promotion").innerHTML = value+"%";
