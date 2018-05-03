@@ -8,7 +8,7 @@ router.get('/', (req, res, next) =>{
 
 router.get('/employee', (req, res, next) =>{
 	var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-	var shop2SoldDrink = shop1SoldDrink;
+  var shop2SoldDrink = shop1SoldDrink;
 	res.render('employee', {title: 'Employee || myLittleShop',item : shop2SoldDrink});
 });
 

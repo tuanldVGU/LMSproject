@@ -7,14 +7,14 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var debug = require('debug')('mylittleshop:server');
-
+var path = require("path");
 var app = express();
 
 /*
 Database and Models
 */
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
 mongoose.connect(url);
 var db = mongoose.connection;
