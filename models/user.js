@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
 	username: {type: String , unique: true, required: true, trim: true},
 	password: {type: String},
 	role: {type: String, default: ''},
+  shop: {type: String},
 	salt: {type: String},
 	hash: {type: String}
 });

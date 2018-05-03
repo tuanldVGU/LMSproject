@@ -16,13 +16,15 @@ router.post("/", function (req, res, next) {
 
   if (req.body.username &&
     req.body.password &&
-    req.body.role) {
+    req.body.role &&
+    req.body.shop) {
 
     var userData = {
       email: req.body.username,
       username: req.body.username,
       password: req.body.password,
       role: req.body.role,
+      shop: req.body.shop,
     }
 
     User.create(userData, function (error, user) {
@@ -31,7 +33,7 @@ router.post("/", function (req, res, next) {
         alert;
       } else {
         req.session.userId = user._id;
-        return res.redirect('/');
+        return res.redirect('/home');
       }
     });
 
@@ -43,7 +45,7 @@ router.post("/", function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/employee');
+        return res.redirect('/home');
       }
     });
   } else {
@@ -63,4 +65,7 @@ router.get('/signup', (req, res, next) =>{
 
 });
 
+router.get('/home', (req,res, next) =>{
+  res.render('dashboard', {title: 'Dashboard || myLittleShop'});
+})
 module.exports = router;
