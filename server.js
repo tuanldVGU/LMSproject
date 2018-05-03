@@ -7,6 +7,9 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var debug = require('debug')('mylittleshop:server');
+var path = require("path");
+
+const PORT = process.env.PORT || 3000
 
 var app = express();
 
@@ -14,7 +17,7 @@ var app = express();
 Database and Models
 */
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
 mongoose.connect(url);
 var db = mongoose.connection;
@@ -50,6 +53,9 @@ MongoClient.connect(url, function(err, client) {
     }
     console.log(docs.shop1.sold_drink[1])
     app.set('data',docs)
+    app.put('/employee', (req,res)=>{
+      console.log("hello"+req.body.name)
+    })
     //console.log(docs.barcode);
     
   });
@@ -100,6 +106,6 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-app.listen(3000, function(){
+app.listen(PORT, function(){
 	console.log("App running on port 3000");
 })
