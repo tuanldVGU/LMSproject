@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
@@ -8,23 +7,10 @@ router.get('/', (req, res, next) =>{
 });
 
 router.get('/employee', (req, res, next) =>{
-	res.render('employee', {title: 'Employee || myLittleShop'});
+	var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
+	var shop2SoldDrink = shop1SoldDrink;
+	res.render('employee', {title: 'Employee || myLittleShop',item : shop2SoldDrink});
 });
-=======
-module.exports = (app,passport) => {
-
-	app.get('/employee', (req, res, next) =>{
-		var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-		var shop2SoldDrink = shop1SoldDrink;
-		app.get('/', (req, res, next) =>{
-		res.render('index', {title: 'Login || myLittleShop'});
-
-	});
-		res.render('employee', {
-			title: 'Employee || myLittleShop',
-			item : shop2SoldDrink
-		});
->>>>>>> 67a9efbec09b399c9d3bfe2e5c3beb22921b6695
 
 router.post("/", function (req, res, next) {
 

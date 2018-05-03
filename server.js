@@ -26,7 +26,6 @@ db.once('open',function (){
 
 // connect database server-side
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
 var findDocuments = function(db, callback) {
   // Get the documents collection
   var collection = db.collection('secondCollection');
@@ -101,46 +100,6 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-<<<<<<< HEAD
-/*
-Start server
-*/
-=======
-// connect database server-side
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
-var findDocuments = function(db, callback) {
-  // Get the documents collection
-  var collection = db.collection('secondCollection');
-  // Find some documents
-  
-  collection.find().toArray(function(err, items) {
-    console.log("Found the following records");
-    callback(items[0]);
-  });
-
-
-}
-
-// Use connect method to connect to the Server
-MongoClient.connect(url, function(err, client) {
-  const db = client.db('mylittleshop')
-  console.log("Connected correctly to server");
-  //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
-  findDocuments(db, function(docs) {
-    exports.getDataShop1 = function() {
-      return docs;
-    }
-    console.log(docs.shop1.sold_drink[1])
-    app.set('data',docs)
-    //console.log(docs.barcode);
-    
-  });
-  
-  
-});
-
->>>>>>> 67a9efbec09b399c9d3bfe2e5c3beb22921b6695
 app.listen(3000, function(){
 	console.log("App running on port 3000");
 })
