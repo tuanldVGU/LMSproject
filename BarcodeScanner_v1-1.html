@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -171,4 +172,179 @@
 		}, false);
 	</script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<center>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>	
+        canvas.drawing, canvas.drawingBuffer {
+            position: absolute;
+            left: 0;
+            top: 1;
+        }
+    </style>
+	
+	<a href="BarcodeGenerator.html">Generate barcode</a>
+	
+	<form>
+	<p class="big">
+		<h1>Barcode Scanner</h1><br>
+		<input type="text" id="barcode"><br>
+	</p>
+	</form> 
+	<input type="button" id="btn" value="Start/Stop scanner"/>
+</center>
+</head>
+
+<body>
+	<div id="scanner-container"></div>
+	<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+	
+	<center>
+		<br><h1>Checkout</h1>
+		<style>
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		th, td{
+			padding: 10px;
+			text-align: center;
+		}
+		</style>
+		<table id="table">
+		<tr id="1">
+			<th>Product name</th>
+			<th>Price</th>
+			<th>Barcode</th>
+		</tr>
+		</table>
+	</center>
+	
+	<script>
+		var rowPosition=1;
+		var id=1;
+		var index=0;
+		var table=document.getElementById("table");
+		
+		var cell1, cell2, cell3;
+		function addProduct(){		
+			var row=table.insertRow(rowPosition);
+			row.rowIndex=index;
+			cell1=row.insertCell(0);
+			cell2=row.insertCell(1);
+			cell3=row.insertCell(2);
+			cell1.innerHTML="Pepsi";
+			cell2.innerHTML="$5";
+			cell3.innerHTML=document.getElementById("barcode").value;
+			rowPosition++;
+			index++;
+			id++;
+		}	
+	
+		var isScanning=false;
+		function startScanner(){
+			Quagga.init({
+				inputStream : {
+					name : "Live",
+					type : "LiveStream",
+					target: document.querySelector('#scanner-container'),
+					constraints:{
+						width: 800,
+						height: 200,
+						facingMode: "environment"
+					},
+				},
+				decoder : {
+					readers : [
+						"code_128_reader",
+						"ean_reader",
+						"ean_8_reader",
+						"code_39_reader",
+						"code_39_vin_reader",
+						"codabar_reader",
+						"upc_reader",
+						"upc_e_reader",
+						"i2of5_reader"
+					],
+					debug: {
+						showCanvas: true,
+						showPatches: true,
+						showFoundPatches: true,
+						showSkeleton: true,
+						showLabels: true,
+						showPatchLabels: true,
+						showRemainingPatchLabels: true,
+						boxFromPatches: {
+							showTransformed: true,
+							showTransformedBox: true,
+							showBB: true
+						}
+					}
+				},
+				
+			}, function(err){
+				if(err){
+					console.log(err);
+					return
+				}
+				Quagga.start();
+				isScanning=true;
+			});
+			
+			Quagga.onProcessed(function (result) {
+				var drawingCtx = Quagga.canvas.ctx.overlay,
+				drawingCanvas = Quagga.canvas.dom.overlay;
+
+				if (result) {
+					if (result.boxes) {
+						drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+						result.boxes.filter(function (box) {
+							return box !== result.box;
+						}).forEach(function (box) {
+							Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+						});
+					}
+
+					if (result.box) {
+						Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+					}
+
+					if (result.codeResult && result.codeResult.code) {
+						Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+					}
+				}
+			});
+
+			Quagga.onDetected(function (result) {
+				var resultValue=document.getElementById("barcode");
+				resultValue.value=result.codeResult.code;
+				if(resultValue.value=="MLS482048"
+				||resultValue.value=="MLS574308"
+				||resultValue.value=="MLS854949"
+				||resultValue.value=="MLS708609"
+				||resultValue.value=="MLS928748"){
+					addProduct();
+					console.log("Barcode matched");
+				}
+			});
+		}
+
+		// Start/stop scanner
+		document.getElementById("btn").addEventListener("click", function () {
+			if (isScanning) {
+				Quagga.stop();
+				location.reload();
+			}else{
+				startScanner();
+			}
+		}, false);
+	</script>
+</body>
+>>>>>>> 7df92896d892f0e7ecc93f73fb9b0be2f11d6970
 </html>
