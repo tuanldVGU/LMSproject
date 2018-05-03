@@ -33,7 +33,7 @@ button:hover{
 }
 
 .promBtn{
-	width: 100px;
+	width: 100px
 }
 #productDiv{
 	position: fixed;
@@ -58,5 +58,12 @@ button:hover{
 canvas.drawing, canvas.drawingBuffer {
             position: absolute;
             left: 0;
-            top: 5;
-    }
+            top: 0;
+            right:0;
+            bottom:0;
+            width: 100%;
+}
+
+video{
+	width: 100%;
+}
