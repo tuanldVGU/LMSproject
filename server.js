@@ -89,8 +89,10 @@ app.use(cookieParser());
 Routes
 */
 
-var routes = require('./routes/user');
-app.use('/', routes);
+var tasks = require('./routes/task')
+var users = require('./routes/user');
+app.use('/', users);
+app.use('/', tasks);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -107,5 +109,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(PORT, function(){
-	console.log("App running on port 3000");
+	console.log("App running on port "+ PORT);
 })
