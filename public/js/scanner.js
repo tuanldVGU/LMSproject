@@ -1,4 +1,7 @@
 var isScanning=false;
+// var w = $( window ).width()*;
+// var h = $( window ).height();
+
 function startScanner(){
 	Quagga.init({
 		inputStream : {
@@ -6,11 +9,13 @@ function startScanner(){
 			type : "LiveStream",
 			target: document.querySelector('#scanner-container'),
 			constraints:{
-				width:400,
-				height: 200,
+				// width:400,
+				// height: 200,
 				facingMode: "environment"
+				},			
 			},
-		},
+		locale:false,
+		numOfWorkers: 0,  // Needs to be 0 when used within node
 		decoder : {
 			readers : [
 				"code_128_reader",
@@ -92,6 +97,7 @@ document.getElementById("scan_btn").addEventListener("click", function () {
 
 
 document.getElementById("webcamBtn").addEventListener("click", function () {
+		//setTimeout(Quagga.stop(), 100);		
 		Quagga.stop();
 		isScanning=false;
 }, false);
