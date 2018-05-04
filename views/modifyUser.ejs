@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="userLMS">
+<head>
+	<% include partials/header %>
+	<% include partials/customh %>
+	<!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="/js/angular.min.js"></script>
+	<script src="/usercore.js"></script>
+
+	<!-- Bootstrap tether Core JavaScript -->
+	<script src="js/popper.min.js"></script>
+
+	<!-- slimscrollbar scrollbar JavaScript -->
+	<script src="js/jquery.slimscroll.js"></script>
+
+	<!--Menu sidebar -->
+	<script src="js/sidebarmenu.js"></script>
+
+	<!--stickey kit -->
+	 <script src="js/sticky-kit.min.js"></script>
+
+	<!--Custom JavaScript -->
+	<script src="js/scripts.js"></script>
+	<script src="js/custom.min.js"></script>
+</head>
+<body ng-controller="mainController" class="fix-header fix-sidebar">
+	<div id="main-wrapper">
+
+		<% include partials/nav %>
+
+		<% include partials/sidebar %>		
+
+		<div class="page-wrapper">
+			<div id="user-list" class="row">
+	            <div class="col-sm-4 col-sm-offset-4">
+
+	                <!-- LOOP OVER THE TODOS IN $scope.todos -->
+	                <div class="checkbox" ng-repeat="user in users">
+	                    <label>
+	                        <input type="checkbox" ng-click="deleteTodo(user._id)"> {{ user.username }}
+	                    </label>
+	                </div>
+
+	            </div>
+	        </div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,26 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
 
-router.get('/app', (req, res, next) =>{
-  var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
-  res.render('checkout', {title: 'Checkout || myLittleShop',item: shop2SoldDrink});
+router.get('/users', function(req,res){
+  User.find(function(err,users){
+    if (err) res.send(err);
+    res.json(users);
+  });
 });
 
-router.get('/employee', (req, res, next) =>{
-	var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
-	res.render('employee', {title: 'Employee || myLittleShop',item : shop2SoldDrink});
+router.post('/users', function(req,res){
+  
 });
 
-router.get('/owner', (req, res, next) =>{
-	res.render('owner', {title: 'Owner || myLittleShop'});
-
-});
-
-router.get('/signup', (req, res, next) =>{
-	res.render('signup', {title: 'Signup || myLittleShop'});
-
+router.delete('users/:user_id', function(req,res){
+  Todo.remove({
+    _id : req.params.user_id
+  },function(err, user){
+      if (err) res.send(err);
+      
+      User.find(function(err,users){
+      if (err) res.send(err);
+      res.json(users);
+  });
+  });
 });
 
 module.exports = router;
