@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var debug = require('debug')('mylittleshop:server');
 var path = require("path");
-var methodOverride = require('method-override');  
+var methodOverride = require('method-override'); 
+var morgan = require('morgan'); 
 
 const PORT = process.env.PORT || 3000
 
@@ -87,7 +88,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 
 app.use(methodOverride());
-
+app.use(morgan('dev'));
 /*
 Routes
 */
