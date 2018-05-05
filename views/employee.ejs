@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm-2" id="sidebar" >
       <nav class="nav flex-column navbar-expand-lg nav-fill " >
-        <a class="nav-link active text-light navbar-brand" href="#"><h4>theLittleShop</h3></a>
+        <a class="nav-link active text-light navbar-brand" href="#"><h4>theLittleShop</h4></a>
         <a class="nav-link text-light" href="#">Home</a>
         <a class="nav-link text-light" href="#">Inventory</a>
         <a class="nav-link text-light" href="#">Transaction</a>
@@ -89,11 +89,11 @@
           <tr>
             <td colspan="2" rowspan="2">
               <button type="button" class="btn" id="pay_btn" onclick="payFunc()">Pay</button>
-            </td>
-          </tr>
-        </tr>
+            </td>            
+          </tr>        
       </tbody>
     </table>
+
   </div>
 </div>
 </div>
@@ -118,7 +118,7 @@
 </div>
 </div>
 <!-- Modal for Add Voucher button-->
-<div id="voucherModal" class="modal fade" role="dialog">
+<div id="voucherModal" class="modal hide fade" role="dialog">
 <div class="modal-dialog">
 <!-- Modal content-->
 <div class="modal-content">
@@ -153,6 +153,8 @@
 </div>
 </div>
 </div>
+  
+
 
 <script>
     function addFunc() {

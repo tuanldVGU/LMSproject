@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var debug = require('debug')('mylittleshop:server');
 var path = require("path");
+var methodOverride = require('method-override'); 
+var morgan = require('morgan'); 
 
 const PORT = process.env.PORT || 3000
 
@@ -76,15 +78,17 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({extended:false}));
 
 
-app.use(express.static('public'));
+app.use(express.static(__dirname +'public'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 
-
+app.use(methodOverride());
+app.use(morgan('dev'));
 /*
 Routes
 */
@@ -92,7 +96,7 @@ Routes
 var tasks = require('./routes/task')
 var users = require('./routes/user');
 app.use('/', users);
-app.use('/', tasks);
+app.use('/api', tasks);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,3 +1,4 @@
+/*Nav-bar styling*/
 .navbar-default{
     background-color:  #74ebd5;  /* fallback for old browsers */
 	background-color:  -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
@@ -6,4 +7,95 @@
 
 nav ul li a{
 	color: white;
+}
+
+/*Table styling */
+
+/*Wrapping*/
+.limiter {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.limiter .container-table {
+  min-height: 100vh;
+  background: #d1d1d1;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.limiter .wrap-table {
+  width: 1000px;
+}
+
+/*Styling*/
+.limiter table {
+  width: 100%;
+  background-color: #fff;
+}
+
+.limiter th, td {
+  font-weight: unset;
+  padding-right: 10px;
+}
+
+.limiter thead{
+	background-color: #333333;
+}
+.limiter th {
+  font-family: Lato;
+  font-size: 12px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+
+}
+
+.limiter td {
+  font-family: Lato;
+  font-size: 14px;
+  color: #808080;
+  line-height: 1.4;
+  text-align: center;	
+}
+
+.limiter input {
+  display: block;
+	outline: none;
+	border: none !important;
+}
+
+.limiter .row {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+.limiter .column{
+	width: 195px;
+	padding-left: 42px;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
 }
