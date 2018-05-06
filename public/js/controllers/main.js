@@ -22,4 +22,14 @@ angular.module('userController', [])
 					console.log('Error: ' + res);
 				})
 		}
+		$scope.updateUser = function(id) {
+			$http.put('/api/users/' + id)
+				.then(function(res){
+					$scope.users = res.data;
+				})
+				.catch(function(res){
+					//Export error
+					console.log('Error: ' + res);
+				})
+		}
 	})

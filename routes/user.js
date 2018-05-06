@@ -39,7 +39,8 @@ router.post("/", function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/home');
+        if (user.role=="Employee") return res.redirect('/app');
+        else return res.redirect('/home');
       }
     });
   } else {

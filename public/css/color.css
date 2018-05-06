@@ -13,14 +13,12 @@ nav ul li a{
 
 /*Wrapping*/
 .limiter {
-  margin: 0 auto;
   padding: 0;
+  background: #d1d1d1;
 }
 
 .limiter .container-table {
   min-height: 100vh;
-  background: #d1d1d1;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

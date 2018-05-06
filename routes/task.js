@@ -42,11 +42,11 @@ router.put('users/:user_id', function(req,res){
   var user = req.body;
   var updTask = {};
 
-  if (user.isDone){
-    updTask.isDone = user.isDone;
+  if (user.role){
+    updTask.role = user.role;
   }
-  if (user.username){
-    updTask.username = user.username;
+  if (user.shop){
+    updTask.shop = user.shop;
   }
 
   if (!updTask){

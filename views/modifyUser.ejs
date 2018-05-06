@@ -34,30 +34,32 @@
 		<% include partials/sidebar %>		
 
 		<div class="page-wrapper limiter">
-			<div id="user-list" class="container-table">
-	            <div class="wrap-table">
-	                <table>
-	                	<thead>
-	                		<tr class="row">
-	                			<th class="column">Employee</th>
-	                			<th class="column">Position</th>
-	                			<th class="column">Location</th>
-	                			<th class="column">Modify</th>
-	                			<th class="column">Delete</th>
-	                		</tr>
-	                	</thead>
-	                	<!-- LOOP OVER THE USERS IN $scope.users -->
-	                	<tr ng-repeat="user in users" class="row">
-	                		<td class="column">{{user.username}}</td>
-	                		<td class="column"><input type="text" ng-model="role" placeholder="{{user.role}}"></td>
-	                		<td class="column"><input type="text" ng-model="shop" placeholder="{{user.shop}}"></td>
-	                		<td class="column"><input type="button" value="Update" ng-click="updateUser(user._id)" class="btn btn-danger"></td>
-	                		<td class="column"><input type="button" value="Detele" ng-click="deleteUser(user._id)" class="btn btn-danger"></td>
-	                	</tr>
-	                </table>
+			<div class="container-fluid">
+				<div id="user-list" class="container-table">
+		            <div class="wrap-table">
+		                <table>
+		                	<thead>
+		                		<tr class="row">
+		                			<th class="column">Employee</th>
+		                			<th class="column">Position</th>
+		                			<th class="column">Location</th>
+		                			<th class="column">Modify</th>
+		                			<th class="column">Delete</th>
+		                		</tr>
+		                	</thead>
+		                	<!-- LOOP OVER THE USERS IN $scope.users -->
+		                	<tr ng-repeat="user in users" class="row">
+		                		<td class="column">{{user.username}}</td>
+		                		<td class="column"><input type="text" ng-model="role" placeholder="{{user.role}}" name=role></td>
+		                		<td class="column"><input type="text" ng-model="shop" placeholder="{{user.shop}}" name=shop></td>
+		                		<td class="column"><input type="button" value="Update" ng-click="updateUser(user._id)" class="btn btn-danger"></td>
+		                		<td class="column"><input type="button" value="Detele" ng-click="deleteUser(user._id)" class="btn btn-danger"></td>
+		                	</tr>
+		                </table>
 
-	            </div>
-	        </div>
+		            </div>
+		        </div>
+		    </div>
 		</div>
 	</div>
 </body>
