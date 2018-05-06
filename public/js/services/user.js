@@ -7,11 +7,14 @@ angular.module('userService', [])
             get : function() {
                 return $http.get('/api/users');
             },
-            create : function(todoData) {
-                return $http.post('/api/todos', todoData);
+            create : function(userData) {
+                return $http.post('/api/users', userData);
             },
             delete : function(id) {
                 return $http.delete('/api/user/' + id);
+            },
+            update : function(id) {
+                return $http.put('/api/user/' + id);
             }
         }
     });

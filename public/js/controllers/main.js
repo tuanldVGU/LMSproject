@@ -13,22 +13,23 @@ angular.module('userController', [])
 			});
 
 		$scope.deleteUser = function(id) {
-			$http.delete('/api/users/' + id)
+			$http.delete('/api/user/' + id)
 				.then(function(res){
-					$scope.users = res.data;
+					$scope.user = res.data;
 				})
 				.catch(function(res){
 					//Export error
 					console.log('Error: ' + res);
 				})
 		}
-		$scope.updateUser = function(id) {
-			$http.put('/api/users/' + id)
+		$scope.updateUser = function(id,data) {
+			$http.put('/api/user/' + id, data)
 				.then(function(res){
-					$scope.users = res.data;
+					$scope.user = res.data;
 				})
 				.catch(function(res){
 					//Export error
+					console.log(res.data);
 					console.log('Error: ' + res);
 				})
 		}
