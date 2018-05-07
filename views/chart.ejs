@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="chartLMS">
+<head>
+	<% include partials/header %>
+	<% include partials/customh %>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/productController.js"></script>
+	<script src="/js/services/product.js"></script>
+	<script src="/js/productcore.js"></script>
+
+	<!-- Bootstrap tether Core JavaScript -->
+	<script src="js/popper.min.js"></script>
+
+	<!-- slimscrollbar scrollbar JavaScript -->
+	<script src="js/jquery.slimscroll.js"></script>
+
+	<!--Menu sidebar -->
+	<script src="js/sidebarmenu.js"></script>
+
+	<!--stickey kit -->
+	 <script src="js/sticky-kit.min.js"></script>
+	<!-- chart library -->
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>	 
+</head>
+<body ng-controller="mainController" class="fix-header fix-sidebar">
+	<div id="main-wrapper">
+
+		<% include partials/nav %>
+
+		<% include partials/sidebar %>		
+
+		<div class="page-wrapper limiter">
+			<div id="product-list" class="container-table">
+	            <div class="wrap-table">
+	                <table id="table">
+	                	<thead>
+	                		<tr class="row">
+	                			<th class="column">Product ID</th>
+	                			<th class="column">Product Name</th>
+	                			<th class="column">Qty In Stock</th>
+	                			<th class="column">Qty Sold</th>
+	                			<th class="column">Price</th>
+	                			<!-- <th class="column">Time Stamp</th> -->
+	                		</tr>
+	                	</thead>
+	                	<!-- LOOP OVER THE USERS IN $scope.users -->
+	                	<tbody>
+	                		<tr ng-repeat="(key, product) in products" class="row">
+	                		<td class="column">{{product.product_id}}</td>
+	                		<td class="column">{{key}}</td>
+	                		<td class="column">{{product.quantity_in_stock}}</td>
+	                		<td class="column">{{product.quantity_sold}}</td>	                		
+	                		<td class="column">{{product.price}}</td>
+							<!-- <td class="column">{{product.timestamp}}</td> -->
+	                	</tr>
+	                	</tbody>
+	                	
+	                </table>
+	                <canvas id="myChart" width="400" height="400"></canvas>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</body>
+
+<script src="js/reports.js"></script>
+
+</html>

@@ -10,7 +10,6 @@ var debug = require('debug')('mylittleshop:server');
 var path = require("path");
 var methodOverride = require('method-override'); 
 var morgan = require('morgan'); 
-var http = require('http').Server(app);
 const PORT = process.env.PORT || 3000
 
 var app = express();
@@ -30,39 +29,39 @@ db.once('open',function (){
 });
 
 // connect database server-side
-// var MongoClient = require('mongodb').MongoClient;
-// var findDocuments = function(db, callback) {
-//   // Get the documents collection
-//   var collection = db.collection('secondCollection');
-//   // Find some documents
-  
-//   collection.find().toArray(function(err, items) {
-//     console.log("Found the following records");
-//     callback(items[0]);
-//   });
+var MongoClient = require('mongodb').MongoClient;
+var collection;
+var findDocuments = function(db, callback) {
+  // Get the documents collection
+  collection = db.collection('secondCollection');
+  // Find some documents
+  collection.find().toArray(function(err, items) {
+    console.log("Found the following records");
+    collection = items[0];
+    callback(items[0]);
+  });
+}
 
 
-// }
-
-// //Use connect method to connect to the Server
-// MongoClient.connect(url, function(err, client) {
-//   const db = client.db('mylittleshop')
-//   console.log("Connected correctly to server");
-//   //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
-//   findDocuments(db, function(docs) {
-//     exports.getDataShop1 = function() {
-//       return docs;
-//     }
-//     console.log(docs.shop1.sold_drink[1])
-//     app.set('data',docs)
+/*
+// Use connect method to connect to the Server
+MongoClient.connect(url, function(err, client) {
+  const db = client.db('mylittleshop')
+  console.log("Connected correctly to server");
+  //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
+  findDocuments(db, function(docs) {
+    exports.getDataShop1 = function() {
+      return docs;
+    }
+    console.log(docs.shop1.sold_drink[1])
+    app.set('data',docs)
+    app.put('/employee', (req,res)=>{
+      console.log("hello"+req.body.name)
+    })
+    //console.log(docs.barcode);
     
-//     //console.log(docs.barcode);
-    
-//   });
-//  });
-// app.put('/employee', (req, res) => {
-//   console.log("bac"+req.body.name)
-// })
+  });
+});*/
 
 /*
 Middlewares and configurations 
@@ -94,8 +93,11 @@ Routes
 
 var tasks = require('./routes/task')
 var users = require('./routes/user');
+var products = require('./routes/products')
 app.use('/', users);
 app.use('/api', tasks);
+app.use('/api', products);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
