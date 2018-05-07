@@ -37,16 +37,21 @@
 		<% include partials/sidebar %>		
 
 		<div class="page-wrapper limiter">
-			<h1 id="polar-area-chart"> Polar Area Chart</h1>
-			<div id="product-list" class="container-table">
-                <input type="text" name="shopName" ng-model="shopName">
-                <input type="button" class="btn-danger" ng-click="findShop(shopName)" value="findShop">
-                <!-- <h1>{{shopName}}</h1> -->
-                <div style="width:100%; height:100%;">
-                        <canvas id="myChart"></canvas>				
-                </div>				
-			</div>
-			
+				<div class="container-fluid">
+					<h1 id="pie-chart"> Polar Area Chart</h1>
+					<div id="product-list" class="container-table">				
+						<select name="shopName" ng-change="loadChartInfo(value)" ng-model="value" >
+							<option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>					
+						</select>
+						<input type="button" ng-click="loadChart()" value="loadChart">
+						<!-- <h1>{{shopName}}</h1> -->
+						<div style="width:100%; height:100%;">
+								<canvas id="myChart"></canvas>				
+						</div>
+						<h1>{{productNames}}</h1>
+						<h1>{{qtySold}}</h1>
+					</div>
+				</div>
 		</div>
 	</div>
 </body>

@@ -2,19 +2,13 @@ angular.module('productController', [])
 	.controller('mainController',function($scope, $http){
 		$scope.data = {};
 		$scope.item = {};
-		var productNames = [];
-		var qtySold = [];
+		console.log($scope.product);
+		$scope.productNames = [];
+		$scope.qtySold = [];
 		// show all the products
 		$http.get('/api/products')
 			.then(function(res){
-				$scope.products = res.data;
-				angular.forEach(res.data, function(shops, key) {
-					angular.forEach(shops.item, function(value, key2) {
-						productNames.push(value.productName);
-						qtySold.push(value.quantity_sold);
-					  });
-				  });
-				  loadChart(productNames, qtySold);
+				$scope.products = res.data;			
 			})
 			.catch(function(res){				
 				console.log('Error: ' + res); //Export error
@@ -62,9 +56,31 @@ angular.module('productController', [])
 				.catch(function(res){
 					console.log("Error" + res)
 				})
+			}			
+			$scope.loadChartInfo = function(data2)
+			{
+				// $scope.productNames = [];
+				// $scope.qtySold = [];
+				$http.get('/api/product/'+data2)
+				.then(function(res){
+					$scope.productNames = [];
+					$scope.qtySold = [];
+					
+					$scope.data = res.data;
+					angular.forEach($scope.data.item, function(value, key) {
+						$scope.productNames.push(value.productName);
+						$scope.qtySold.push(value.quantity_sold);
+						
+					});
+				})
+				.catch(function(res){
+					console.log("Error" + res)
+				})				
 			}
-		
-		function loadChart(productNames, qtySold){
+			
+		 $scope.loadChart = function(productNames, qtySold){
+			productNames =$scope.productNames;
+			qtySold = $scope.qtySold;
 			var ctx = document.getElementById("myChart").getContext('2d');			
 			var header = document.getElementsByTagName("H1")[0].innerHTML;
 			var chartType = header.replace("Chart","").toLowerCase().trim();
@@ -111,7 +127,7 @@ angular.module('productController', [])
 						}]
 					}
 				}
-			});
+			});			
 		}
 
 	})
