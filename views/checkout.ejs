@@ -47,7 +47,15 @@
               </tr>
             </thead>
             <tbody>
-            </tbody>
+                <tr ng-repeat="item in data" >
+                <td scope="col">{{item.id}}</td>
+                <td scope="col">{{item.productID}}</td>
+                <td scope="col">{{item.productName}}</td>
+                <td scope="col">{{item.quantity}}</td>	                		
+                <td scope="col">{{item.price}}</td>
+                <!-- <td class="column">{{product.timestamp}}</td> -->
+              </tr>
+              </tbody>
           </table>
         </div>
       </div>
@@ -56,7 +64,7 @@
         <table class="table" id="rightTable">
           <tr>
             <th scope="col">SubTotal</th>
-            <td scope="col" id="sub_total">0</td>
+            <td scope="col" id="sub_total" ng-model="subTotal">{{subTotal}}</td>
           </tr>
           <tr>
             <th scope="col">Promotion</th>
@@ -75,7 +83,7 @@
           <tr>
             <th scope="col">Quantity</th>
             <td scope="col">
-              <input type="number" name="quantity" min="1" value=1 id="quantity" ng-model="item_qty">
+              <input type="text" name="quantity" id="quantity" ng-model="item_qty">
               </td>
           </tr>
           <tr>
@@ -112,7 +120,7 @@
             </tr>
             <tr>
               <td colspan="2" rowspan="2">
-                <button type="button" class="btn" id="pay_btn" onclick="payFunc()">Pay</button>                
+                <button type="button" class="btn" id="pay_btn" ng-click="payFunc()">Pay</button>                
               </td>
             </tr>          
           </tbody>
