@@ -2,15 +2,16 @@ var mongoose = require('mongoose');
 
 var ProductSchema = new mongoose.Schema({
   name: String,
-  shop1: {
-  	"sold_drink": {
-  		productID: Number,
-  		productName: String,
-  		quantity_in_stock: Number,
-		price: Number,
-		timestamp: { type: Date, default: Date.now }
-  	}
-  }     
+  item: 
+		[
+			{
+				productID: Number,
+				productName: String,
+				quantity_in_stock: Number,
+				quantity_sold: Number,
+				price: Number,
+			}	
+		]	   
 });
 
-module.exports = mongoose.model('secondCollection', ProductSchema);
+module.exports = mongoose.model('shops', ProductSchema);

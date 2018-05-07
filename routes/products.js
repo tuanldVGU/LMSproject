@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-// var Product = require('../models/Product.js');
-var Schema = mongoose.Schema; 
-var Product = mongoose.model("product", new Schema({}), "secondCollection"); 
+var Product = require('../models/Product');
 
 /* GET ALL PRODUCTS */
 router.get('/products', function(req, res, next) {
@@ -24,16 +22,20 @@ router.get('/products/:id', function(req, res, next) {
   });
 });
 
-/* SAVE PRODUCT */
-router.post('/products', function(req, res, next) {
+/* CREATE SHOP */
+router.post('/product/:name', function(req, res, next) {
   console.log(req);
-  Product.create(req.body, function (err, post) {
+  var shop = {
+    name: req.params.name,
+    item:[]
+  }
+  Product.create(shop, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* UPDATE PRODUCT */
+/* UPDATE SHOP */
 router.put('/products/:id', function(req, res, next) {
   console.log(req);
   Product.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
@@ -42,7 +44,7 @@ router.put('/products/:id', function(req, res, next) {
   });
 });
 
-/* DELETE PRODUCT */
+/* DELETE SHOP */
 router.delete('/products/:id', function(req, res, next) {
   console.log(req);
   Product.findByIdAndRemove(req.params.id, req.body, function (err, post) {

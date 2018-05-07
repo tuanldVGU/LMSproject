@@ -6,6 +6,9 @@ angular.module('productService', [])
         return {
             get : function() {
                 return $http.get('/api/products');
+            },
+            create : function(name){
+                return $http.post('api/product',name);
             }
         }
     });

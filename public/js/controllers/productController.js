@@ -5,13 +5,23 @@ angular.module('productController', [])
 			.then(function(res){
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
-				$scope.products = res.data[0].shop2.sold_drink;
+				$scope.products = res.data;
 
 			})
 			.catch(function(res){
 				//Export error
 				console.log('Error: ' + res);
-			});
+			})
+			$scope.createShop = function(name){
+				$http.post('/api/product',name)
+				.then(function(res){
+					$scope.users = res.data;
+				})
+				.catch(function(res){
+					//Export error
+					console.log('Error: ' + res);
+				});
+			}
 
 	})
 
