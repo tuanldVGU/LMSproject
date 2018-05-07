@@ -81,7 +81,10 @@ nav ul li a{
 	width: 195px;
 	padding-left: 42px;
 }
-
+.limiter .column02{
+	width: 150px;
+	padding-left: 42px;
+}
 ::-webkit-input-placeholder {
    text-align: center;
 }

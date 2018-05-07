@@ -5,7 +5,7 @@ var ProductSchema = new mongoose.Schema({
   item: 
 		[
 			{
-				productID: Number,
+				productID: {type: Number, unique: true},
 				productName: String,
 				quantity_in_stock: Number,
 				quantity_sold: Number,

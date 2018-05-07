@@ -5,7 +5,7 @@ var Product = require('../models/Product');
 
 /* GET ALL PRODUCTS */
 router.get('/products', function(req, res, next) {
-  console.log(req);
+
 
   Product.find(function (err, products) {
     if (err) return next(err);
@@ -14,19 +14,19 @@ router.get('/products', function(req, res, next) {
 });
 
 /* GET SINGLE PRODUCT BY ID */
-router.get('/products/:id', function(req, res, next) {
-  console.log(req);
-  Product.findById(req.params.id, function (err, post) {
+router.get('/product/', function(req, res, next) {
+  
+  Product.findOne(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
 /* CREATE SHOP */
-router.post('/product/:name', function(req, res, next) {
-  console.log(req);
+router.post('/product', function(req, res, next) {
+  //console.log(req.body);
   var shop = {
-    name: req.params.name,
+    name: req.body.name,
     item:[]
   }
   Product.create(shop, function (err, post) {
@@ -36,9 +36,9 @@ router.post('/product/:name', function(req, res, next) {
 });
 
 /* UPDATE SHOP */
-router.put('/products/:id', function(req, res, next) {
-  console.log(req);
-  Product.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/product/:id', function(req, res, next) {
+  console.log(req.body);
+  Product.findByIdAndUpdate(req.params.id, req.body, {new:true},function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -46,7 +46,7 @@ router.put('/products/:id', function(req, res, next) {
 
 /* DELETE SHOP */
 router.delete('/products/:id', function(req, res, next) {
-  console.log(req);
+  //console.log(req);
   Product.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

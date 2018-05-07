@@ -39,27 +39,29 @@
 			<div id="product-list" class="container-table">
 				<ul>
 					<li ng-repeat="product in products">
-						<h1>{{product.name}}</h1>
+						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
 						<div class="wrap-table">
 								<table id="table">
 									<thead>
 										<tr class="row">
-											<th class="column">Product ID</th>
-											<th class="column">Product Name</th>
-											<th class="column">Qty In Stock</th>
-											<th class="column">Qty Sold</th>
-											<th class="column">Price</th>
+											<th class="column02">Product ID</th>
+											<th class="column02">Product Name</th>
+											<th class="column02">Qty In Stock</th>
+											<th class="column02">Qty Sold</th>
+											<th class="column02">Price</th>
+											<th class="column02">Update</th>
 											<!-- <th class="column">Time Stamp</th> -->
 										</tr>
 									</thead>
 									<!-- LOOP OVER THE USERS IN $scope.users -->
 									<tbody>
 										<tr ng-repeat="item in product.item" class="row">
-										<td class="column">{{item.productID}}</td>
-										<td class="column">{{item.productName}}</td>
-										<td class="column">{{item.quantity_in_stock}}</td>
-										<td class="column">{{item.quantity_sold}}</td>	                		
-										<td class="column">{{item.price}}</td>
+										<td class="column02">{{item.productID}}</td>
+										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
+										<td class="column02"><input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"></td>
+										<td class="column02"><input type="text" ng-model="item.quantity_sold" placeholder="{{item.quantity_sold}}"></td>	                		
+										<td class="column02"><input type="text" ng-model="item.price" placeholder="{{item.price}}"></td>
+										<td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
@@ -69,9 +71,10 @@
 							</div>
 					</li>
 				</ul>
-				<input type="text" name="shopName" ng-model="shopName">
-				<input type="button" class="btn-danger" ng-click="createShop(shopName)" value="createShop">
-				<h1>{{shopName}}</h1>
+				<input type="text" name="name" ng-model="data.name">
+				<input type="button" class="btn-danger" ng-click="createShop()" value="createShop">
+				<h1>{{data.name}}</h1>
+
 	        </div>
 		</div>
 	</div>

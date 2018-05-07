@@ -1,0 +1,37 @@
+
+<html ng-app="chartLMS">
+<head>
+	<% include partials/header %>
+	<% include partials/customh %>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/productController.js"></script>
+	<script src="/js/services/product.js"></script>
+	<script src="/js/productcore.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/css/login.css">	
+</head>
+<body ng-controller="mainController">
+<div class="login-page">
+	<div class="form">
+		<h3>Add Item</h3><br>
+         <form class="register-form" >
+                <select name="shopName" ng-change="getID(product.name)" ng-model="value" >
+                        <option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>
+                    </select>
+              <input type="text" name="productID" ng-model="item.productID" placeholder="productID"/>   
+              <input type="text" name="productName" ng-model="item.productName" placeholder="productName"/>
+              <input type="text" name="quantity_in_stock" ng-model="item.quantity_in_stock" placeholder="quantity_in_stock"/>
+              <input type="text" name="quantity_sold" ng-model="item.quantity_sold" placeholder="quantity_sold"/>
+              <input type="text" name="price" ng-model="item.price" placeholder="price" />
+              <button ng-click="addItem(data._id)">create</button>
+              <!-- <h1>{{data}}</h1> -->
+   		 </form>
+	</div>
+</div>
+</body>

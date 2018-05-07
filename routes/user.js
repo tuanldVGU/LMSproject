@@ -129,6 +129,9 @@ router.get('/profile', (req, res, next) =>{
 router.get('/chart', (req, res, next) =>{
   res.render('chart', {title: 'Modify user || myLittleShop'});
 });
+router.get('/addItem', (req, res, next) =>{
+  res.render('addItem', {title: 'Modify user || myLittleShop'});
+});
 
 
 module.exports = router;
