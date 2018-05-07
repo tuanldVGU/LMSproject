@@ -53,10 +53,6 @@ router.post("/", function (req, res, next) {
 
 
 
-router.get('/app', (req, res, next) =>{
-  var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  res.render('checkout', {title: 'Checkout || myLittleShop',item: shop2SoldDrink});
-});
 
 // router.get('/employee', (req, res, next) =>{
 //   var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
@@ -93,6 +89,11 @@ MongoClient.connect(url, function(err, client) {
       for(var i = 0; i<docs.shop1.sold_drink.length;i++)
       res.render('dashboard', {title: 'Dashboard || myLittleShop',item:docs});
     })
+
+router.get('/app', (req, res, next) =>{
+  var shop1SoldDrink = docs.shop1.sold_drink;
+  res.render('checkout', {title: 'Checkout || myLittleShop',item: shop1SoldDrink});
+});
     })
     
     //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
