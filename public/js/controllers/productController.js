@@ -50,11 +50,14 @@ angular.module('productController', [])
 				})
 
 			}
-			$scope.getID = function(data)
+			$scope.getID = function(data1)
 			{
-				$http.get('/api/product/',data)
+				console.log("hello"+data1)
+				$http.get('/api/product/'+data1)
 				.then(function(res){
 					$scope.data = res.data;
+					console.log(res.data);
+					console.log(data1);
 				})
 				.catch(function(res){
 					console.log("Error" + res)

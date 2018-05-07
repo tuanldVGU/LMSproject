@@ -14,9 +14,9 @@ router.get('/products', function(req, res, next) {
 });
 
 /* GET SINGLE PRODUCT BY ID */
-router.get('/product/', function(req, res, next) {
-  
-  Product.findOne(req.body, function (err, post) {
+router.get('/product/:id', function(req, res, next) {
+  //console.log(req.params.id);
+  Product.findOne({name:req.params.id}, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

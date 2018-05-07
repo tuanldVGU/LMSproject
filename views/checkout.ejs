@@ -1,10 +1,22 @@
-<% layout('layout/management') %>
+<!DOCTYPE html>
+<html ng-app="checkout">
 <head>
+    <% include partials/header %>
+    <% include partials/customh %>
   <link rel="stylesheet" type="text/css" href="/css/employee.css">
+  <!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/checkoutController.js"></script>
+	<script src="/js/services/checkout.js"></script>
+	<script src="/js/checkoutcore.js"></script>
 </head>
-<body class="fix-header fix-sidebar">
+<body class="fix-header fix-sidebar" ng-controller="mainController">
   
-  /* Start of Main Wrapper Div */
+  <!-- /* Start of Main Wrapper Div */ -->
   <div id="main-wrapper"><% include partials/nav %><% include partials/sidebar %>
     <div class="page-wrapper">
     <!-- Bread crumb -->
@@ -57,13 +69,13 @@
           <tr>
             <th scope="col">Item ID</th>
             <td scope="col">
-              <input type="text" id="item_id">
+              <input type="text" id="item_id" ng-model="item_id">
             </td>
           </tr>
           <tr>
             <th scope="col">Quantity</th>
             <td scope="col">
-              <input type="number" name="quantity" min="1" value=1 id="quantity">
+              <input type="number" name="quantity" min="1" value=1 id="quantity" ng-model="item_qty">
               </td>
           </tr>
           <tr>
@@ -76,7 +88,7 @@
           <tbody>
             <tr>
               <th>
-                <button type="button" class="btn" id="add_btn" onclick="addFunc()">Add Item</button>
+                <button type="button" class="btn" id="add_btn" ng-click="addFunc()">Add Item</button>
               </th>
               <th>
                 <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
