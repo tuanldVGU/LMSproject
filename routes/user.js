@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-
+var MongoClient = require('mongodb').MongoClient;
 router.get('/', (req, res, next) =>{
 	res.render('index', {title: 'Login || myLittleShop'});
 });
@@ -50,21 +50,67 @@ router.post("/", function (req, res, next) {
   }
 });
 
-router.get('/home', (req,res, next) =>{
-  res.render('dashboard', {title: 'Dashboard || myLittleShop'});
-})
+
 
 router.get('/app', (req, res, next) =>{
   var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
   res.render('checkout', {title: 'Checkout || myLittleShop',item: shop2SoldDrink});
 });
 
-router.get('/employee', (req, res, next) =>{
-  var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
-  res.render('employee', {title: 'Employee || myLittleShop',item : shop2SoldDrink});
-});
+// router.get('/employee', (req, res, next) =>{
+//   var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
+//   res.render('employee', {title: 'Employee || myLittleShop',item : shop1SoldDrink});
+// });
+
+// Update database
+var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
+var findDocuments = function(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('secondCollection');
+  // Find some documents
+  
+  collection.find().toArray(function(err, items) {
+    console.log("Found the following records");
+    callback(items[0]);
+  });
+
+
+}
+MongoClient.connect(url, function(err, client) {
+  var datashop1 = []
+    const db = client.db('mylittleshop')
+    console.log("Connected correctly to server from user.js");
+    findDocuments(db, function(docs) {
+      exports.getDataShop1 = function() {
+        return docs;    
+      }
+      console.log(docs.shop1.sold_drink.length);
+    router.get('/employee', (req, res, next) =>{
+      res.render('employee', {title: 'Employee || myLittleShop',item : docs.shop1.sold_drink});
+    });
+    router.get('/home', (req,res, next) =>{
+      
+      res.render('dashboard', {title: 'Dashboard || myLittleShop',item:docs});
+    })
+    })
+    
+    //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
+    router.put('/orderListPaid', function(req,res,next){
+      var orderList = req.body;
+      console.log(req.body)
+      for(var i = 0; i<orderList.length;i++)
+      {
+        console.log("test"+orderList[i].id)
+        db.collection('secondCollection').update({"name":"firstDocument", "shop1.sold_drink.productID":orderList[i].id},{$set:{"shop1.sold_drink.$.quantity_in_stock":orderList[i].qtyInStock,"shop1.sold_drink.$.quantity_sold":orderList[i].qtySold}}, (err, result) => {
+          if(err) {
+            throw err;
+          }
+          res.send('user updated sucessfully');
+        });
+      }
+    });   
+  });
+
 
 router.get('/owner', (req, res, next) =>{
   res.render('owner', {title: 'Owner || myLittleShop'});

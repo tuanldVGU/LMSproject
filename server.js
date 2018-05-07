@@ -10,7 +10,7 @@ var debug = require('debug')('mylittleshop:server');
 var path = require("path");
 var methodOverride = require('method-override'); 
 var morgan = require('morgan'); 
-
+var http = require('http').Server(app);
 const PORT = process.env.PORT || 3000
 
 var app = express();
@@ -30,40 +30,39 @@ db.once('open',function (){
 });
 
 // connect database server-side
-var MongoClient = require('mongodb').MongoClient;
-var findDocuments = function(db, callback) {
-  // Get the documents collection
-  var collection = db.collection('secondCollection');
-  // Find some documents
+// var MongoClient = require('mongodb').MongoClient;
+// var findDocuments = function(db, callback) {
+//   // Get the documents collection
+//   var collection = db.collection('secondCollection');
+//   // Find some documents
   
-  collection.find().toArray(function(err, items) {
-    console.log("Found the following records");
-    callback(items[0]);
-  });
+//   collection.find().toArray(function(err, items) {
+//     console.log("Found the following records");
+//     callback(items[0]);
+//   });
 
 
-}
+// }
 
-// Use connect method to connect to the Server
-MongoClient.connect(url, function(err, client) {
-  const db = client.db('mylittleshop')
-  console.log("Connected correctly to server");
-  //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
-  findDocuments(db, function(docs) {
-    exports.getDataShop1 = function() {
-      return docs;
-    }
-    console.log(docs.shop1.sold_drink[1])
-    app.set('data',docs)
-    app.put('/employee', (req,res)=>{
-      console.log("hello"+req.body.name)
-    })
-    //console.log(docs.barcode);
+// //Use connect method to connect to the Server
+// MongoClient.connect(url, function(err, client) {
+//   const db = client.db('mylittleshop')
+//   console.log("Connected correctly to server");
+//   //db.collection('secondCollection').update({"name":"firstDocument"},{$pull:{"barcode":[{"3":"Fnta"}]}},{multi:true})
+//   findDocuments(db, function(docs) {
+//     exports.getDataShop1 = function() {
+//       return docs;
+//     }
+//     console.log(docs.shop1.sold_drink[1])
+//     app.set('data',docs)
     
-  });
-  
-  
-});
+//     //console.log(docs.barcode);
+    
+//   });
+//  });
+// app.put('/employee', (req, res) => {
+//   console.log("bac"+req.body.name)
+// })
 
 /*
 Middlewares and configurations 
@@ -115,3 +114,13 @@ app.use(function (err, req, res, next) {
 app.listen(PORT, function(){
 	console.log("App running on port "+ PORT);
 })
+// http.listen(3000, function(){
+//   console.log('listening on *:3000');
+// });
+// var http = require('http');
+
+// //create a server object:
+// http.createServer(function (req, res) {
+//   res.write('Hello World!'); //write a response to the client
+//   res.end(); //end the response
+// }).listen(3000); //the server object listens on port 8080
