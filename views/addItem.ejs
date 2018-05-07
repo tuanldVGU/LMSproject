@@ -21,7 +21,7 @@
 	<div class="form">
 		<h3>Add Item</h3><br>
          <form class="register-form" >
-                <select name="shopName" ng-change="getID(product.name)" ng-model="value" >
+                <select name="shopName" ng-change="getID(value)" ng-model="value" >
                         <option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>
                     </select>
               <input type="text" name="productID" ng-model="item.productID" placeholder="productID"/>   
@@ -30,7 +30,7 @@
               <input type="text" name="quantity_sold" ng-model="item.quantity_sold" placeholder="quantity_sold"/>
               <input type="text" name="price" ng-model="item.price" placeholder="price" />
               <button ng-click="addItem(data._id)">create</button>
-              <!-- <h1>{{data}}</h1> -->
+              <h1>{{data}}</h1>
    		 </form>
 	</div>
 </div>
