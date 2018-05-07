@@ -1,6 +1,21 @@
-<% layout('layout/management') %>
+<!DOCTYPE html>
+<html ng-app="dashboard">
+<head>
+    <% include partials/header %>
+    <% include partials/customh %>
+  <link rel="stylesheet" type="text/css" href="/css/employee.css">
+  <!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
-<body class="fix-header fix-sidebar">
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/dashboardController.js"></script>
+	<script src="/js/services/dashboard.js"></script>
+	<script src="/js/dashboardcore.js"></script>
+</head>
+
+<body class="fix-header fix-sidebar" ng-controller="mainController">
 	<div id="main-wrapper">
 
 		<% include partials/nav %>
@@ -32,7 +47,7 @@
                                     <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2>568120</h2>
+                                    <h2>{{totalRevenue}}</h2>
                                     <p class="m-b-0">Total Revenue</p>
                                 </div>
                             </div>

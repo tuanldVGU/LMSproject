@@ -1,22 +1,27 @@
-angular.module('checkoutController', [])
+angular.module('dashboardController', [])
 	.controller('mainController',function($scope, $http){
 		$scope.data = [];
         $scope.item = {};
-        $scope.item_id = 0;
+        $scope.totalRevenue = 0;
         $scope.item_qty = 0;
         $scope.subTotal = 0;
         $scope.shopName = "shop1";
         $scope.orderList = {};
         // $scope.orderList.item=[];
 		// show all the products
-        $http.get('/api/product/'+$scope.shopName)
+        $http.get('/api/products')
 			.then(function(res){
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
-                $scope.item = res.data.item;
-                $scope.orderList = res.data;
-                // $scope.orderList.name = res.data.name;
-                // $scope.orderList._id = res.data._id;
+                $scope.allProduct = res.data;
+                for(var i=0;i<$scope.allProduct.length;i++)
+                {
+                    for(var j=0; j<$scope.allProduct[i].item.length;j++)
+                    {
+                        $scope.totalRevenue = $scope.totalRevenue+$scope.allProduct[i].item[j].price*$scope.allProduct[i].item[j].quantity_sold;
+                    }
+                }
+                
 
 			})
 			.catch(function(res){

@@ -37,6 +37,27 @@ angular.module('productController', [])
 				})
 
 			}
+			$scope.deleteShop = function(itemID, shopID,data){
+				console.log(itemID);
+				console.log(shopID);
+				console.log(data);
+				for(var i = 0; i <data.item.length;i++)
+				{
+					if(data.item[i]._id == itemID){
+						data.item.splice(i,1);
+					}
+				}
+				console.log(data);
+				$http.put('/api/product/'+shopID,data)
+				.then(function(res){
+					$scope.abc = res.data;
+				})
+				.catch(function(res){
+					//console.log(res.data);
+					console.log("Error" + res)
+				})
+
+			}
 			$scope.addItem = function(id){
 				$scope.data.item.push($scope.item);
 				$http.put('/api/product/'+id,$scope.data)

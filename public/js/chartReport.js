@@ -1,0 +1,50 @@
+// var tableBody = document.getElementById("table").getElementsByTagName('tbody')[0];     
+// var name;
+// var qty;
+// var nameArray = [];
+// var qtyArray = [];
+// for (i=0; i<tableBody.children.length; i++) {
+//         var row = tableBody.children[i];
+//         // loop through all columns
+//         /*for (j=0; j<row.children.length; j++) {
+//             console.log(row.children[j].innerHTML);
+//         }*/
+//         nameArray.push(row.children[2].innerHTML);
+//         qtyArray.push(row.children[4].innerHTML);
+
+// }
+// console.log(nameArray);
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['x','y'],
+        datasets: [{
+            label: 'Number of sold items',
+            data: [2,2],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
