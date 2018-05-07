@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var mongoose = require('mongoose');
 
 router.get('/', (req, res, next) =>{
 	res.render('index', {title: 'Login || myLittleShop'});
+
 });
 
 router.post("/", function (req, res, next) {
@@ -53,10 +55,8 @@ router.get('/home', (req,res, next) =>{
   res.render('dashboard', {title: 'Dashboard || myLittleShop'});
 })
 
-router.get('/app', (req, res, next) =>{
-  var shop1SoldDrink = req.app.get('data').shop1.sold_drink;
-  var shop2SoldDrink = shop1SoldDrink;
-  res.render('checkout', {title: 'Checkout || myLittleShop',item: shop2SoldDrink});
+router.get('/app', (req, res, next) =>{  
+  res.render('checkout', {title: 'Checkout || myLittleShop'});
 });
 
 router.get('/employee', (req, res, next) =>{
@@ -79,5 +79,8 @@ router.get('/profile', (req, res, next) =>{
   res.render('modifyUser', {title: 'Modify user || myLittleShop'});
 })
 
+router.get('/chart', (req, res, next) =>{
+  res.render('chart', {title: 'Chart || myLittleShop'});
+})
 
 module.exports = router;

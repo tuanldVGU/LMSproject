@@ -10,7 +10,6 @@ var debug = require('debug')('mylittleshop:server');
 var path = require("path");
 var methodOverride = require('method-override'); 
 var morgan = require('morgan'); 
-
 const PORT = process.env.PORT || 3000
 
 var app = express();
@@ -31,19 +30,20 @@ db.once('open',function (){
 
 // connect database server-side
 var MongoClient = require('mongodb').MongoClient;
+var collection;
 var findDocuments = function(db, callback) {
   // Get the documents collection
-  var collection = db.collection('secondCollection');
+  collection = db.collection('secondCollection');
   // Find some documents
-  
   collection.find().toArray(function(err, items) {
     console.log("Found the following records");
+    collection = items[0];
     callback(items[0]);
   });
-
-
 }
 
+
+/*
 // Use connect method to connect to the Server
 MongoClient.connect(url, function(err, client) {
   const db = client.db('mylittleshop')
@@ -61,9 +61,7 @@ MongoClient.connect(url, function(err, client) {
     //console.log(docs.barcode);
     
   });
-  
-  
-});
+});*/
 
 /*
 Middlewares and configurations 
@@ -95,8 +93,11 @@ Routes
 
 var tasks = require('./routes/task')
 var users = require('./routes/user');
+var products = require('./routes/products')
 app.use('/', users);
 app.use('/api', tasks);
+app.use('/api', products);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

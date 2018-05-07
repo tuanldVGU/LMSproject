@@ -20,14 +20,15 @@ function voucherFunct() {
 
 
 function addFunc() {	  
-	var table = document.getElementById("salesTable");
+	var table = document.getElementById("salesTable").getElementsByTagName('tbody')[0];
+	//var table = document.getElementById("salesTable");
 	var row = table.insertRow(-1);
 	var cell1 = row.insertCell(0);
 	var cell2 = row.insertCell(1);
 	var cell3 = row.insertCell(2);
 	var cell4 = row.insertCell(3);
 	var cell5 = row.insertCell(4);	
-	
+	  
 	/*if (document.getElementById("quantity").value == null) 
 		document.getElementById("quantity").value = 5;	
 	
@@ -44,26 +45,58 @@ function addFunc() {
 	cell3.innerHTML = datagood[0].productName;
 	cell4.innerHTML = document.getElementById("quantity").value;
 	cell5.innerHTML = datagood[0].price;*/
-
-	cell1.innerHTML = "Just for testing";
+	
+	cell1.innerHTML = "Just for testing ";
 	cell2.innerHTML = "2";
 	cell3.innerHTML = "3";
 	cell4.innerHTML = "4";
 	cell5.innerHTML = "5";
 	var price =5;
+		
 	sub_total = sub_total +  price*quantity;
 	document.getElementById("sub_total").innerHTML = sub_total;
 	document.getElementById("tax").innerHTML = sub_total*(100-promotion)/100 * 0.1;
-	document.getElementById("sum").innerHTML = sub_total*(100-promotion)/100 * 0.9;	
+	document.getElementById("sum").innerHTML = sub_total*(100-promotion)/100 * 0.9;
+
 }
 
 function payFunc() {
 	document.getElementById("pay_modal_value").innerHTML = "Total: "+ sub_total*(100-promotion)/100 * 0.9;
-	// console.log(document.getElementById("my_modal_value").value);
-	// $("#payModal").find('.p').val('xxx');
 	$("#payModal").modal("show");
 
-	// window.alert("Total: "+ sub_total*(100-promotion)/100 * 0.9);
+	var tableBody = document.getElementById("salesTable").getElementsByTagName('tbody')[0];		
+	var id;
+	var qty;
+	for (i=0; i<tableBody.children.length; i++) {
+		var row = tableBody.children[i];
+		// loop through all columns
+		for (j=0; j<row.children.length; j++) {
+			console.log(row.children[j].innerHTML);
+		}
+		id = row.children[1].innerHTML;
+		qty = row.children[3].innerHTML;
+	}
+	var url = "http://localhost:3000/";
+	var data = { "id": id, "qty": qty };
+	  fetch(url, {
+	  method: "POST",
+	  body: JSON.stringify(data),
+	  headers: {
+	    "Content-Type": "application/json"
+	  },
+	  credentials: "same-origin"
+	}).then(function(response) {
+	  response.status     //=> number 100–599
+	  response.statusText //=> String
+	  response.headers    //=> Headers
+	  response.url        //=> String
+	  console.log("succeeded");
+	  return response.text()
+	}, function(error) {
+	console.log("fail");
+	  error.message //=> String
+	})
+
 	// No need when page reload
 	/*myTable = document.getElementById("salesTable");
 	var rowCount = myTable.rows.length; while(--rowCount) myTable.deleteRow(rowCount);
@@ -72,7 +105,7 @@ function payFunc() {
 	document.getElementById("sum").innerHTML = 0;
 	document.getElementById("promotion").innerHTML = 0;*/
 }
-
+/*
 var del = document.getElementById("closePayBtn");
 del.addEventListener('click', function () {
   fetch('employee', {
@@ -91,4 +124,4 @@ del.addEventListener('click', function () {
     console.log("hello "+data)
     window.location.reload()
   })
-})
+})*/

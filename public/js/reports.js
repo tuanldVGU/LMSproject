@@ -1,12 +1,28 @@
+// var tableBody = document.getElementById("table").getElementsByTagName('tbody')[0];     
+// var name;
+// var qty;
+// var nameArray = [];
+// var qtyArray = [];
+// for (i=0; i<tableBody.children.length; i++) {
+//         var row = tableBody.children[i];
+//         // loop through all columns
+//         /*for (j=0; j<row.children.length; j++) {
+//             console.log(row.children[j].innerHTML);
+//         }*/
+//         nameArray.push(row.children[2].innerHTML);
+//         qtyArray.push(row.children[4].innerHTML);
+
+// }
+// console.log(nameArray);
 
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Coca cola", "Pepsi", "Fanta", "Mountain Dew"],
+        labels: nameArray,
         datasets: [{
             label: 'Number of sold items',
-            data: [12, 19, 3, 5],
+            data: qtyArray,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
