@@ -146,5 +146,8 @@ router.get('/addItem', (req, res, next) =>{
     router.get('/app', (req, res, next) =>{
       res.render('checkout', {title: 'Checkout || myLittleShop'});
     });
+    router.get('/chart', (req, res, next) =>{
+      res.render('chart', {title: 'Checkout || myLittleShop'});
+    });
 
 module.exports = router;

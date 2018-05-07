@@ -50,6 +50,7 @@
 											<th class="column02">Qty Sold</th>
 											<th class="column02">Price</th>
 											<th class="column02">Update</th>
+											<th class="column02">Delete</th>
 											<!-- <th class="column">Time Stamp</th> -->
 										</tr>
 									</thead>
@@ -62,6 +63,7 @@
 										<td class="column02"><input type="text" ng-model="item.quantity_sold" placeholder="{{item.quantity_sold}}"></td>	                		
 										<td class="column02"><input type="text" ng-model="item.price" placeholder="{{item.price}}"></td>
 										<td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td>
+										<td><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
