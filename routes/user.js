@@ -27,6 +27,7 @@ router.post("/", function (req, res, next) {
         alert;
       } else {
         req.session.userId = user._id;
+        req.session.shop = user.shop;
         return res.redirect('/home');
       }
     });
