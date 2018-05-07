@@ -126,9 +126,18 @@ router.get('/profile', (req, res, next) =>{
   res.render('modifyUser', {title: 'Modify user || myLittleShop'});
 });
 
-router.get('/chart', (req, res, next) =>{
-  res.render('chart', {title: 'Modify user || myLittleShop'});
+router.get('/bar-chart', (req, res, next) =>{
+  res.render('bar-chart', {title: 'Bar Chart || myLittleShop'});
 });
+
+router.get('/pie-chart', (req, res, next) =>{
+  res.render('pie-chart', {title: 'Pie Chart || myLittleShop'});
+});
+
+router.get('/polar-area-chart', (req, res, next) =>{
+  res.render('polar-area-chart', {title: 'Pie Area Chart || myLittleShop'});
+});
+
 router.get('/addItem', (req, res, next) =>{
   res.render('addItem', {title: 'Modify user || myLittleShop'});
 });
