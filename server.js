@@ -52,15 +52,28 @@ app.use(cookieParser());
 
 app.use(methodOverride());
 app.use(morgan('dev'));
+
 /*
 Routes
 */
 
-var tasks = require('./routes/task')
-var users = require('./routes/user');
+// Handling CORS errors
+app.use(function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept, Authorization');
+	if (req.method === 'OPTIONS'){
+		res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
+		return res.status(200).json({});
+	}
+	next();
+});
+
+// Restful api routes
+var routes = require('./routes/router')
+var users = require('./routes/users');
 var products = require('./routes/products')
-app.use('/', users);
-app.use('/api', tasks);
+app.use('/', routes);
+app.use('/api', users);
 app.use('/api', products);
 
 
