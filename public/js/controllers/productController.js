@@ -8,7 +8,7 @@ angular.module('productController', [])
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
 				$scope.products = res.data;
-
+				$scope.productShop1 = res.data[0].item;
 			})
 			.catch(function(res){
 				//Export error

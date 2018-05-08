@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<meta charset="UTF-8">
+<html ng-app="chartLMS">
+<head>
+		<% include partials/header %>
+		<% include partials/customh %>
+	
+		<!-- Latest compiled JavaScript -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	
+		<!-- Angular controller -->
+		<script src="/js/angular.min.js"></script>
+		<script src="/js/controllers/productController.js"></script>
+		<script src="/js/services/product.js"></script>
+		<script src="/js/productcore.js"></script>
+	
+		
+	</head>
+	<body ng-controller="mainController">
+<center>
+	
+	<h1>Barcode Generator</h1>
+	
+	<div id="div1" style="float:left">
+	<p style="border:3px; border-style:solid; border-color:#000000; padding: 1em;">
+	<b><font size="5">Enter product</font></b><br><br>
+	Product name: 
+	<input type="text" id="productName"><br><br>
+	Product ID: 
+	<select name="shopName" ng-model="value" id="productID" >
+		<div >
+				<option ng-repeat="item in productShop1" ng.value="item.productID">{{item.productID}}</option>
+		</div>
+			
+	</select>
+	<br>
+
+	Barcode Type:
+	<select id="selection" name="BarcodeType">
+	<option value="code128">Code128</option>
+	<option value="code39">Code39</option>
+	<option value="ean2">EAN2</option>
+	<option value="ean5">EAN5</option>
+	<option value="ean8">EAN8</option>
+	<option value="ean13">EAN13</option>
+	<option value="upc">UPC</option>
+	<option value="itf">ITF</option>
+	<option value="msi">MSI</option>
+	<option value="pharmacode">Pharmacode</option>
+	</select>
+	<br><br>
+	
+	<input type="button" href="" id="generateButton" onclick="addRow()" value="Generate"/>
+	</p>
+	</div>
+	
+	<div id="div2" style="float:right">
+	<p style="border:3px; border-style:solid; border-color:#000000; padding: 1em;">
+	<b><font size="5">Delete Barcode</font></b><br><br>
+	At position: <input type="text" id="rowID"><br><br>
+	<input type="button" id="deleteButton" onclick="deleteRow()" value="Delete"/><br><br>
+	<input type="button" id="clearAllButton" onclick="clearAll()" value="Clear all"/>
+	</p>
+	</div>
+
+</center>
+
+<center>	
+	<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+	
+	<input type="button" id="tableDownload" value="Download Table (CSV)"/><br><br>
+	<style>
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	th, td{
+		padding: 10px;
+		text-align: center;
+	}
+	</style>
+	
+	<table id="table">
+	<tbody>
+	<tr id="1">
+		<th>No.</th>
+		<th>Product name</th>
+		<th>Barcode</th>	
+		<th>Type</th>
+	</tr>
+	</tbody>
+	</table>
+	
+	<script>	
+		var textBoxes=document.getElementsByTagName("input");
+		for(var i=0;i<textBoxes.length;i++){
+			if(textBoxes[i].type!="button")
+				textBoxes[i].value="";
+		}
+	
+		var rowID=1;
+		var tableProduct=document.getElementById("table").getElementsByTagName('tbody')[0];
+		function addRow(){		
+			var newRow=tableProduct.insertRow(tableProduct.rows.length);
+			newRow.id= document.getElementById("productID").value;
+			var newCell1=newRow.insertCell(0)
+			var newCell2=newRow.insertCell(1);
+			var newCell3=newRow.insertCell(2);
+			var newCell4=newRow.insertCell(3);
+			newCell1.innerHTML=tableProduct.rows.length - 1;
+			newCell2.innerHTML=document.getElementById("productName").value;
+			
+			var barcodeImage=new Image();
+			JsBarcode(barcodeImage, document.getElementById("productID").value,{
+				format: document.getElementById("selection").value
+			});		
+			newCell3.appendChild(barcodeImage);
+			
+			newCell4.innerHTML=document.getElementById("selection").value.toUpperCase();
+
+			rowID++;
+		}
+		
+		function deleteRow(){
+			var rowNumber=document.getElementById("rowID");
+			if(rowNumber.value!="0")
+				tableProduct.deleteRow(rowNumber.value);
+			checkRowID();
+		}
+		
+		function clearAll(){
+			if(tableProduct.rows.length>1){
+				var confirmValue=confirm("Do you want to delete all product data from the table?");
+				if(confirmValue==true){
+					while(tableProduct.rows.length>1)
+						tableProduct.deleteRow(1);
+				}
+			}
+		}
+		
+		function checkRowID(){
+			var newRowNumber=1;
+			for(var i=1;i<tableProduct.rows.length;i++){
+				tableProduct.rows[i].cells[0].innerHTML=newRowNumber;
+				newRowNumber++;
+			}
+		}
+		
+		function downloadCsv(csv,filename) {
+			var csvFile;
+			var downloadLink;
+			
+			csvFile=new Blob([csv],{type: "text/csv"});
+			downloadLink = document.createElement("a");
+			downloadLink.download = filename;
+			downloadLink.href = window.URL.createObjectURL(csvFile);
+			downloadLink.style.display = "none";
+			document.body.appendChild(downloadLink);
+			downloadLink.click();
+		}
+
+		function exportToCsv(tableObj,filename) {
+			var csv=[];
+			var rows=document.querySelectorAll("table tr");
+			
+			for(var i=0;i<rows.length;i++){
+				var row=[],cols=rows[i].querySelectorAll("td, th");			
+				for (var j=0;j<cols.length;j++){
+					if(j!=2 && i!=0)
+						row.push(cols[j].innerText);
+					else if(j==2 && i!=0)
+						row.push(rows[i].id);
+					else
+						row.push(cols[j].innerText);
+				}
+				csv.push(row.join(","));		
+			}
+			downloadCsv(csv.join("\n"), filename);
+		}
+
+		document.getElementById("tableDownload").addEventListener("click",function () {
+			var tableObj=document.querySelector("table").outerHTML;
+			exportToCsv(tableObj,"productTable.csv");
+		});
+
+	</script>
+</center>
+</body>
+</html>

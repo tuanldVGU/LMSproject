@@ -5,6 +5,8 @@ angular.module('dashboardController', [])
         $scope.totalRevenue = 0;
         $scope.item_qty = 0;
         $scope.subTotal = 0;
+        $scope.totalShop = 0;
+        $scope.totalEmployee =0;
         $scope.shopName = "shop1";
         $scope.orderList = {};
         // $scope.orderList.item=[];
@@ -14,6 +16,7 @@ angular.module('dashboardController', [])
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
                 $scope.allProduct = res.data;
+                $scope.totalShop = $scope.allProduct.length;
                 for(var i=0;i<$scope.allProduct.length;i++)
                 {
                     for(var j=0; j<$scope.allProduct[i].item.length;j++)
@@ -60,10 +63,15 @@ angular.module('dashboardController', [])
 					console.log("Error" + res)
 				})
             }
-			
-		
+            $http.get('/api/users')
+                .then(function(res){
+    /*				console.log(res.data[0].shop1);
+                    console.log('x');*/
+                    console.log( res.data);
+                    $scope.totalEmployee = res.data.length;
+                    
 
-
+                })
 	})
 
 
