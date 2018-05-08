@@ -38,7 +38,16 @@
 
 		<div class="page-wrapper limiter">
 				<div class="container-fluid">
-					<h1 id="pie-chart"> Bar Chart</h1>
+					<!-- Bread crumb -->
+		            <div class="row page-titles">
+		                <div class="col-md-5 align-self-center">
+		                	<h3 id="chart" class="text-primary"> Bar Chart</h3>
+		                </div>
+		                <div class="col-md-7 align-self-center">
+		    
+		                </div>
+		            </div>
+		            <!-- End Bread crumb --> 
 					<div id="product-list" class="container-table">				
 						<select name="shopName" ng-change="loadChartInfo(value)" ng-model="value" >
 							<option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>					

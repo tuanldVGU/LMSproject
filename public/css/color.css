@@ -14,7 +14,7 @@ nav ul li a{
 /*Wrapping*/
 .limiter {
   padding: 0;
-  background: #d1d1d1;
+  background: #fff;
 }
 
 .limiter .container-table {

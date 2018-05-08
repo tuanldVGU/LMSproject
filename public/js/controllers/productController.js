@@ -43,7 +43,7 @@ angular.module('productController', [])
 					productNames =$scope.productNames;
 					qtySold = $scope.qtySold;					
 					var ctx = document.getElementById("myChart").getContext('2d');			
-					var chartType = document.getElementsByTagName("H1")[0].innerHTML.replace("Chart","");
+					var chartType = document.getElementsByTagName("H3")[0].innerHTML.replace("Chart","");
 					var camelize = function camelize(str) {
 						return str.replace(/\W+(.)/g, function(match, chr)
 						 {
