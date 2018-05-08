@@ -8,45 +8,45 @@ input.addEventListener("keyup", function(event) {
         document.getElementById("voucherCloseBtn").click();
     }
 })
-document.getElementById('pay_btn').addEventListener('click',payFunction);
-function payFunction() {
-	document.getElementById("my_modal_value").innerHTML = "Total: "+ sub_total*(100-promotion)/100 * 0.9;
-	console.log(document.getElementById("my_modal_value").value);
-	// $("#myModal").find('.p').val('xxx');
-	$("#myModal").modal("show");	
-	// window.alert("Total: "+ sub_total*(100-promotion)/100 * 0.9);
-	myTable = document.getElementById("salesTable");
-	var rowCount = myTable.rows.length; 
-	for(var i = 1; i<rowCount;i++)
-	{
-		id = myTable.rows[i].cells[1].innerHTML;
-		qty =myTable.rows[i].cells[3].innerHTML;
-		order.push({ "id": id, "qtyInStock": datagood[0].quantity_in_stock-qty,"qtySold": parseInt(datagood[0].quantity_sold) + parseInt(qty) })
-	}
-	console.log("testGetjson"+datagood[0].quantity_sold)
-	while(--rowCount) myTable.deleteRow(rowCount);
-	document.getElementById("sub_total").innerHTML = 0;
-	document.getElementById("tax").innerHTML = 0;
-	document.getElementById("sum").innerHTML = 0;
-	document.getElementById("promotion").innerHTML = 0;
-	//var data = { "id": id, "qty": qty };
-	  fetch('orderListPaid', {
-	  method: "put",
-	  body: JSON.stringify(order),
-	  headers: {
-	    "Content-Type": "application/json"
-	  },
-	  credentials: "same-origin"
-	}).then(data => {
-		console.log(data)
-	}, function(error) {
-	console.log("fail");
-	  error.message //=> String
-	})
-	order = [];
-}
+// document.getElementById('pay_btn').addEventListener('click',payFunction);
+// function payFunction() {
+// 	document.getElementById("my_modal_value").innerHTML = "Total: "+ sub_total*(100-promotion)/100 * 0.9;
+// 	console.log(document.getElementById("my_modal_value").value);
+// 	// $("#myModal").find('.p').val('xxx');
+// 	$("#myModal").modal("show");	
+// 	// window.alert("Total: "+ sub_total*(100-promotion)/100 * 0.9);
+// 	myTable = document.getElementById("salesTable");
+// 	var rowCount = myTable.rows.length; 
+// 	for(var i = 1; i<rowCount;i++)
+// 	{
+// 		id = myTable.rows[i].cells[1].innerHTML;
+// 		qty =myTable.rows[i].cells[3].innerHTML;
+// 		order.push({ "id": id, "qtyInStock": datagood[0].quantity_in_stock-qty,"qtySold": parseInt(datagood[0].quantity_sold) + parseInt(qty) })
+// 	}
+// 	console.log("testGetjson"+datagood[0].quantity_sold)
+// 	while(--rowCount) myTable.deleteRow(rowCount);
+// 	document.getElementById("sub_total").innerHTML = 0;
+// 	document.getElementById("tax").innerHTML = 0;
+// 	document.getElementById("sum").innerHTML = 0;
+// 	document.getElementById("promotion").innerHTML = 0;
+// 	//var data = { "id": id, "qty": qty };
+// 	  fetch('orderListPaid', {
+// 	  method: "put",
+// 	  body: JSON.stringify(order),
+// 	  headers: {
+// 	    "Content-Type": "application/json"
+// 	  },
+// 	  credentials: "same-origin"
+// 	}).then(data => {
+// 		console.log(data)
+// 	}, function(error) {
+// 	console.log("fail");
+// 	  error.message //=> String
+// 	})
+// 	order = [];
+// }
 function promFunc(value) {
-	document.getElementById("promotion").innerHTML = value+"%";
+	document.getElementById("promotion").innerHTML = value;
 	promotion = value;
 	document.getElementById("tax").innerHTML = sub_total*(100-promotion)/100 * 0.1;
 }

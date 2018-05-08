@@ -48,8 +48,8 @@ router.get('/polar-area-chart', (req, res, next) =>{
 router.get('/addItem', (req, res, next) =>{
   res.render('addItem', {title: 'Modify user || myLittleShop'});
 });
-router.get('/employee', (req, res, next) =>{
-  res.render('employee', {title: 'Modify user || myLittleShop'});
+router.get('/employee', checkAuth, (req, res, next) =>{
+  res.render('employee', {title: 'Modify user || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
 router.get('/barcode-tools', (req, res, next) =>{
   res.render('barcode-tools', {title: 'Barcode Tools || myLittleShop'});

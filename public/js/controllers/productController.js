@@ -2,6 +2,7 @@ angular.module('productController', [])
 	.controller('mainController',function($scope, $http){
 		$scope.data = {};
 		$scope.item = {};
+		
 		// show all the products
 		$http.get('/api/products')
 			.then(function(res){

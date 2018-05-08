@@ -22,10 +22,14 @@
     <!-- Bread crumb -->
     <div class="row page-titles">
       <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Checkout</h3>
+        <h3 class="text-primary">Checkout </h3>
       </div>
-      <div class="col-md-7 align-self-center">
-       
+      <div class="col-md-7 align-self-center" id="shopName">
+          <ol class="breadcrumb">
+            <li><div ng-init="init('<%= shopName %>')"><%- shopName %></div></li>
+            <li>/</li>
+            <li><%- employee %></li>
+          </ol>
       </div>
     </div>
     <!-- End Bread crumb -->    
@@ -64,11 +68,11 @@
           </tr>
           <tr>
             <th scope="col">Promotion</th>
-            <td scope="col" id="promotion">0</td>
+            <td scope="col" id="promotion" ng-model="promotion">{{promotion*100}}</td>
           </tr>
           <tr>
             <th scope="col">Tax</th>
-            <td scope="col" id="tax">0</td>
+            <td scope="col" id="tax">{{Tax}}</td>
           </tr>
           <tr>
             <th scope="col">Item ID</th>
@@ -84,7 +88,7 @@
           </tr>
           <tr>
             <th scope="col">Total</th>
-            <td scope="col" id="sum">0</td>
+            <td scope="col" id="sum">{{Total}}</td>
           </tr>
         </table>
          <!-- Table for Buttons  -->
@@ -95,7 +99,7 @@
                 <button type="button" class="btn" id="add_btn" ng-click="addFunc()">Add Item</button>
               </th>
               <th>
-                <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
+                <button type="button" class="btn promBtn" ng-click="promFunc(0.1)">10%</button>
               </th>
             </tr>
             <tr>
@@ -103,7 +107,7 @@
                 <button type="button" class="btn" id="scan_btn">Scan Barcode</button>
               </th>
               <th>
-                <button type="button" class="btn promBtn" onclick="promFunc(20)">20%</button>
+                <button type="button" class="btn promBtn" ng-click="promFunc(0.2)">20%</button>
               </th>
             </tr>
             <tr>
@@ -111,7 +115,7 @@
                 <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
               </th>
               <th>
-                <button type="button" class="btn promBtn" onclick="promFunc(50)">50%</button>
+                <button type="button" class="btn promBtn" ng-click="promFunc(0.5)">50%</button>
               </th>
             </tr>
             <tr>
