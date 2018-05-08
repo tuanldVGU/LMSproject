@@ -5,8 +5,20 @@ angular.module('productController', [])
 		var productNames = [];
 		var qtySold = [];
 		$scope.productNames = [];
-		$scope.qtySold = [];		
+		$scope.qtySold = [];
+		$scope.productSelected = "";		
 		// show all the products
+		$scope.selectProductID = function(id){
+            console.log("test"+id)
+            for(var i =0; i<$scope.productShop1.length;i++)
+            {
+                if($scope.productShop1[i].productID==id)
+                {
+                    $scope.productSelected = $scope.productShop1[i].productName;
+                }
+            }
+            
+        }
 		$http.get('/api/products')
 			.then(function(res){
 				$scope.products = res.data;				

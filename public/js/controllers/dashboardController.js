@@ -8,8 +8,6 @@ angular.module('dashboardController', ["chart.js"])
         $scope.totalEmployee =0;
         $scope.orderList = {};
         $scope.totalOrders = 0;
-        $scope.productShop1 = {};
-
         $scope.labels = [];
         $scope.data = [];
           $scope.onClick = function (points, evt) {
@@ -24,7 +22,7 @@ angular.module('dashboardController', ["chart.js"])
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
                 $scope.allProduct = res.data;
-                $scope.productShop1 = res.data[0].item;
+                
                 for(var i = 0; i<res.data[0].item.length;i++)
                 {
                     $scope.labels.push(res.data[0].item[i].productName)
@@ -65,6 +63,7 @@ angular.module('dashboardController', ["chart.js"])
             
 
         })
+
 	})
 
 
