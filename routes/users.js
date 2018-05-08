@@ -63,7 +63,7 @@ router.post("/users", function (req, res, next) {
         if (user.role=="Employee") 
           {
             res.cookie('x-access-token',token);
-            return res.redirect('/app');
+            return res.redirect('/employee');
           }
         else 
           {
