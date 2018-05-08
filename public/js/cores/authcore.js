@@ -1,0 +1,1 @@
+angular.module('authLMS', ['authController','authService']);

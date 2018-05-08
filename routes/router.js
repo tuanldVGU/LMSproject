@@ -7,6 +7,7 @@ router.get('/', (req, res, next) =>{
 });
 
 router.get('/home', checkAuth, (req,res, next) =>{
+	  console.log(req.cookies);
       res.render('dashboard', {title: 'Dashboard || myLittleShop'});
 });
 

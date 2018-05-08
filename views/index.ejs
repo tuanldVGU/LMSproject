@@ -1,13 +1,21 @@
-<% layout('layout') %>
+<!DOCTYPE html>
+<html ng-app="authLMS">
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/login.css">	
+	<% include partials/header %>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+
+	<!-- Angular  -->
+	<script src="/js/controllers/authentication.js"></script>	
+	<script src="/js/services/authentication.js"></script>	
+	<script src="/js/cores/authcore.js"></script>
+
 </head>
-<div class="login-page">
+<div ng-controller="mainController" class="login-page">
 	<div class="form">
 		<h3>Login to Your Account</h3><br>
 		  <form class="login-form" action="/api/users" method="post">
-			<input type="text" name="loguser" placeholder="Username">
-			<input type="password" name="logpassword" placeholder="Password">
+			<input type="text" name="loguser" placeholder="Username" ng-model="tmp.loguser">
+			<input type="password" name="logpassword" placeholder="Password" ng-model="tmp.logpassword">
 			<button>Login</button>
 		  </form>
 	</div>

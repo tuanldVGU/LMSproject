@@ -42,7 +42,6 @@ router.post("/users", function (req, res, next) {
         alert;
       } else {
         req.session.userId = user._id;
-        req.session.shop = user.shop;
         return res.redirect('/home');
       }
     });
@@ -55,8 +54,22 @@ router.post("/users", function (req, res, next) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        if (user.role=="Employee") return res.redirect('/app');
-        else return res.redirect('/home');
+        // var ans = {};
+        // ans.shop = user.shop;
+        // ans.role = user.role;
+        // ans.token = token;
+        // // res.json(ans);
+        // // res.cookie('Passport',ans);
+        if (user.role=="Employee") 
+          {
+            res.cookie('x-access-token',token);
+            return res.redirect('/app');
+          }
+        else 
+          {
+            res.cookie('x-access-token',token);
+            return res.redirect('/home');
+          }
       }
     });
   } else {
