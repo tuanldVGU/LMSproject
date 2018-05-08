@@ -1,199 +1,178 @@
-<% layout('applayout') %>
-<body>
-<div class="container-fluid ">  
-  <div class="row">
-    <div class="col-sm-2" id="sidebar" >
-      <nav class="nav flex-column navbar-expand-lg nav-fill " >
-        <a class="nav-link active text-light navbar-brand" href="#"><h4>theLittleShop</h4></a>
-        <a class="nav-link text-light" href="#">Home</a>
-        <a class="nav-link text-light" href="#">Inventory</a>
-        <a class="nav-link text-light" href="#">Transaction</a>
-      </nav>
-    </div>
-    <div class="col-sm-7 ">
-      <h3>Current Sales</h3>
-      <div class="table-responsive"style="height: 512px;overflow:auto;> <!-- style="height: 400px ;overflow:auto; -->
-      <table class="table table-primary" id="salesTable">
-        <thead id="table-head">
-          <tr>
-            <th scope="col">#<%=item[0].productName%></th>
-            <th scope="col" id="barcode">Item ID</th>
-            <th scope="col">Item Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Itemxxx Price</th>
-          </tr>
-        </thead>
-      </table>
-      
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div id="avatar">
-      <!-- <img src="images/user.svg"  width="40" height="40" alt="Employee Avatar"> -->
-      <p> Employee Name</p>
-      <!-- <a class="btn btn-primary" href="#" role="button">Log out</a> -->
-      <table class="table" id="rightTable">
-        <tr>
-          <th scope="col">SubTotal</th>
-          <td scope="col" id="sub_total">0</td>
-        </tr>
-        <tr>
-          <th scope="col">Promotion</th>
-          <td scope="col" id="promotion">0</td>
-        </tr>
-        <tr>
-          <th scope="col">Tax</th>
-          <td scope="col" id="tax">0</td>
-        </tr>
-        <tr>
-          <th scope="col">Item ID</th>
-          <td scope="col">
-            <input type="text" id="item_id">
-          </td>
-        </tr>
-        <tr>
-          <th scope="col">Quantity</th>
-          <td scope="col">  <input type="number" name="quantity" min="1" value=1 id="quantity"></td>
-        </tr>
-        <tr>
-          <th scope="col">Total</th>
-          <td scope="col" id="sum">0</td>
-        </tr>
-      </table>
-      <table >
-        <tbody>
-          <tr>
-            <th>
-              <button type="button" class="btn" id="add_btn" onclick="addFunc()">Add Item</button>
-            </th>
-            <th>
-              <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <button type="button" class="btn" id="scan_btn">Scan Barcode</button>
-            </th>
-            <th>
-              <button type="button" class="btn promBtn" onclick="promFunc(20)">20%</button>
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
-            </th>
-            <th>
-              <button type="button" class="btn promBtn" onclick="promFunc(50)">50%</button>
-            </th>
-          </tr>
-          <tr>
-            <td colspan="2" rowspan="2">
-              <button type="submit" formaction="../employee" class="btn" id="pay_btn" onclick="payFunc()" >Pay</button>
-            </td>            
-          </tr>        
-      </tbody>
-    </table>
+<!DOCTYPE html>
+<html ng-app="checkout">
+<head>
+    <% include partials/header %>
+    <% include partials/customh %>
+  <link rel="stylesheet" type="text/css" href="/css/employee.css">
+  <!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
-  </div>
-</div>
-</div>
-<!-- end container -->
-</div>
-<!-- Modal for Pay button-->
-<div id="myModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-<div class="modal-content">
-  <!-- <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Modal Header</h4>
-  </div> -->
-  <div class="modal-body">
-    <p id="my_modal_value"></p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  </div>
-</div>
-</div>
-</div>
-<!-- Modal for Add Voucher button-->
-<div id="voucherModal" class="modal hide fade" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-<div class="modal-content">
-  <!-- <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Modal Header</h4>
-  </div> -->
-  <div class="modal-body">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/checkoutController.js"></script>
+	<script src="/js/services/checkout.js"></script>
+	<script src="/js/checkoutcore.js"></script>
+</head>
+<body class="fix-header fix-sidebar" ng-controller="mainController">
+  
+  <!-- /* Start of Main Wrapper Div */ -->
+  <div id="main-wrapper"><% include partials/nav %>
+    <div >
+    <!-- Bread crumb -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-primary">Checkout</h3>
       </div>
-      <input type="text" class="form-control" placeholder="Discount Percentage" aria-label="" aria-describedby="basic-addon1" id="voucherInput" style="width: 80px">
+      <div class="col-md-7 align-self-center">
+       
+      </div>
+    </div>
+    <!-- End Bread crumb -->    
+    <div class="row bg-white m-l-0 m-r-0 box-shadow ">
+      <div class="col-lg-8"> <!--  Left Column -->
+        <div class="table-responsive" style="height:512px;overflow:auto;">
+          <table class="table table-primary" id="salesTable">
+            <thead id="table-head">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" id="barcode">Item ID</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Item Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data" >
+                <td scope="col">{{item.id}}</td>
+                <td scope="col">{{item.productID}}</td>
+                <td scope="col">{{item.productName}}</td>
+                <td scope="col">{{item.quantity}}</td>	                		
+                <td scope="col">{{item.price}}</td>
+                <!-- <td class="column">{{product.timestamp}}</td> -->
+              </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-4"> <!-- Middle Column -->
+        <!--  Right Table for Checkout Data -->
+        <table class="table" id="rightTable">
+          <tr>
+            <th scope="col">SubTotal</th>
+            <td scope="col" id="sub_total" ng-model="subTotal">{{subTotal}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Promotion</th>
+            <td scope="col" id="promotion">0</td>
+          </tr>
+          <tr>
+            <th scope="col">Tax</th>
+            <td scope="col" id="tax">0</td>
+          </tr>
+          <tr>
+            <th scope="col">Item ID</th>
+            <td scope="col">
+              <input type="text" id="item_id" ng-model="item_id">
+            </td>
+          </tr>
+          <tr>
+            <th scope="col">Quantity</th>
+            <td scope="col">
+              <input type="text" name="quantity" id="quantity" ng-model="item_qty">
+              </td>
+          </tr>
+          <tr>
+            <th scope="col">Total</th>
+            <td scope="col" id="sum">0</td>
+          </tr>
+        </table>
+         <!-- Table for Buttons  -->
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                <button type="button" class="btn" id="add_btn" ng-click="addFunc()">Add Item</button>
+              </th>
+              <th>
+                <button type="button" class="btn promBtn" onclick="promFunc(10)">10%</button>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <button type="button" class="btn" id="scan_btn">Scan Barcode</button>
+              </th>
+              <th>
+                <button type="button" class="btn promBtn" onclick="promFunc(20)">20%</button>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
+              </th>
+              <th>
+                <button type="button" class="btn promBtn" onclick="promFunc(50)">50%</button>
+              </th>
+            </tr>
+            <tr>
+              <td colspan="2" rowspan="2">
+                <button type="button" class="btn" id="pay_btn" ng-click="payFunc()">Pay</button>                
+              </td>
+            </tr>          
+          </tbody>
+        </table>
+        
+      </div>
+    </div>    
+    </div>
+
+  </div>
+  <!-- Modal for Pay button-->
+  <div  id="payModal" class="modal " role="dialog">
+    <div class="modal-dialog">    
+      <div class="modal-content">
+        <div class="modal-body">
+          <p id="pay_modal_value"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="closePayBtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+<!-- End of Modal for Pay button-->
+<!-- Modal for Add Voucher button-->
+  <div id="voucherModal" class="modal " role="dialog">
+    <div class="modal-dialog">   
+      <div class="modal-content">      
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend"></div>
+            <input type="text" class="form-control" placeholder="Discount Percentage" aria-label="" aria-describedby="basic-addon1" id="voucherInput" style="width: 80px">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="voucherCloseBtn" class="btn btn-default" data-dismiss="modal" onclick="voucherFunct()">Close</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" id="voucherCloseBtn" class="btn btn-default" data-dismiss="modal" onclick="voucherFunct()">Close</button>
-  </div>
-</div>
-</div>
-</div>
-<!-- Modal for Camera-->
-<div id="camModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-<div class="modal-content">
-  <div class="modal-body">
-    <div id="scanner-container"></div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" id="webcamBtn" >Close</button>
-  </div>
-</div>
-</div>
-</div>
-  
-
-
-<script>
-
-    function addFunc() {
-	if (document.getElementById("item_id").value == null) {
-		alert("Please enter item id");
-	}
-	var table = document.getElementById("salesTable");
-	var row = table.insertRow(-1);
-	var cell1 = row.insertCell(0);
-	var cell2 = row.insertCell(1);
-	var cell3 = row.insertCell(2);
-	var cell4 = row.insertCell(3);
-	var cell5 = row.insertCell(4);	
-	
-	if (document.getElementById("quantity").value == null) 
-		document.getElementById("quantity").value = 5;	
-	do {
-		var quantity = document.getElementById("quantity").value;	
-	} while (quantity == null);
-  var initData = JSON.parse('<%-JSON.stringify(item)%>');
-  datagood = $.grep(initData, function (item) {
-    return item.productID == document.getElementById("item_id").value;
-});
-  
-	cell1.innerHTML = table.rows.length-1;
-	cell2.innerHTML = document.getElementById("item_id").value;
-	cell3.innerHTML = datagood[0].productName;
-	cell4.innerHTML = document.getElementById("quantity").value;
-	cell5.innerHTML = datagood[0].price;
-	sub_total = sub_total +  price*quantity;
-	document.getElementById("sub_total").innerHTML = sub_total;
-	document.getElementById("tax").innerHTML = sub_total*(100-promotion)/100 * 0.1;
-	document.getElementById("sum").innerHTML = sub_total*(100-promotion)/100 * 0.9;	
-}
-
- </script>
-
-<script type="text/javascript" src="/js/employee.js"></script>
-<script type="text/javascript" src="/js/scanner.js"></script>
+  <!-- End of Modal for Add Voucher button-->
+  <!-- Modal for Camera-->
+  <div id="camModal" class="modal " role="dialog">
+    <div class="modal-dialog">    
+      <div class="modal-content">
+        <div class="modal-body">
+          <div id="scanner-container"></div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="webcamBtn" >Close</button>
+      </div>
+      </div>
+    </div>
+  </div> <!-- End of Modal for Camera -->  
+                                     
+  <script type="text/javascript" src="/js/employee.js" ></script>
+  <script type="text/javascript" src="/js/scanner.js" ></script>
+  <script src="/js/quagga.min.js"></script>
 </body>
-

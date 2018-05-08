@@ -35,6 +35,11 @@ router.get('/chart', (req, res, next) =>{
 router.get('/addItem', (req, res, next) =>{
   res.render('addItem', {title: 'Modify user || myLittleShop'});
 });
-
+router.get('/employee', (req, res, next) =>{
+  res.render('employee', {title: 'Modify user || myLittleShop'});
+});
+router.get('/barcodeScanner', (req, res, next) =>{
+  res.render('barcodeScanner', {title: 'barcodeScanner || myLittleShop'});
+});
 
 module.exports = router;
