@@ -60,7 +60,7 @@
                                     <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2>1178</h2>
+                                    <h2>{{totalOrders}}</h2>
                                     <p class="m-b-0">Sales</p>
                                 </div>
                             </div>
@@ -112,12 +112,15 @@
                     <!-- column -->
                     <div class="col-lg-4">
                         <div class="card">
-                            <div class="card-body browser">
-                                <p class="f-w-600">iMacs <span class="pull-right">85%</span></p>
-                                <div class="progress ">
-                                    <div role="progressbar" style="width: 85%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                            <div class="card-body browser" >
+                                <div ng-repeat="product in productShop1">
+                                        <p class="f-w-600">{{product.productName}} <span class="pull-right">{{(product.quantity_sold*100/product.quantity_in_stock | number:2)}}%</span></p>
+                                        <div class="progress " >
+                                            <div role="progressbar" ng-style="{width:product.quantity_sold*100/product.quantity_in_stock  +'%'}" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                        </div>
                                 </div>
-
+                                
+<!-- 
                                 <p class="m-t-30 f-w-600">iBooks<span class="pull-right">90%</span></p>
                                 <div class="progress">
                                     <div role="progressbar" style="width: 90%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
@@ -136,7 +139,7 @@
 								<p class="m-t-30 f-w-600">android<span class="pull-right">65%</span></p>
                                 <div class="progress m-b-30">
                                     <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

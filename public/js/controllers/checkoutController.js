@@ -9,11 +9,15 @@ angular.module('checkoutController', [])
         $scope.Tax = 0;
         $scope.promotion = 0;
         $scope.shopName = "";
+        $scope.employee = "";
         $scope.orderList = {};
+        $scope.orderListPaid = {};
+        $scope.orderListPaid.item = [];
+        $scope.record = {};
         // $scope.orderList.item=[];
         // show all the products
-        $scope.init = function(stringifiedArray) {
-            $scope.shopName = stringifiedArray;
+        $scope.init = function(s1) {
+            $scope.shopName = s1;
             $http.get('/api/product/'+$scope.shopName)
 			.then(function(res){
 /*				console.log(res.data[0].shop1);
@@ -44,8 +48,12 @@ angular.module('checkoutController', [])
                         $scope.Total = $scope.subTotal + $scope.Tax -$scope.promotion*$scope.subTotal;
                         $scope.orderList.item[i].quantity_in_stock = $scope.item[i].quantity_in_stock - $scope.item_qty;
                         $scope.orderList.item[i].quantity_sold = parseInt($scope.item[i].quantity_sold)+parseInt($scope.item_qty);
+                        $scope.record.productName = $scope.orderList.item[i].productName;
+                        $scope.record.productID = $scope.orderList.item[i].productID;
+                        $scope.record.quantity = $scope.item_qty;
+                        $scope.orderListPaid.item.push($scope.record);
                     }
-
+                    
                 }
                 //console.log($scope.idShop);
             }
@@ -53,6 +61,7 @@ angular.module('checkoutController', [])
                 $scope.promotion = promotion;
             }
             $scope.payFunc = function(id){
+                $scope.orderListPaid.shop = $scope.shopName;
                 $http.put('/api/product/'+$scope.orderList._id,$scope.orderList)
 				.then(function(res){
                     $scope.abc = res.data;
@@ -61,11 +70,17 @@ angular.module('checkoutController', [])
                     $scope.item_id = 0;
                     $scope.item_qty = 0;
                     $scope.subTotal = 0;
+                    $scope.Tax = 0;
+                    $scope.Total = 0;
 				})
 				.catch(function(res){
 					//console.log(res.data);
 					console.log("Error" + res)
-				})
+                })
+                $http.post('/api/order/',$scope.orderListPaid)
+                .then(function(res){
+
+                })
             }
         }
         

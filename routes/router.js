@@ -37,7 +37,7 @@ router.get('/addItem', (req, res, next) =>{
   res.render('addItem', {title: 'Modify user || myLittleShop'});
 });
 router.get('/employee', checkAuth, (req, res, next) =>{
-  res.render('employee', {title: 'Modify user || myLittleShop',shopName : req.body.userData.shop});
+  res.render('employee', {title: 'Modify user || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
 router.get('/barcodeScanner', (req, res, next) =>{
   res.render('barcodeScanner', {title: 'barcodeScanner || myLittleShop'});
