@@ -13,16 +13,20 @@ angular.module('checkoutController', [])
         $scope.orderList = {};
         $scope.orderListPaid = {};
         $scope.orderListPaid.item = [];
-        $scope.record = {};
+        $scope.items = [];
         // $scope.orderList.item=[];
         // show all the products
         $scope.init = function(s1) {
             $scope.shopName = s1;
+            $http.get('/api/items')
+            .then(function(res){
+                $scope.items = res.data;
+            })
             $http.get('/api/product/'+$scope.shopName)
 			.then(function(res){
 /*				console.log(res.data[0].shop1);
 				console.log('x');*/
-                $scope.item = res.data.item;
+                
                 $scope.orderList = res.data;
                 console.log($scope.item)
                 // $scope.orderList.name = res.data.name;
@@ -39,23 +43,33 @@ angular.module('checkoutController', [])
                 //$scope.promotion = document.getElementById('promotion').value;
                 for(var i=0; i<$scope.orderList.item.length;i++) 
                 {
-                    //console.log($scope.item[i])
+                    //console.log($scope.item_id,i,$scope.orderList.item[i].productID)
+
                     if($scope.orderList.item[i].productID == $scope.item_id)
                     {
-                        $scope.data.push({"id":i,"productID":$scope.item_id,"productName":$scope.orderList.item[i].productName,"price":$scope.orderList.item[i].price,"quantity": $scope.item_qty});
-                        $scope.subTotal = $scope.subTotal + $scope.orderList.item[i].price * $scope.item_qty;
-                        $scope.Tax = $scope.subTotal *0.1;
-                        $scope.Total = $scope.subTotal + $scope.Tax -$scope.promotion*$scope.subTotal;
-                        $scope.orderList.item[i].quantity_in_stock = $scope.item[i].quantity_in_stock - $scope.item_qty;
-                        $scope.orderList.item[i].quantity_sold = parseInt($scope.item[i].quantity_sold)+parseInt($scope.item_qty);
-                        $scope.record.productName = $scope.orderList.item[i].productName;
-                        $scope.record.productID = $scope.orderList.item[i].productID;
-                        $scope.record.quantity = $scope.item_qty;
-                        $scope.orderListPaid.item.push($scope.record);
+                       
+                        for(var j =0 ; j<$scope.items.length;j++)
+                        {
+                            if($scope.items[j].productID == $scope.item_id)
+                            {
+                                $scope.data.push({"id":i,"productID":$scope.item_id,"productName":$scope.items[j].productName,"price":$scope.items[j].price,"quantity": $scope.item_qty});
+                                $scope.subTotal = $scope.subTotal + $scope.items[j].price * $scope.item_qty;
+                                $scope.Tax = $scope.subTotal *0.1;
+                                $scope.Total = $scope.subTotal + $scope.Tax -$scope.promotion*$scope.subTotal;
+                                $scope.orderList.item[i].quantity_in_stock = $scope.orderList.item[i].quantity_in_stock - $scope.item_qty;
+                                var testPro = {};
+                                testPro.productID = $scope.items[j].productID;
+                                testPro.quantity = $scope.item_qty;
+                                $scope.orderListPaid.item.push(testPro);
+                                console.log($scope.record)
+                                break;
+                            }
+                        }
+                        
                     }
                     
                 }
-                //console.log($scope.idShop);
+                console.log($scope.orderListPaid);
             }
             $scope.promFunc = function(promotion){
                 $scope.promotion = promotion;

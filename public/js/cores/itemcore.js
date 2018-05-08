@@ -1,0 +1,1 @@
+angular.module('itemLMS', ['itemController','itemService']);

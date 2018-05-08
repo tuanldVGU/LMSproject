@@ -24,12 +24,21 @@ router.get('/profile',checkAuth, (req, res, next) =>{
   res.render('modifyUser', {title: 'Modify user || myLittleShop'});
 });
 
+router.get('/modifyItem',checkAuth, (req, res, next) =>{
+  res.render('modifyItem', {title: 'Modify item || myLittleShop'});
+});
+
+
 router.get('/inventory',checkAuth, (req, res, next) =>{
   res.render('chart', {title: 'Inventory || myLittleShop'});
 });
 
 router.get('/addItem',checkAuth, (req, res, next) =>{
   res.render('addItem', {title: 'Add item || myLittleShop'});
+});
+
+router.get('/addItemtoShop',checkAuth, (req, res, next) =>{
+  res.render('addItemtoShop', {title: 'Add item || myLittleShop'});
 });
 
 router.get('/employee', checkAuth, (req, res, next) =>{

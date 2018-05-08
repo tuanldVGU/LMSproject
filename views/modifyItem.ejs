@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="chartLMS">
+<html ng-app="itemLMS">
 <head>
 	<% include partials/header %>
 	<% include partials/customh %>
@@ -9,10 +9,9 @@
 	<script src="js/bootstrap.min.js"></script>
 
 	<!-- Angular controller -->
-	<script src="/js/angular.min.js"></script>
-	<script src="/js/controllers/productController.js"></script>
-	<script src="/js/services/product.js"></script>
-	<script src="/js/productcore.js"></script>
+	<script src="/js/controllers/itemController.js"></script>
+	<script src="/js/services/item.js"></script>
+	<script src="/js/cores/itemcore.js"></script>
 
 	<!-- Bootstrap tether Core JavaScript -->
 	<script src="js/popper.min.js"></script>
@@ -37,16 +36,13 @@
 
 		<div class="page-wrapper limiter">
 			<div id="product-list" class="container-table">
-				<ul>
-					<li ng-repeat="product in products">
-						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
 						<div class="wrap-table">
 								<table id="table">
 									<thead>
 										<tr class="row">
 											<th class="column02">Product ID</th>
 											<th class="column02">Product Name</th>
-											<th class="column02">Qty In Stock</th>
+											<th class="column02">Price</th>
 											<th class="column02">Update</th>
 											<th class="column02">Delete</th>
 											<!-- <th class="column">Time Stamp</th> -->
@@ -54,25 +50,18 @@
 									</thead>
 									<!-- LOOP OVER THE USERS IN $scope.users -->
 									<tbody>
-										<tr ng-repeat="item in product.item" class="row">
+										<tr ng-repeat="item in items" class="row">
 										<td class="column02">{{item.productID}}</td>
-										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
-										<td class="column02"><input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"></td>                		
-										<td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td>
-										<td><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
+										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>	                		
+										<td class="column02"><input type="text" ng-model="item.price" placeholder="{{item.price}}"></td>
+										<td class="column02"><input type="button" value="update" ng-click="updateItem(item._id,item)" class="btn-danger"></td>
+										<td><input type="button" value="delete" ng-click="deleteItem(item._id)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
 									
 								</table>
-								
 							</div>
-					</li>
-				</ul>
-				<input type="text" name="name" ng-model="data.name">
-				<input type="button" class="btn-danger" ng-click="createShop()" value="createShop">
-				<h1>{{data.name}}</h1>
-
 	        </div>
 		</div>
 	</div>

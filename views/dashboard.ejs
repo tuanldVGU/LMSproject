@@ -16,7 +16,7 @@
     <script src="/js/lib/angular-chart.min.js"></script>
 </head>
 
-<body class="fix-header fix-sidebar" ng-controller="mainController">
+<body class="fix-header fix-sidebar" ng-controller="mainController" ng-init="init()">
 	<div id="main-wrapper">
 
 		<% include partials/nav %>
@@ -105,9 +105,10 @@
                             <div class="card-body">
                                 <h4 class="card-title">Product Statistics</h4>
                                 <div id="extra-area-chart">
-                                    <canvas id="doughnut" class="chart chart-doughnut"
-                                    chart-data="data" chart-labels="labels">
-                                  </canvas> 
+                                        <canvas id="line" class="chart chart-line" chart-data="data"
+                                        chart-labels="labels" chart-series="series" chart-options="options"
+                                        chart-dataset-override="datasetOverride" chart-click="onClick">
+                                </canvas>
                                   
                                 </div>
                             </div>
