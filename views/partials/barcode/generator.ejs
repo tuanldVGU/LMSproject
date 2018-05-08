@@ -1,0 +1,48 @@
+<div>	
+        <h1>Barcode Generator</h1>
+        <div class="table-responsive" style="width:100%;overflow:auto;">
+                <table class="table table-primary" id="salesTable">        
+        <div id="div1">
+        <p style="border:3px; border-style:solid; border-color:#000000; padding: 1em;">
+        <b><font size="5">Enter product</font></b><br><br>
+        Product name: 
+        <input type="text" id="productName"><br><br>
+        Product ID: 
+        <select name="shopName" ng-model="value" id="productID" >
+            <div >
+                    <option ng-repeat="item in productShop1" ng.value="item.productID">{{item.productID}}</option>
+            </div>
+                
+        </select>
+        <br>
+    
+        Barcode Type:
+        <select id="selection" name="BarcodeType">
+        <option value="code128">Code128</option>
+        <option value="code39">Code39</option>
+        <option value="ean2">EAN2</option>
+        <option value="ean5">EAN5</option>
+        <option value="ean8">EAN8</option>
+        <option value="ean13">EAN13</option>
+        <option value="upc">UPC</option>
+        <option value="itf">ITF</option>
+        <option value="msi">MSI</option>
+        <option value="pharmacode">Pharmacode</option>
+        </select>
+        <br><br>
+        
+        <input type="button" href="" id="generateButton" onclick="addRow()" value="Generate"/>
+        </p>
+        </div>
+        
+        <div id="div2">
+        <p style="border:3px; border-style:solid; border-color:#000000; padding: 1em;">
+        <b><font size="5">Delete Barcode</font></b><br><br>
+        At position: <input type="text" id="rowID"><br><br>
+        <input type="button" id="deleteButton" onclick="deleteRow()" value="Delete"/><br><br>
+        <input type="button" id="clearAllButton" onclick="clearAll()" value="Clear all"/>
+        </p>
+        </div> 
+        </table>
+        </div>   
+</div>

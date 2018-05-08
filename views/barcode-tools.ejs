@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<meta charset="UTF-8">
+<html ng-app="chartLMS">
+<head>
+	<% include partials/header %>
+	<% include partials/customh %>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Angular controller -->
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/controllers/productController.js"></script>
+	<script src="/js/services/product.js"></script>
+	<script src="/js/productcore.js"></script>
+			
+</head>
+<body class="fix-header fix-sidebar" ng-controller="mainController">
+	<div id="main-wrapper">
+			<% include partials/nav %>
+			<% include partials/sidebar %>		
+			<div class="page-wrapper">
+				<!-- Bread crumb -->
+				<div class="row page-titles">
+					<div class="col-md-5 align-self-center">
+						<h3 class="text-primary">Barcode Tools</h3> </div>
+					<div class="col-md-7 align-self-center">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+							<li class="breadcrumb-item active">Barcode Tool</li>
+						</ol>
+					</div>
+				</div>
+				<!-- End Bread crumb --> 
+				
+				<!-- Container fluid  -->
+				<div class="row bg-white m-l-0 m-r-0 box-shadow ">
+						<div class="col-lg-6"> <!--  Left Column -->
+							<% include partials/barcode/generator.ejs %>
+						</div>
+						<div class="col-lg-6 "> <!-- Middle Column -->
+						  <!--  Right Table for Checkout Data -->
+						  <% include partials/barcode/download.ejs %>
+						</div>
+				</div>
+
+			</div>
+	</div>
+	<% include partials/footer %>
+</body>
+</html>
