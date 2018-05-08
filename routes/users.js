@@ -20,8 +20,37 @@ router.get('/user/:user_id',checkAuth, function(req,res){
   });
 });
 
-// Save user
+// Sign in user
 router.post("/users", function (req, res, next) {
+ if (req.body.loguser && req.body.logpassword) {
+    User.authenticate(req.body.loguser, req.body.logpassword, function (error, user, token) {
+      if (error || !user) {
+        var err = new Error('Wrong user or password.');
+        err.status = 401;
+        return next(err);
+      } else {
+        req.session.userId = user._id;
+        if (user.role=="Employee") 
+          {
+            res.cookie('x-access-token',token);
+            return res.redirect('/employee');
+          }
+        else 
+          {
+            res.cookie('x-access-token',token);
+            return res.redirect('/home');
+          }
+      }
+    });
+  } else {
+    var err = new Error('All fields required.'+ req.body.username +"pw"+ req.body.password +"role"+ req.body.role);
+    err.status = 400;
+    return next(err);
+  }
+});
+
+// Sign up user
+router.post("/user/signup",checkAuth, function (req, res, next) {
 
   if (req.body.username &&
     req.body.password &&
@@ -46,33 +75,7 @@ router.post("/users", function (req, res, next) {
       }
     });
 
-  } else if (req.body.loguser && req.body.logpassword) {
-    User.authenticate(req.body.loguser, req.body.logpassword, function (error, user, token) {
-      if (error || !user) {
-        var err = new Error('Wrong user or password.');
-        err.status = 401;
-        return next(err);
-      } else {
-        req.session.userId = user._id;
-        // var ans = {};
-        // ans.shop = user.shop;
-        // ans.role = user.role;
-        // ans.token = token;
-        // // res.json(ans);
-        // // res.cookie('Passport',ans);
-        if (user.role=="Employee") 
-          {
-            res.cookie('x-access-token',token);
-            return res.redirect('/employee');
-          }
-        else 
-          {
-            res.cookie('x-access-token',token);
-            return res.redirect('/home');
-          }
-      }
-    });
-  } else {
+  }else {
     var err = new Error('All fields required.'+ req.body.username +"pw"+ req.body.password +"role"+ req.body.role);
     err.status = 400;
     return next(err);
@@ -96,9 +99,6 @@ router.delete('/user/:user_id',checkAuth, function(req,res){
 // Update user
 router.put('/user/:user_id',checkAuth, function(req,res){
   var user = req.body;
-  console.log(user);
-  console.log(user.role);
-  console.log(user.shop);
   
   User.findByIdAndUpdate({
     _id : req.params.user_id

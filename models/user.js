@@ -27,15 +27,18 @@ userSchema.statics.authenticate = function (email, password, callback) {
       }
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
-          console.log(process.env.JWT_KEY);
+
+          if (user.role == "Employee"){ var key = config.secretEmployee}
+          else { var key = config.secretAdmin}
           const token = jwt.sign({
             username: user.username,
             userID: user._id,
             shop: user.shop
-          },config.secret,
+          },key,
           {
             expiresIn: '1h'
           });
+
           return callback(null, user, token);
           res.json({
             success: true,

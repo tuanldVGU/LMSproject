@@ -2,7 +2,7 @@
 	<nav class="navbar top-navbar navbar-expand-md navbar-default">
 		<!-- Logo -->
 		<div class="navbar-header">
-            <a class="navbar-brand" href="/home">
+            <a class="navbar-brand" href="/employee">
                 <!-- Logo icon -->
                 <b><i class="fa fa-registered"></i></b>
                 <!--End Logo icon -->

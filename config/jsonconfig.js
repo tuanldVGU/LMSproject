@@ -1,3 +1,4 @@
 module.exports = {
-	secret: "jsonwebtoken"
+	secretAdmin: "jsonwebtokenAdmin" ,
+	secretEmployee: "jsonwebtokenEmployee"
 };

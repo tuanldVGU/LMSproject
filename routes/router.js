@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var checkAuth = require('../middleware/check-auth');
+var checkAuthE = require('../middleware/check-authE');
 
 router.get('/', (req, res, next) =>{
 	res.render('index', {title: 'Login || myLittleShop'});
 });
 
 router.get('/home', checkAuth, (req,res, next) =>{
-	  console.log(req.cookies);
-      res.render('dashboard', {title: 'Dashboard || myLittleShop'});
+	  console.log(req.headers);
+    res.render('dashboard', {title: 'Dashboard || myLittleShop'});
 });
 
 router.get('/app',checkAuth, (req, res, next) =>{
@@ -32,7 +33,7 @@ router.get('/addItem',checkAuth, (req, res, next) =>{
   res.render('addItem', {title: 'Add item || myLittleShop'});
 });
 
-router.get('/employee', checkAuth, (req, res, next) =>{
+router.get('/employee', checkAuthE, (req, res, next) =>{
   res.render('employee', {title: 'Checkout || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
 
@@ -56,4 +57,8 @@ router.get('/polar-area-chart',checkAuth, (req, res, next) =>{
   res.render('polar-area-chart', {title: 'Polar area chart || myLittleShop'});
 });
 
+router.get('/logout', (req, res, next) =>{
+  res.clearCookie('x-access-token');
+  res.redirect('/');
+});
 module.exports = router;
