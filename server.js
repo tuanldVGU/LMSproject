@@ -74,10 +74,12 @@ var routes = require('./routes/router')
 var users = require('./routes/users');
 var products = require('./routes/products')
 var orders = require('./routes/orderList')
+var items = require('./routes/item')
 app.use('/', routes);
 app.use('/api', users);
 app.use('/api', products);
 app.use('/api', orders);
+app.use('/api', items);
 
 
 // catch 404 and forward to error handler

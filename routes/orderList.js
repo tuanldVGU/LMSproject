@@ -25,7 +25,7 @@ router.get('/orders',checkAuth, function(req, res, next) {
   router.post('/order',checkAuth, function(req, res, next) {
     //console.log(req.body);
     var orderList = {
-        shop: req.body.shopName,
+        shop: req.body.shop,
         item: req.body.item
     }
     Order.create(orderList, function (err, post) {

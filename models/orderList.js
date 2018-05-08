@@ -6,7 +6,6 @@ var OrderSchema = new mongoose.Schema({
 		[
 			{
 				productID: {type: Number, unique: true},
-				productName: String,
 				quantity: Number,
 			}	
         ],
