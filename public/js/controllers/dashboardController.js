@@ -10,35 +10,13 @@ angular.module('dashboardController', ["chart.js"])
         $scope.totalOrders = 0;
         $scope.productShop1 = {};
 
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-        $scope.series = ['Series A', 'Series B'];
-        $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-          ];
+        $scope.labels = [];
+        $scope.data = [];
           $scope.onClick = function (points, evt) {
             console.log(points, evt);
           };
 
-          $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-          $scope.options = {
-            scales: {
-              yAxes: [
-                {
-                  id: 'y-axis-1',
-                  type: 'linear',
-                  display: true,
-                  position: 'left'
-                },
-                {
-                  id: 'y-axis-2',
-                  type: 'linear',
-                  display: true,
-                  position: 'right'
-                }
-              ]
-            }
-          };
+          
         // $scope.orderList.item=[];
 		// show all the products
         $http.get('/api/products')
@@ -47,6 +25,11 @@ angular.module('dashboardController', ["chart.js"])
 				console.log('x');*/
                 $scope.allProduct = res.data;
                 $scope.productShop1 = res.data[0].item;
+                for(var i = 0; i<res.data[0].item.length;i++)
+                {
+                    $scope.labels.push(res.data[0].item[i].productName)
+                    $scope.data.push(res.data[0].item[i].quantity_sold)
+                }
                 $scope.totalShop = $scope.allProduct.length;
                 for(var i=0;i<$scope.allProduct.length;i++)
                 {
@@ -75,8 +58,10 @@ angular.module('dashboardController', ["chart.js"])
         .then(function(res){
 /*				console.log(res.data[0].shop1);
             console.log('x');*/
-            console.log( res.data);
+            //console.log( res.data);
             $scope.totalOrders = res.data.length;
+            console.log(res.data[0].quantity)
+
             
 
         })
