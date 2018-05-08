@@ -32,11 +32,13 @@ router.post("/users", function (req, res, next) {
         req.session.userId = user._id;
         if (user.role=="Employee") 
           {
+            res.cookie('role','employee');
             res.cookie('x-access-token',token);
             return res.redirect('/employee');
           }
         else 
           {
+            res.cookie('role','admin');
             res.cookie('x-access-token',token);
             return res.redirect('/home');
           }

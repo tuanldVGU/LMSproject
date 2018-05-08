@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Order = require('../models/orderList');
-var checkAuth = require('../middleware/check-auth');
+var checkAuth = require('../middleware/check-authE');
 /* GET ALL ORDER */
 router.get('/orders',checkAuth, function(req, res, next) {
 

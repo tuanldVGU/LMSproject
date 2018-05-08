@@ -29,7 +29,6 @@ router.get('/modifyItem',checkAuth, (req, res, next) =>{
   res.render('modifyItem', {title: 'Modify item || myLittleShop'});
 });
 
-
 router.get('/inventory',checkAuth, (req, res, next) =>{
   res.render('chart', {title: 'Inventory || myLittleShop'});
 });
@@ -38,15 +37,11 @@ router.get('/addItem',checkAuth, (req, res, next) =>{
   res.render('addItem', {title: 'Add item || myLittleShop'});
 });
 
-<<<<<<< HEAD
-router.get('/employee', checkAuthE, (req, res, next) =>{
-=======
 router.get('/addItemtoShop',checkAuth, (req, res, next) =>{
   res.render('addItemtoShop', {title: 'Add item || myLittleShop'});
 });
 
-router.get('/employee', checkAuth, (req, res, next) =>{
->>>>>>> 30e65d91abebfa11e2d1dfcf7683483bce5b9e91
+router.get('/employee', checkAuthE, (req, res, next) =>{
   res.render('employee', {title: 'Checkout || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
 
@@ -72,6 +67,7 @@ router.get('/polar-area-chart',checkAuth, (req, res, next) =>{
 
 router.get('/logout', (req, res, next) =>{
   res.clearCookie('x-access-token');
+  res.clearCookie('role');
   res.redirect('/');
 });
 module.exports = router;

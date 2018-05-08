@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Product = require('../models/Shop');
-var checkAuth = require('../middleware/check-auth');
+var checkAuth = require('../middleware/check-authE');
 
 /* GET ALL PRODUCTS */
 router.get('/products',checkAuth, function(req, res, next) {
