@@ -1,6 +1,5 @@
-angular.module('dashboardController', [])
+angular.module('dashboardController', ["chart.js"])
 	.controller('mainController',function($scope, $http){
-		$scope.data = [];
         $scope.item = {};
         $scope.totalRevenue = 0;
         $scope.item_qty = 0;
@@ -10,6 +9,36 @@ angular.module('dashboardController', [])
         $scope.orderList = {};
         $scope.totalOrders = 0;
         $scope.productShop1 = {};
+
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $scope.series = ['Series A', 'Series B'];
+        $scope.data = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+          ];
+          $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+          };
+
+          $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+          $scope.options = {
+            scales: {
+              yAxes: [
+                {
+                  id: 'y-axis-1',
+                  type: 'linear',
+                  display: true,
+                  position: 'left'
+                },
+                {
+                  id: 'y-axis-2',
+                  type: 'linear',
+                  display: true,
+                  position: 'right'
+                }
+              ]
+            }
+          };
         // $scope.orderList.item=[];
 		// show all the products
         $http.get('/api/products')
@@ -26,63 +55,31 @@ angular.module('dashboardController', [])
                         $scope.totalRevenue = $scope.totalRevenue+$scope.allProduct[i].item[j].price*$scope.allProduct[i].item[j].quantity_sold;
                     }
                 }
-                
-
 			})
 			.catch(function(res){
 				//Export error
                 console.log('Error: ' + res);
                 console.log($scope.shopName);
 			})
-			$scope.addFunc = function(){
-                //console.log($scope.item)
-                for(var i=0; i<$scope.orderList.item.length;i++) 
-                {
-                    //console.log($scope.item[i])
-                    if($scope.orderList.item[i].productID == $scope.item_id)
-                    {
-                        $scope.data.push({"id":i,"productID":$scope.item_id,"productName":$scope.orderList.item[i].productName,"price":$scope.orderList.item[i].price,"quantity": $scope.item_qty});
-                        $scope.subTotal = $scope.subTotal + $scope.orderList.item[i].price * $scope.item_qty;
-                        $scope.orderList.item[i].quantity_in_stock = $scope.item[i].quantity_in_stock - $scope.item_qty;
-                        $scope.orderList.item[i].quantity_sold = parseInt($scope.item[i].quantity_sold)+parseInt($scope.item_qty);
-                    }
 
-                }
-                //console.log($scope.idShop);
-            }
-            $scope.payFunc = function(id){
-                $http.put('/api/product/'+$scope.orderList._id,$scope.orderList)
-				.then(function(res){
-                    $scope.abc = res.data;
-                    console.log($scope.orderList)
-                    $scope.data = [];
-                    $scope.item_id = 0;
-                    $scope.item_qty = 0;
-                    $scope.subTotal = 0;
-				})
-				.catch(function(res){
-					//console.log(res.data);
-					console.log("Error" + res)
-				})
-            }
-            $http.get('/api/users')
-                .then(function(res){
-    /*				console.log(res.data[0].shop1);
-                    console.log('x');*/
-                    console.log( res.data);
-                    $scope.totalEmployee = res.data.length;
-                    
+        $http.get('/api/users')
+            .then(function(res){
+/*				console.log(res.data[0].shop1);
+                console.log('x');*/
+                console.log( res.data);
+                $scope.totalEmployee = res.data.length;
+                
 
-                })
-                $http.get('/api/orders')
-                .then(function(res){
-    /*				console.log(res.data[0].shop1);
-                    console.log('x');*/
-                    console.log( res.data);
-                    $scope.totalOrders = res.data.length;
-                    
+            })
+        $http.get('/api/orders')
+        .then(function(res){
+/*				console.log(res.data[0].shop1);
+            console.log('x');*/
+            console.log( res.data);
+            $scope.totalOrders = res.data.length;
+            
 
-                })
+        })
 	})
 
 

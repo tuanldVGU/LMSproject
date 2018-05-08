@@ -31,11 +31,29 @@ router.get('/chart',checkAuth, (req, res, next) =>{
 router.get('/addItem',checkAuth, (req, res, next) =>{
   res.render('addItem', {title: 'Modify user || myLittleShop'});
 });
+
 router.get('/employee', checkAuth, (req, res, next) =>{
   res.render('employee', {title: 'Modify user || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
+
 router.get('/barcodeScanner',checkAuth, (req, res, next) =>{
   res.render('barcodeScanner', {title: 'barcodeScanner || myLittleShop'});
+});
+
+router.get('/barcode-tools', (req, res, next) =>{
+  res.render('barcode-tools', {title: 'Barcode Tools || myLittleShop'});
+});
+
+router.get('/bar-chart', (req, res, next) =>{
+  res.render('bar-chart', {title: 'Modify user || myLittleShop'});
+});
+
+router.get('/pie-chart', (req, res, next) =>{
+  res.render('pie-chart', {title: 'Modify user || myLittleShop'});
+});
+
+router.get('/polar-area-chart', (req, res, next) =>{
+  res.render('polar-area-chart', {title: 'Modify user || myLittleShop'});
 });
 
 module.exports = router;

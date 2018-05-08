@@ -17,7 +17,9 @@
 <body class="fix-header fix-sidebar" ng-controller="mainController">
   
   <!-- /* Start of Main Wrapper Div */ -->
-  <div id="main-wrapper"><% include partials/nav %><% include partials/sidebar %>
+  <div id="main-wrapper">
+    <% include partials/nav %>
+    <% include partials/sidebar %>
     <div class="page-wrapper">
     <!-- Bread crumb -->
     <div class="row page-titles">
@@ -176,7 +178,8 @@
       </div>
     </div>
   </div> <!-- End of Modal for Camera -->  
-                                     
+  <% include partials/footer %>
+                                 
   <script type="text/javascript" src="/js/employee.js" ></script>
   <script type="text/javascript" src="/js/scanner.js" ></script>
   <script src="/js/quagga.min.js"></script>

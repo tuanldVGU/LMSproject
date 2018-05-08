@@ -9,10 +9,11 @@
 	<script src="js/bootstrap.min.js"></script>
 
 	<!-- Angular controller -->
-	<script src="/js/angular.min.js"></script>
 	<script src="/js/controllers/dashboardController.js"></script>
 	<script src="/js/services/dashboard.js"></script>
 	<script src="/js/dashboardcore.js"></script>
+    <script src="/js/lib/chart.js"></script>
+    <script src="/js/lib/angular-chart.min.js"></script>
 </head>
 
 <body class="fix-header fix-sidebar" ng-controller="mainController">
@@ -103,7 +104,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Product Statistics</h4>
-                                <div id="extra-area-chart"></div>
+                                <div id="extra-area-chart">
+                                    <canvas id="line" class="chart chart-line" chart-data="data"
+chart-labels="labels" chart-series="series" chart-options="options"
+chart-dataset-override="datasetOverride" chart-click="onClick">
+</canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
