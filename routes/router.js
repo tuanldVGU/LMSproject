@@ -65,6 +65,11 @@ router.get('/polar-area-chart',checkAuth, (req, res, next) =>{
   res.render('polar-area-chart', {title: 'Polar area chart || myLittleShop'});
 });
 
+router.get('/time-chart',checkAuth, (req, res, next) =>{
+  res.render('time-chart', {title: 'Bar chart || myLittleShop'});
+});
+
+
 router.get('/logout', (req, res, next) =>{
   res.clearCookie('x-access-token');
   res.clearCookie('role');
