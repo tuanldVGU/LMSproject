@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+var config = require('../config/jsonconfig');
+
 
 var userSchema = new mongoose.Schema({
   email: {type: String , unique: true, required: true, trim: true},
@@ -24,7 +27,20 @@ userSchema.statics.authenticate = function (email, password, callback) {
       }
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
-          return callback(null, user);
+          console.log(process.env.JWT_KEY);
+          const token = jwt.sign({
+            username: user.username,
+            userID: user._id,
+            shop: user.shop
+          },config.secret,
+          {
+            expiresIn: '1h'
+          });
+          return callback(null, user, token);
+          res.json({
+            success: true,
+            token: token
+          });
         } else {
           return callback();
         }
