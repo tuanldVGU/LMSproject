@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Product = require('../models/Product');
+var checkAuth = require('../middleware/check-auth');
 
 /* GET ALL PRODUCTS */
-router.get('/products', function(req, res, next) {
+router.get('/products',checkAuth, function(req, res, next) {
 
 
   Product.find(function (err, products) {
@@ -14,7 +15,7 @@ router.get('/products', function(req, res, next) {
 });
 
 /* GET SINGLE PRODUCT BY ID */
-router.get('/product/:id', function(req, res, next) {
+router.get('/product/:id',checkAuth, function(req, res, next) {
   //console.log(req.params.id);
   Product.findOne({name:req.params.id}, function (err, post) {
     if (err) return next(err);
@@ -23,7 +24,7 @@ router.get('/product/:id', function(req, res, next) {
 });
 
 /* CREATE SHOP */
-router.post('/product', function(req, res, next) {
+router.post('/product',checkAuth, function(req, res, next) {
   //console.log(req.body);
   var shop = {
     name: req.body.name,
@@ -36,7 +37,7 @@ router.post('/product', function(req, res, next) {
 });
 
 /* UPDATE SHOP */
-router.put('/product/:id', function(req, res, next) {
+router.put('/product/:id',checkAuth, function(req, res, next) {
   console.log(req.body);
   Product.findByIdAndUpdate(req.params.id, req.body, {new:true},function (err, post) {
     if (err) return next(err);
@@ -45,7 +46,7 @@ router.put('/product/:id', function(req, res, next) {
 });
 
 /* DELETE SHOP */
-router.delete('/products/:id', function(req, res, next) {
+router.delete('/products/:id',checkAuth, function(req, res, next) {
   //console.log(req);
   Product.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
