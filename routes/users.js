@@ -4,7 +4,7 @@ var User = require('../models/user');
 var checkAuth = require('../middleware/check-auth');
 
 // Get all users
-router.get('/users', function(req,res){
+router.get('/users',checkAuth, function(req,res){
   User.find(function(err,users){
     if (err) res.send(err);
     res.json(users);
@@ -12,7 +12,7 @@ router.get('/users', function(req,res){
 });
 
 // Get single user
-router.get('/user/:user_id', function(req,res){
+router.get('/user/:user_id',checkAuth, function(req,res){
   User.findOne({_id: req.params.user_id}
     ,function(err,user){
     if (err) res.send(err);
@@ -80,7 +80,7 @@ router.post("/users", function (req, res, next) {
 });
 
 // Delete user
-router.delete('/user/:user_id', function(req,res){
+router.delete('/user/:user_id',checkAuth, function(req,res){
   User.remove({
     _id : req.params.user_id
   },function(err, user){
@@ -94,7 +94,7 @@ router.delete('/user/:user_id', function(req,res){
 });
 
 // Update user
-router.put('/user/:user_id', function(req,res){
+router.put('/user/:user_id',checkAuth, function(req,res){
   var user = req.body;
   console.log(user);
   console.log(user.role);
@@ -111,7 +111,7 @@ router.put('/user/:user_id', function(req,res){
 });
 
 // Update user
-router.patch('/user/:user_id', function(req,res){
+router.patch('/user/:user_id',checkAuth, function(req,res){
   var users = req.body;
   var upTask ={};
   for (const tsk of users){
