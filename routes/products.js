@@ -37,7 +37,11 @@ router.post('/product',checkAuth, function(req, res, next) {
 });
 
 /* UPDATE SHOP */
-router.put('/product/:id',checkAuth, function(req, res, next) {
+router.put('/product/:id', function(req, res, next) {
+  var upd = {
+    name : req.body.name,
+    item : req.body.item,
+  };
   console.log(req.body);
   Product.findByIdAndUpdate(req.params.id, req.body, {new:true},function (err, post) {
     if (err) return next(err);

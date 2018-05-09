@@ -45,7 +45,7 @@ router.post("/users", function (req, res, next) {
       }
     });
   } else {
-    var err = new Error('All fields required.'+ req.body.username +"pw"+ req.body.password +"role"+ req.body.role);
+    var err = new Error('All fields required.');
     err.status = 400;
     return next(err);
   }
@@ -78,7 +78,7 @@ router.post("/user/signup",checkAuth, function (req, res, next) {
     });
 
   }else {
-    var err = new Error('All fields required.'+ req.body.username +"pw"+ req.body.password +"role"+ req.body.role);
+    var err = new Error('All fields required.');
     err.status = 400;
     return next(err);
   }

@@ -36,7 +36,7 @@ userSchema.statics.authenticate = function (email, password, callback) {
             shop: user.shop
           },key,
           {
-            expiresIn: '1h'
+            expiresIn: '6h'
           });
 
           return callback(null, user, token);

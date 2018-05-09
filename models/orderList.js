@@ -9,7 +9,8 @@ var OrderSchema = new mongoose.Schema({
 				quantity: Number,
 			}	
         ],
-    day: {type: Date, default: Date.now}
+    day: {type: Date, default: Date.now},
+    type: String,
 });
 
 module.exports = mongoose.model('orderList', OrderSchema);

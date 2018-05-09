@@ -47,7 +47,7 @@
 											<th class="column02">Product ID</th>
 											<th class="column02">Product Name</th>
 											<th class="column02">Qty In Stock</th>
-											<th class="column02">Update</th>
+											<!-- <th class="column02">Update</th> -->
 											<th class="column02">Delete</th>
 											<!-- <th class="column">Time Stamp</th> -->
 										</tr>
@@ -57,9 +57,12 @@
 										<tr ng-repeat="item in product.item" class="row">
 										<td class="column02">{{item.productID}}</td>
 										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
-										<td class="column02"><input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"></td>                		
-										<td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td>
-										<td><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
+										<td class="column02">
+											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
+											{{item.qty_init}}
+										</td>                		
+										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
+										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
