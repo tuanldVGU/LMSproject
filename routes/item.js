@@ -32,7 +32,7 @@ router.post('/item',checkAuth, function(req, res, next) {
 
 /* UPDATE SHOP */
 router.put('/item/:id',checkAuth, function(req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
   Item.findByIdAndUpdate(req.params.id, req.body, {new:true},function (err, post) {
     if (err) return next(err);
     res.json(post);

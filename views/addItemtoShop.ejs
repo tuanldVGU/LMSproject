@@ -24,7 +24,10 @@
                 <select name="shopName" ng-change="getID(value)" ng-model="value" >
                         <option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>
 				</select>
-              <input type="text" name="productID" ng-model="item.productID" placeholder="productID"/>   
+			  <!-- <input type="text" name="productID" ng-model="item.productID" placeholder="productID"/>  -->
+			  <select name="productID" ng-change="" ng-model="item.productID" >
+					<option ng-repeat="item in items" ng.value="item.productID">{{item.productID}}</option>
+			</select>  
               <input type="text" name="quantity_in_stock" ng-model="item.quantity_in_stock" placeholder="quantity_in_stock"/>
               <button ng-click="addItem(data._id)">create</button>
               <!-- <h1>{{data}}</h1> -->

@@ -61,7 +61,6 @@ angular.module('checkoutController', [])
                                 testPro.productID = $scope.items[j].productID;
                                 testPro.quantity = $scope.item_qty;
                                 $scope.orderListPaid.item.push(testPro);
-                                console.log($scope.record)
                                 break;
                             }
                         }
