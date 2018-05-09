@@ -6,7 +6,7 @@ var ShopSchema = new mongoose.Schema({
 		[
 			{
 				productID: {type: Number, unique: true},
-				quantity_in_stock: Number,
+				quantity_in_stock: Number
 			}	
 		]	   
 });

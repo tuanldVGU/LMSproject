@@ -38,9 +38,41 @@ router.post('/product',checkAuth, function(req, res, next) {
 
 /* UPDATE SHOP */
 router.put('/product/:id',checkAuth, function(req, res, next) {
-  console.log(req.body);
-  Product.findByIdAndUpdate(req.params.id, req.body, {new:true},function (err, post) {
-    if (err) return next(err);
+  var upd ={};
+  upd.name = req.body.name;
+  upd.item = req.body.item;
+  upd._id = req.params.id;
+  //upd.item.push({"productID":5,"quantity_in_stock":100})
+  console.log(upd);
+  Product.findByIdAndUpdate(req.params.id, upd, {new:true},function (err, post) {
+    if (err){return next(err);} 
+    res.json(post);
+  });
+});
+
+
+//new 
+router.put('/productnew/:id',checkAuth, function(req, res, next) {
+  //console.log(req.body);
+  var itemUp={productID:req.body.productID,quantity_in_stock:req.body.quantity_in_stock};
+  console.log(itemUp)
+  Product.findByIdAndUpdate(req.params.id,
+    {$push: 
+      {
+      "item": 
+      {
+        "productID":req.body.productID,
+        "quantity_in_stock":req.body.quantity_in_stock
+      }
+    }
+  }, 
+     
+      {
+        safe: true, 
+        upsert: true, 
+        new: true
+      },function (err, post) {
+    if (err){console.log("fuck");return next(err);} 
     res.json(post);
   });
 });

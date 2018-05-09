@@ -1,0 +1,1 @@
+angular.module('chartLMS', ['chartController','chartService']);

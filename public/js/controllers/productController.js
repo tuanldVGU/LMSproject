@@ -2,6 +2,7 @@ angular.module('productController', [])
 	.controller('mainController',function($scope, $http){
 		$scope.data = {};
 		$scope.item = {};
+		$scope.data.item=[];
 		var productNames = [];
 		var qtySold = [];
 		$scope.productNames = [];
@@ -18,7 +19,11 @@ angular.module('productController', [])
                 }
             }
             
-        }
+		}
+		$http.get('/api/items')
+            .then(function(res){
+                $scope.items = res.data;
+            })
 		$http.get('/api/products')
 			.then(function(res){
 				$scope.products = res.data;				
@@ -126,6 +131,20 @@ angular.module('productController', [])
 				})
 
 			}
+			$scope.addItem = function(id){
+				$scope.data.item.push($scope.item);
+				// console.log($scope.item)
+				//console.log($scope.data)
+				$http.put('/api/productnew/'+id,$scope.item)
+				.then(function(res){
+					$scope.abc = res.data;
+				})
+				.catch(function(res){
+					//console.log(res.data);
+					console.log("Error" + res)
+				})
+
+			}
 			$scope.deleteShop = function(itemID, shopID,data){
 				console.log(itemID);
 				console.log(shopID);
@@ -147,21 +166,10 @@ angular.module('productController', [])
 				})
 
 			}
-			$scope.addItem = function(id){
-				$scope.data.item.push($scope.item);
-				$http.put('/api/product/'+id,$scope.data)
-				.then(function(res){
-					$scope.abc = res.data;
-				})
-				.catch(function(res){
-					//console.log(res.data);
-					console.log("Error" + res)
-				})
-
-			}
+			
 			$scope.getID = function(data1)
 			{
-				console.log("hello"+data1)
+				//console.log("hello"+data1)
 				$http.get('/api/product/'+data1)
 				.then(function(res){
 					$scope.data = res.data;
@@ -173,6 +181,7 @@ angular.module('productController', [])
 					console.log("Error" + res)
 				})
 			}
+			
 		
 
 

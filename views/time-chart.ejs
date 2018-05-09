@@ -9,12 +9,13 @@
 	<script src="js/bootstrap.min.js"></script>
 
 	<!-- Angular controller -->
-	<script src="/js/controllers/productController.js"></script>
-	<script src="/js/services/product.js"></script>
-	<script src="/js/productcore.js"></script>
+	<script src="/js/controllers/chartController.js"></script>
+	<script src="/js/services/chart.js"></script>
+	<script src="/js/cores/chartcore.js"></script>
 	
 	<!-- chart library -->
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>	 
+	<script src="/js/lib/chart.js"></script>
+    <script src="/js/lib/angular-chart.min.js"></script>	 
 
 </head>
 <body ng-controller="mainController" class="fix-header fix-sidebar">
@@ -38,9 +39,9 @@
 		            <!-- End Bread crumb --> 
 					<div id="product-list" class="container-table">				
 						 <form class="form" >
-						      <h3>Time start:</h3><input type="date" name="timestart"/>
-						      <h3>Time end:</h3><input type="date" name="timestart"/>
-						      <button ng-click="loadChart()" class="btn btn-success">Create</button>
+						      <h3>Time start:</h3><input type="date" name="timestart" ng-model="timestart"/>
+						      <h3>Time end:</h3><input type="date" name="timeend" ng-model="timeend"/>
+						      <button ng-click="loadChart(timestart,timeend)" class="btn btn-success">Create</button>
 				   		 </form> 
 
 						<!-- <h1>{{shopName}}</h1> -->
@@ -51,8 +52,6 @@
                                 </canvas>
 			
 						</div>
-						<h1>{{productNames}}</h1>
-						<h1>{{qtySold}}</h1>
 					</div>
 				</div>
 		</div>
