@@ -3,6 +3,7 @@
 <head>
 	<% include partials/header %>
 	<% include partials/customh %>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">	
 
 	<!-- Latest compiled JavaScript -->
 	<script src="js/jquery.min.js"></script>
@@ -26,6 +27,8 @@
 		<div class="page-wrapper limiter">
 			<div id="product-list" class="container-table">
 				<ul>
+					<h1>{{withdraw}}</h1>
+					<h1>{{deposit}}</h1>
 					<li ng-repeat="product in products">
 						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
 						<div class="wrap-table">
@@ -46,8 +49,9 @@
 										<td class="column02">{{item.productID}}</td>
 										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
 										<td class="column02">
+											{{$parent.$index}}
 											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
-											{{(item.qty_init-withdraw[counter][item.productID]+deposit[counter][item.productID])}}
+											{{(item.qty_init-withdraw[counter][item.productID]+deposit[$parent.$index][item.productID])}}
 										</td>                		
 										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
 										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
@@ -60,9 +64,12 @@
 							</div>
 					</li>
 				</ul>
-				<input type="text" name="name" ng-model="data.name">
-				<input type="button" class="btn btn-danger" ng-click="createShop()" value="createShop">
-				<button class="btn btn-success"><a href='/additemtoshop'>AddItemToShop</a></button>
+				<div class="form">
+					<h4>Enter shop name:</h4>
+					<input type="text" name="name" ng-model="data.name">
+					<input type="button" class="btn btn-danger" ng-click="createShop()" value="createShop">
+					<button class="btn btn-success"><a href='/additemtoshop'>AddItemToShop</a></button>
+				</divs>
 				<!-- <h1>{{data.name}}</h1> -->
 
 	        </div>

@@ -8,7 +8,6 @@ router.get('/', (req, res, next) =>{
 });
 
 router.get('/home', checkAuth, (req,res, next) =>{
-	  console.log(req.headers);
     res.render('dashboard', {title: 'Dashboard || myLittleShop'});
 });
 
