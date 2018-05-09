@@ -59,7 +59,7 @@ angular.module('productController', [])
 					}
                 }
                 $scope.orders = res.data;
-                console.log($scope.withdraw[0][2]);
+                //console.log($scope.withdraw[0][2]);
                 for(var i = 0; i<$scope.orders.length;i++)
                 {
 					for (var k = 0; k< shopList.length;k++)
