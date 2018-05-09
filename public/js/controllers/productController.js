@@ -15,7 +15,6 @@ angular.module('productController', [])
 				$scope.deposit = [];
 				$scope.products = {};
 		// show all the products
-		console.log("test"+$scope.productSelected)
 		$scope.selectProductID = function(id){
             console.log("test"+id)
             for(var i =0; i<$scope.items.length;i++)
@@ -53,13 +52,14 @@ angular.module('productController', [])
 					$scope.withdraw.push([]);
 					$scope.deposit.push([]);
 					shopList[i] = $scope.products.name;
-					for(var j =0 ; j<$scope.products[i].item[j].length;j++)
+					for(var j =0 ; j<$scope.products[i].item.length;j++)
 					{
-						$scope.withdraw[i].push("0");
-						$scope.deposit[i].push("0");
+						$scope.withdraw[i].push(0);
+						$scope.deposit[i].push(0);
 					}
-					console.log($scope.withdraw);
+
                 }
+                console.log($scope.withdraw,$scope.deposit);
                 $scope.orders = res.data;
                 
                 for(var i = 0; i<$scope.orders.length;i++)
@@ -71,9 +71,7 @@ angular.module('productController', [])
 							
 							for (var j = 0; j<$scope.orders[i].item.length; j++)
 							{
-								console.log($scope.withdraw);
 								$scope.withdraw[k][$scope.orders[i].item[j].productID] = $scope.withdraw[k][$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity;
-								console.log($scope.withdraw);
 							}
 							
 						}
@@ -87,7 +85,7 @@ angular.module('productController', [])
 					}
                     
                 }
-				//console.log($scope.withdraw, $scope.deposit);
+                console.log($scope.withdraw,$scope.deposit);
 			})
 		$http.get('/api/products')
 			.then(function(res){
