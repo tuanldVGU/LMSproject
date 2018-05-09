@@ -5,8 +5,8 @@ var OrderSchema = new mongoose.Schema({
   item: 
 		[
 			{
-				productID: {type: Number, unique: true},
-				quantity: Number,
+				productID: Number,
+				quantity: Number
 			}	
         ],
     day: {type: Date, default: Date.now},

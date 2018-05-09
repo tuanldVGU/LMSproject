@@ -54,15 +54,15 @@ router.put('/product/:id',checkAuth, function(req, res, next) {
 //new 
 router.put('/productnew/:id',checkAuth, function(req, res, next) {
   //console.log(req.body);
-  var itemUp={productID:req.body.productID,quantity_in_stock:req.body.quantity_in_stock};
-  console.log(itemUp)
+  //var itemUp={productID:req.body.productID,quantity_in_stock:req.body.quantity_in_stock};
+  //console.log(itemUp)
   Product.findByIdAndUpdate(req.params.id,
     {$push: 
       {
       "item": 
       {
         "productID":req.body.productID,
-        "quantity_in_stock":req.body.quantity_in_stock
+        "qty_init":req.body.qty_init
       }
     }
   }, 

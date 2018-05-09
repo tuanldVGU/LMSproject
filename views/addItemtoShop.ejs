@@ -28,7 +28,7 @@
 			  <select name="productID" ng-change="" ng-model="item.productID" >
 					<option ng-repeat="item in items" ng.value="item.productID">{{item.productID}}</option>
 			</select>  
-              <input type="text" name="quantity_in_stock" ng-model="item.quantity_in_stock" placeholder="quantity_in_stock"/>
+              <input type="text" name="qty_init" ng-model="item.qty_init" placeholder="qty_init"/>
               <button ng-click="addItem(data._id)">create</button>
               <!-- <h1>{{data}}</h1> -->
    		 </form>

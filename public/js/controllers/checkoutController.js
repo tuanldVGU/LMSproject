@@ -28,7 +28,7 @@ angular.module('checkoutController', [])
 				console.log('x');*/
                 
                 $scope.orderList = res.data;
-                console.log($scope.item)
+                console.log($scope.orderList)
                 // $scope.orderList.name = res.data.name;
                 // $scope.orderList._id = res.data._id;
 
@@ -56,7 +56,6 @@ angular.module('checkoutController', [])
                                 $scope.subTotal = $scope.subTotal + $scope.items[j].price * $scope.item_qty;
                                 $scope.Tax = $scope.subTotal *0.1;
                                 $scope.Total = $scope.subTotal + $scope.Tax -$scope.promotion*$scope.subTotal;
-                                $scope.orderList.item[i].quantity_in_stock = $scope.orderList.item[i].quantity_in_stock - $scope.item_qty;
                                 var testPro = {};
                                 testPro.productID = $scope.items[j].productID;
                                 testPro.quantity = $scope.item_qty;
@@ -75,25 +74,16 @@ angular.module('checkoutController', [])
             }
             $scope.payFunc = function(id){
                 $scope.orderListPaid.shop = $scope.shopName;
-                $http.put('/api/product/'+$scope.orderList._id,$scope.orderList)
-				.then(function(res){
-                    $scope.abc = res.data;
-                    console.log($scope.orderList)
-                    $scope.data = [];
-                    $scope.item_id = 0;
-                    $scope.item_qty = 0;
-                    $scope.subTotal = 0;
-                    $scope.Tax = 0;
-                    $scope.Total = 0;
-				})
-				.catch(function(res){
-					//console.log(res.data);
-					console.log("Error" + res)
-                })
+                $scope.orderListPaid.type = "withdraw";
                 $http.post('/api/order/',$scope.orderListPaid)
                 .then(function(res){
 
                 })
+                $scope.subTotal = 0;
+                $scope.tax = 0;
+                $scope.Total = 0;
+                $scope.promotion = 0;
+                $scope.data = [];
             }
         }
         

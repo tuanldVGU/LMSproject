@@ -122,10 +122,10 @@
                         <div class="card">
                                 <h4 class="card-title">Product Availability</h4>
                             <div class="card-body browser" >
-                                <div ng-repeat="product in productShop1">
-                                        <p class="f-w-600">{{product.productName}} <span class="pull-right">{{(product.quantity_sold*100/product.quantity_in_stock | number:2)}}%</span></p>
+                                <div ng-repeat="item in items ">
+                                        <p class="f-w-600">{{item.productName}} <span class="pull-right">{{(init[item.productID]-withdraw[item.productID]+deposit[item.productID])*100/(init[item.productID]+deposit[item.productID])}}%</span></p>
                                         <div class="progress " >
-                                            <div role="progressbar" ng-style="{width:product.quantity_sold*100/product.quantity_in_stock  +'%'}" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                            <div role="progressbar" ng-style="{width:(init[item.productID]-withdraw[item.productID]+deposit[item.productID])*100/(init[item.productID]+deposit[item.productID])  +'%'}" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
                                         </div>
                                 </div>
                                 

@@ -42,8 +42,9 @@
 						      <h3>Time start:</h3><input type="date" name="timestart" ng-model="timestart"/>
 						      <h3>Time end:</h3><input type="date" name="timeend" ng-model="timeend"/>
 						      <button ng-click="loadChart(timestart,timeend)" class="btn btn-success">Create</button>
-				   		 </form> 
-
+							</form> 
+							
+						
 						<!-- <h1>{{shopName}}</h1> -->
 						<div style="width:100%; height:100%;">
 								<canvas id="line" class="chart chart-line" chart-data="data"
@@ -52,6 +53,38 @@
                                 </canvas>
 			
 						</div>
+
+						<!-- <div ng-repeat="items in itemSelected">
+								<ul>Timestamp: {{items.day}}</ul>
+								<li>Type: {{items.type}}</li>
+								<div ng-repeat="item in items.item">
+									<li>ProductID: {{item.productID}}</li>
+									<li>quantity: {{item.quantity}}</li>
+								</div>
+						</div> -->
+						<table id="table">
+								<thead>
+									<tr class="row">
+										<th class="column02">Day</th>
+										<th class="column02">Type</th>
+										<th class="column02">ProductID</th>
+										<!-- <th class="column02">Update</th> -->
+										<th class="column02">Quantity</th>
+										<!-- <th class="column">Time Stamp</th> -->
+									</tr>
+								</thead>
+								<!-- LOOP OVER THE USERS IN $scope.users -->
+								<tbody>
+									<tr ng-repeat="items in itemSelected" class="row">
+									<td class="column02">{{items.day}}</td>
+									<td class="column02">{{items.type}}</td>
+									<td class="column02">{{items.productID}}</td>
+									<td class="column02">{{items.quantity}}</td>
+								</tr>
+								</tbody>
+								
+							</table>
+						
 					</div>
 				</div>
 		</div>

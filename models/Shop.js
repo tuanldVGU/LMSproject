@@ -7,6 +7,7 @@ var ShopSchema = new mongoose.Schema({
 			{
 				productID: {type: Number, unique: true},
 				qty_init: Number,
+				day_init: {type: Date, default: Date.now }
 			}	
 		]	   
 });

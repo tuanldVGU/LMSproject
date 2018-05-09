@@ -11,7 +11,10 @@ angular.module('dashboardController', ["chart.js"])
         $scope.totalOrders = 0;
         $scope.orders = [];
         $scope.price = 0;
-
+        $scope.itemListName = [];
+        $scope.deposit = [];
+        $scope.withdraw = [];
+        $scope.init = [];
         //chart variable
         $scope.labels = [];
         $scope.data = [];
@@ -48,8 +51,43 @@ angular.module('dashboardController', ["chart.js"])
         /*				console.log(res.data[0].shop1);
                 console.log('x');*/
                 //console.log( res.data);
-                $scope.totalOrders = res.data.length;
+                $scope.deposit = [];
+                //deposit.length = $scope.items.length;
+                $scope.withdraw = [];
+                $scope.init = [];
+                for(var i =0 ; i<$scope.items.length;i++)
+                {
+                    $scope.deposit[$scope.items[i].productID] = 0;
+                    $scope.withdraw[$scope.items[i].productID]=0;
+                    $scope.init[$scope.items[i].productID]=0;
+                }
                 $scope.orders = res.data;
+                for(var i = 0; i<$scope.products.length; i++)
+                {
+                    for(var j = 0; j<$scope.products[i].item.length;j++)
+                    {
+                        $scope.init[$scope.products[i].item[j].productID] = $scope.init[$scope.products[i].item[j].productID] + $scope.products[i].item[j].qty_init;
+                    }
+                }
+                for(var i = 0; i<$scope.orders.length;i++)
+                {
+                    if($scope.orders[i].type == "withdraw")
+                    {
+                        $scope.totalOrders ++;
+                        for (var j = 0; j<$scope.orders[i].item.length; j++)
+                        {
+                            $scope.withdraw[$scope.orders[i].item[j].productID] = $scope.withdraw[$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity
+                        }
+                    }
+                    if($scope.orders[i].type == "deposit")
+                    {
+                        for (var j = 0; j<$scope.orders[i].item.length; j++)
+                        {
+                            $scope.deposit[$scope.orders[i].item[j].productID] = $scope.deposit[$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity
+                        }
+                    }
+                }
+                console.log($scope.withdraw, $scope.deposit);
                 // $scope.series.push($scope.orders[0].item[0].producID);
                 //$scope.data.push([]);
                 for(var i=0;i<$scope.orders.length;i++)
@@ -84,7 +122,7 @@ angular.module('dashboardController', ["chart.js"])
                             {
                                 for(var k =0 ; k<$scope.items.length;k++)
                                 {
-                                    if($scope.orders[i].item[j].productID == $scope.items[k].productID)
+                                    if($scope.orders[i].item[j].productID == $scope.items[k].productID && $scope.orders[i].type=="withdraw")
                                     {
                                         $scope.totalRevenue = $scope.totalRevenue+$scope.items[k].price*$scope.orders[i].item[j].quantity;
                                         break;
@@ -114,7 +152,7 @@ angular.module('dashboardController', ["chart.js"])
                                     if($scope.series[k] == $scope.orders[i].item[j].productID)
                                     {
                                         $scope.data[k][keep] = $scope.data[k][keep]+parseInt($scope.orders[i].item[j].quantity);
-                                        console.log("Yp",keep);
+                                        //console.log("Yp",keep);
                                         break;
                                     }
                                     
@@ -122,7 +160,17 @@ angular.module('dashboardController', ["chart.js"])
                             }
 
                         }
-                        
+                        // for(var i = 0 ; i<$scope.series.length;i++)
+                        // {
+                        //     // // for(var j =0; j<$scope.itemListName.length;j++)
+                        //     // // {
+                        //     //     if($scope.series[i]==j)
+                        //     //     {
+                        //     //         $scope.series[i] = $scope.itemListName[j];
+                        //     //     }
+                        //     // //} 
+                        //     $scope.series[i] = $scope.itemListName[$scope.series[i]];
+                        // }
                         console.log($scope.labels, $scope.series,$scope.data)
                 
             })
@@ -161,6 +209,11 @@ angular.module('dashboardController', ["chart.js"])
             console.log('x');*/
             //console.log( res.data);
             $scope.items = res.data;
+            for(var i = 0 ; i<$scope.items.length;i++)
+				{
+					$scope.itemListName[$scope.items[i].productID] = $scope.items[i].productName;
+				}
+          
             
 
         })

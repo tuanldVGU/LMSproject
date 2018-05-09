@@ -39,6 +39,8 @@
 			<div id="product-list" class="container-table">
 				<ul>
 					<li ng-repeat="product in products">
+						<h1>{{deposit}}</h1>
+						<h1>{{withdraw}}</h1>
 						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
 						<div class="wrap-table">
 								<table id="table">
@@ -59,7 +61,7 @@
 										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
 										<td class="column02">
 											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
-											{{item.qty_init}}
+											{{(item.qty_init-withdraw[counter][item.productID]+deposit[counter][item.productID])}}
 										</td>                		
 										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
 										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
@@ -73,8 +75,9 @@
 					</li>
 				</ul>
 				<input type="text" name="name" ng-model="data.name">
-				<input type="button" class="btn-danger" ng-click="createShop()" value="createShop">
-				<h1>{{data.name}}</h1>
+				<input type="button" class="btn btn-danger" ng-click="createShop()" value="createShop">
+				<button class="btn btn-success"><a href='/additemtoshop'>AddItemToShop</a></button>
+				<!-- <h1>{{data.name}}</h1> -->
 
 	        </div>
 		</div>

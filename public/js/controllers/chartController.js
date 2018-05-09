@@ -1,6 +1,7 @@
 angular.module('chartController', ["chart.js"])
 	.controller('mainController',function($scope, $http){
 		$scope.items = {};
+		$scope.itemSelected = [];
 		$http.get('/api/items')
 			.then(function(res){
 				$scope.items = res.data;				
@@ -55,6 +56,21 @@ angular.module('chartController', ["chart.js"])
 					// $scope.series.push($scope.orders[0].item[0].producID);
 					//$scope.data.push([]);
 					var test = new Date($scope.orders[0].day)
+					for(var i=0;i<$scope.orders.length;i++)
+					if(new Date($scope.orders[i].day) < timeE && new Date($scope.orders[i].day) > timeS)
+							{
+								for (var j=0; j<$scope.orders[i].item.length; j++){
+									$scope.itemSelected.push(
+										{
+											day: $scope.orders[i].day,
+											type: $scope.orders[i].type,
+											productID : $scope.orders[i].item[j].productID,
+											quantity : $scope.orders[i].item[j].quantity,
+										}
+									)
+								}
+							}
+					console.log($scope.itemSelected)
 					console.log(test.setHours(0,0,0,0));
 					for(var i=0;i<$scope.orders.length;i++)
 					if(new Date($scope.orders[i].day) < timeE && new Date($scope.orders[i].day) > timeS)
@@ -120,7 +136,7 @@ angular.module('chartController', ["chart.js"])
 										if($scope.series[k] == $scope.orders[i].item[j].productID)
 										{
 											$scope.data[k][keep] = $scope.data[k][keep]+parseInt($scope.orders[i].item[j].quantity);
-											console.log("Yp",keep);
+											//console.log("Yp",keep);
 											break;
 										}
 										
@@ -129,7 +145,7 @@ angular.module('chartController', ["chart.js"])
 	
 							}
 							
-							console.log($scope.labels, $scope.series,$scope.data)
+							//console.log($scope.labels, $scope.series,$scope.data)
 					
 				
 						})
