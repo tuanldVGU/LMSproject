@@ -27,8 +27,6 @@
 		<div class="page-wrapper limiter">
 			<div id="product-list" class="container-table">
 				<ul>
-					<h1>{{withdraw}}</h1>
-					<h1>{{deposit}}</h1>
 					<li ng-repeat="product in products">
 						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
 						<div class="wrap-table">
@@ -49,9 +47,8 @@
 										<td class="column02">{{item.productID}}</td>
 										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
 										<td class="column02">
-											{{$parent.$index}}
 											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
-											{{(item.qty_init-withdraw[counter][item.productID]+deposit[$parent.$index][item.productID])}}
+											{{(item.qty_init-withdraw[$parent.$index][item.productID]+deposit[$parent.$index][item.productID])}}
 										</td>                		
 										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
 										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>

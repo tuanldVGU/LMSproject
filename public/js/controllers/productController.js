@@ -12,8 +12,8 @@ angular.module('productController', [])
 		$scope.quantityItem = [];
 		$scope.counter = 0;		
 		$scope.withdraw = [];
-				$scope.deposit = [];
-				$scope.products = {};
+		$scope.deposit = [];
+		$scope.products = {};
 		// show all the products
 		$scope.selectProductID = function(id){
             console.log("test"+id)
@@ -43,49 +43,50 @@ angular.module('productController', [])
                 console.log('x');*/
                 //console.log( res.data);
 				//$scope.quantityItem = $scope.products.item;
-				$scope.withdraw = [];
-				$scope.deposit = [];
+				$scope.withdraw = new Array();
+				$scope.deposit = new Array();
 				var shopList = [];
 				//console.log($scope.products)
                 for(var i =0 ; i<$scope.products.length;i++)
                 {
-					$scope.withdraw.push([]);
-					$scope.deposit.push([]);
-					shopList[i] = $scope.products.name;
-					for(var j =0 ; j<$scope.products[i].item.length;j++)
+                	$scope.withdraw[i] = new Array();
+					$scope.deposit[i] = new Array();
+					shopList[i] = $scope.products[i].name;
+					for(var j = 0 ; j<$scope.products[i].item.length;j++)
 					{
-						$scope.withdraw[i].push(0);
-						$scope.deposit[i].push(0);
+						$scope.withdraw[i][$scope.products[i].item[j].productID]=0;
+						$scope.deposit[i][$scope.products[i].item[j].productID]=0;
 					}
-
                 }
-                console.log($scope.withdraw,$scope.deposit);
                 $scope.orders = res.data;
-                
+                console.log($scope.withdraw[0][2]);
                 for(var i = 0; i<$scope.orders.length;i++)
                 {
 					for (var k = 0; k< shopList.length;k++)
 					{
-						if($scope.orders[i].type == "withdraw")
+						if(($scope.orders[i].type == "withdraw") && ($scope.orders[i].shop == shopList[k]) )
 						{
 							
 							for (var j = 0; j<$scope.orders[i].item.length; j++)
 							{
-								$scope.withdraw[k][$scope.orders[i].item[j].productID] = $scope.withdraw[k][$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity;
+								$scope.withdraw[k][$scope.orders[i].item[j].productID] 
+								= $scope.withdraw[k][$scope.orders[i].item[j].productID] 
+								+ $scope.orders[i].item[j].quantity;
 							}
 							
 						}
-						if($scope.orders[i].type == "deposit")
+						if($scope.orders[i].type == "deposit" && ($scope.orders[i].shop == shopList[k]))
 						{
 							for (var j = 0; j<$scope.orders[i].item.length; j++)
 							{
-								$scope.deposit[k][$scope.orders[i].item[j].productID] = $scope.deposit[k][$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity
+								$scope.deposit[k][$scope.orders[i].item[j].productID] 
+								= $scope.deposit[k][$scope.orders[i].item[j].productID] 
+								+ $scope.orders[i].item[j].quantity;
 							}
 						}
 					}
                     
                 }
-                console.log($scope.withdraw,$scope.deposit);
 			})
 		$http.get('/api/products')
 			.then(function(res){
