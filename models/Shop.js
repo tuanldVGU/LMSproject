@@ -5,7 +5,7 @@ var ShopSchema = new mongoose.Schema({
   item: 
 		[
 			{
-				productID: {type: Number, unique: true},
+				productID: Number,
 				qty_init: Number,
 				day_init: {type: Date, default: Date.now }
 			}	
