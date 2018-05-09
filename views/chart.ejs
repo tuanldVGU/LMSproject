@@ -48,7 +48,11 @@
 										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
 										<td class="column02">
 											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
-											{{(item.qty_init-withdraw[$parent.$index][item.productID]+deposit[$parent.$index][item.productID])}}
+											{{
+												(item.qty_init-
+												withdraw[$parent.$index][item.productID]
+												+deposit[$parent.$index][item.productID])
+											}}
 										</td>                		
 										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
 										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>

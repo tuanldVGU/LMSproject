@@ -11,8 +11,6 @@ angular.module('productController', [])
 		$scope.itemListName = [];
 		$scope.quantityItem = [];
 		$scope.counter = 0;		
-		$scope.withdraw = [];
-		$scope.deposit = [];
 		$scope.products = {};
 		// show all the products
 		$scope.selectProductID = function(id){
@@ -59,7 +57,6 @@ angular.module('productController', [])
 					}
                 }
                 $scope.orders = res.data;
-                console.log($scope.withdraw[0][2]);
                 for(var i = 0; i<$scope.orders.length;i++)
                 {
 					for (var k = 0; k< shopList.length;k++)
@@ -106,12 +103,24 @@ angular.module('productController', [])
 				.then(function(res){
 					$scope.productNames = [];
 					$scope.qtyinstock = [];
-					
-					$scope.data = res.data;
-					angular.forEach($scope.data.item, function(value, key) {
+					console.log(res.data);
+					var ok = 0;
+	                for(var i =0 ; i<$scope.products.length;i++)
+	                {
+						if ($scope.products[i].name == res.data.name){
+							ok = i ;
+							break;
+						}
+	                }
+	                console.log(ok);
+					angular.forEach(res.data.item, function(value, key) {
 						$scope.productNames.push($scope.itemListName[value.productID]);
-						$scope.qtyinstock.push(value.quantity_in_stock);
-						
+						console.log(value.qty_init);
+						console.log($scope.withdraw[ok][value.productID]);
+						console.log($scope.deposit[ok][value.productID]);
+						var sum = value.qty_init-$scope.withdraw[ok][value.productID]+$scope.deposit[ok][value.productID];
+						console.log(sum);
+						$scope.qtyinstock.push(sum);
 					});
 					
 					loadChart($scope.productNames, $scope.qtyinstock);
@@ -273,10 +282,6 @@ angular.module('productController', [])
 					console.log("Error" + res)
 				})
 			}
-			
-		
-
-
-	})
+})
 
 
