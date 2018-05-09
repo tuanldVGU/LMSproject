@@ -177,7 +177,6 @@ angular.module('productController', [])
 				$http.post('/api/product',$scope.data)
 				.then(function(res){
 					$scope.shop = res.data;
-					console.log($scope.data);
 				})
 				.catch(function(res){
 					//Export error
