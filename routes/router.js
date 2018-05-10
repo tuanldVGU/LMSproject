@@ -12,7 +12,7 @@ router.get('/home', checkAuth, (req,res, next) =>{
 });
 
 router.get('/app',checkAuth, (req, res, next) =>{
-  res.render('checkout', {title: 'Checkout || myLittleShop'});
+  res.render('checkout', {title: 'Checkout || myLittleShop',shopName : req.body.userData.shop, employee: req.body.userData.username});
 });
 
 router.get('/signup',checkAuth, (req, res, next) =>{

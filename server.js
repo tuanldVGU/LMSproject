@@ -96,7 +96,11 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-app.listen(PORT, function(){
+http.createServer(app).listen(PORT,function(){
 	console.log("App running on port "+ PORT);
-})
+});
+
+// app.listen(PORT, function(){
+// 	console.log("App running on port "+ PORT);
+// })
 
