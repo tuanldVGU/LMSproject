@@ -226,12 +226,10 @@ angular.module('productController', [])
 						}
 						$http.post('/api/order/',transaction)
 						.then(function(res){
-
 						})
 						break;
 					}
 				}
-				console.log(check,$scope.data)
 				if(check)
 				{
 					$http.put('/api/productnew/'+id,$scope.item)
