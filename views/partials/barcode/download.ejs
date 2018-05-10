@@ -40,7 +40,8 @@
             var tableProduct=document.getElementById("table").getElementsByTagName('tbody')[0];
             function addRow(){		
                 var newRow=tableProduct.insertRow(tableProduct.rows.length);
-                newRow.id= document.getElementById("productID").value;
+                var id = document.getElementById("productID").value.split(":")[1];
+                newRow.id= id;
                 var newCell1=newRow.insertCell(0)
                 var newCell2=newRow.insertCell(1);
                 var newCell3=newRow.insertCell(2);
@@ -49,7 +50,7 @@
                 newCell2.innerHTML=document.getElementById("productName").value;
                 
                 var barcodeImage=new Image();
-                JsBarcode(barcodeImage, document.getElementById("productID").value,{
+                JsBarcode(barcodeImage, id,{
                     format: document.getElementById("selection").value
                 });		
                 newCell3.appendChild(barcodeImage);

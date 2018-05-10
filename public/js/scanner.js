@@ -1,6 +1,4 @@
 var isScanning=false;
-// var w = $( window ).width()*;
-// var h = $( window ).height();
 
 function startScanner(){
 	Quagga.init({
@@ -69,18 +67,24 @@ function startScanner(){
 				Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
 			}
 			if (result.codeResult && result.codeResult.code) {
+				
 				Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-			}
+				
+				document.getElementById("item_id").value=result.codeResult.code;								
+				Quagga.stop();
+				isScanning=false;
+				$("#camModal").modal("hide");								
+			}			
 		}
 	});
-	Quagga.onDetected(function (result) {
-		document.getElementById("item_id").value=result.codeResult.code;
+	// Quagga.onDetected(function (result) {
+	// 	//document.getElementById("item_id").value=result.codeResult.code;
 
-		console.log(result.codeResult.code);
-		if(document.getElementById("item_id").value=="0097855123176"){			
-			matchProduct();
-		}
-	});
+	// 	console.log(result.codeResult.code);
+	// 	if(document.getElementById("item_id").value=="0097855123176"){			
+	// 		matchProduct();
+	// 	}
+	// });
 }
 // Start/stop scanner
 document.getElementById("scan_btn").addEventListener("click", function () {
