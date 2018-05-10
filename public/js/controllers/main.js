@@ -16,6 +16,7 @@ angular.module('userController', [])
 			$http.delete('/api/user/' + id)
 				.then(function(res){
 					$scope.user = res.data;
+					if(!alert("Delete Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//Export error
@@ -26,6 +27,7 @@ angular.module('userController', [])
 			$http.put('/api/user/' + id, data)
 				.then(function(res){
 					$scope.user = res.data;
+					if(!alert("Update Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//Export error

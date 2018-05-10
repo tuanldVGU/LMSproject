@@ -32,6 +32,7 @@ angular.module('itemController', [])
 				.then(function(res){
 					$scope.shop = res.data;
 					console.log($scope.data);
+					if(!alert("create Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//Export error
@@ -54,17 +55,19 @@ angular.module('itemController', [])
 				})
 				.catch(function(res){
 					//console.log(res.data);
+					
 					console.log("Error" + res)
 				})
 				$http.post('/api/productLog/',data)
 				.then(function(res){
 					$scope.abc = res.data;
+					
 				})
 				.catch(function(res){
 					//console.log(res.data);
 					console.log("Error" + res)
 				})
-
+				if(!alert("update Success")){window.location.reload();} 
 			}
 			$scope.deleteItem = function(id){
 				$http.delete('/api/item/' + id)

@@ -25,8 +25,14 @@ router.get('/productLog/:id',checkAuth, function(req, res, next) {
 
 /* CREATE PRODUCT LOG */
 router.post('/productLog',checkAuth, function(req, res, next) {
-  productLog.create(req.body, function (err, post) {
-    if (err) return next(err);
+  console.log(req.body);
+  var updVar ={
+    productID: req.body.productID,
+    productName: req.body.productName,
+    price: req.body.price
+  }
+  productLog.insertMany(updVar, function (err, post) {
+    if (err) {return next(err)};
     res.json(post);
   });
 });
