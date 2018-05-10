@@ -36,7 +36,6 @@ angular.module('chartController', ["chart.js"])
 					}
 				  ]
 				},
-				responsive: true,
 				maintainAspectRatio: false
 			  };
 			$scope.loadChart = function(timestart, timeend)
@@ -73,8 +72,8 @@ angular.module('chartController', ["chart.js"])
 									)
 								}
 							}
-					console.log($scope.itemSelected)
-					console.log(test.setHours(0,0,0,0));
+					//console.log($scope.itemSelected)
+					//console.log(test.setHours(0,0,0,0));
 					for(var i=0;i<$scope.orders.length;i++)
 					if(new Date($scope.orders[i].day) < timeE && new Date($scope.orders[i].day) > timeS)
 							{
@@ -148,7 +147,7 @@ angular.module('chartController', ["chart.js"])
 	
 							}
 							
-							//console.log($scope.labels, $scope.series,$scope.data)
+							console.log($scope.labels, $scope.series,$scope.data)
 					
 				
 						})

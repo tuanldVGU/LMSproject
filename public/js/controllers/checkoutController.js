@@ -41,6 +41,7 @@ angular.module('checkoutController', [])
 			$scope.addFunc = function(){
                 //console.log($scope.item)
                 //$scope.promotion = document.getElementById('promotion').value;
+                $scope.item_id = document.getElementById("item_id").value;
                 for(var i=0; i<$scope.orderList.item.length;i++) 
                 {
                     //console.log($scope.item_id,i,$scope.orderList.item[i].productID)

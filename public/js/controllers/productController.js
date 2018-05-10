@@ -187,6 +187,7 @@ angular.module('productController', [])
 				$http.post('/api/product',$scope.data)
 				.then(function(res){
 					$scope.shop = res.data;
+					if(!alert("Create Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//Export error

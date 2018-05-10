@@ -32,51 +32,61 @@ angular.module('itemController', [])
 				.then(function(res){
 					$scope.shop = res.data;
 					console.log($scope.data);
-					if(!alert("create Success")){window.location.reload();} 
-				})
-				.catch(function(res){
-					//Export error
-					
-					console.log('Error: ' + res);
-				});
-				$http.post('/api/productLog/',$scope.item)
+					$http.post('/api/productLog/',$scope.item)
 				.then(function(res){
+					if(!alert("create Success")){window.location.reload();} 
 					$scope.abc = res.data;
 				})
 				.catch(function(res){
 					//console.log(res.data);
+					if(!alert("create fail")){window.location.reload();} 
 					console.log("Error" + res)
 				})
+					
+				})
+				.catch(function(res){
+					//Export error
+					if(alert("create fail")){window.location.reload();} 
+					console.log('Error: ' + res);
+				});
+
+				
 			}
 			$scope.updateItem = function(id,data){
 				$http.put('/api/item/'+id,data)
 				.then(function(res){
 					$scope.abc = res.data;
-				})
-				.catch(function(res){
-					//console.log(res.data);
-					
-					console.log("Error" + res)
-				})
-				$http.post('/api/productLog/',data)
+					$http.post('/api/productLog/',data)
 				.then(function(res){
 					$scope.abc = res.data;
+					if(!alert("update Success")){window.location.reload();} 
 					
 				})
 				.catch(function(res){
 					//console.log(res.data);
 					console.log("Error" + res)
+					if(!alert("update fail")){window.location.reload();} 
 				})
-				if(!alert("update Success")){window.location.reload();} 
+				})
+				.catch(function(res){
+					//console.log(res.data);
+					
+					console.log("Error" + res)
+					if(!alert("update fail")){window.location.reload();} 
+				})
+				
+				
 			}
 			$scope.deleteItem = function(id){
 				$http.delete('/api/item/' + id)
 				.then(function(res){
 					$scope.item = res.data;
+					if(!alert("delete Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//Export error
 					console.log('Error: ' + res);
+					if(!alert("delete fail")){window.location.reload();} 
 				})
 
 			}
@@ -85,6 +95,7 @@ angular.module('itemController', [])
 				$http.put('/api/product/'+id,$scope.data)
 				.then(function(res){
 					$scope.abc = res.data;
+					if(!alert("add Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//console.log(res.data);
