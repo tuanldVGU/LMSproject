@@ -29,7 +29,7 @@ router.get('/modifyItem',checkAuth, (req, res, next) =>{
 });
 
 router.get('/inventory',checkAuth, (req, res, next) =>{
-  res.render('chart', {title: 'Inventory || myLittleShop'});
+  res.render('inventory', {title: 'Inventory || myLittleShop'});
 });
 
 router.get('/addItem',checkAuth, (req, res, next) =>{

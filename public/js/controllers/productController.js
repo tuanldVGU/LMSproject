@@ -149,7 +149,7 @@ angular.module('productController', [])
 						data: {
 							labels: productNames,
 							datasets: [{
-								label: '# of qty sold',
+								label: '# of qty_in_stock',
 								data: qtySold,
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',

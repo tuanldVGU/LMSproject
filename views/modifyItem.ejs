@@ -40,22 +40,22 @@
 								<table id="table">
 									<thead>
 										<tr class="row">
-											<th class="column02">Product ID</th>
-											<th class="column02">Product Name</th>
-											<th class="column02">Price</th>
-											<th class="column02">Update</th>
-											<th class="column02">Delete</th>
+											<th class="column05">Product ID</th>
+											<th class="column05">Product Name</th>
+											<th class="column05">Price</th>
+											<th class="column05">Update</th>
+											<th class="column05">Delete</th>
 											<!-- <th class="column">Time Stamp</th> -->
 										</tr>
 									</thead>
 									<!-- LOOP OVER THE USERS IN $scope.users -->
 									<tbody>
 										<tr ng-repeat="item in items" class="row">
-										<td class="column02">{{item.productID}}</td>
-										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>	                		
-										<td class="column02"><input type="text" ng-model="item.price" placeholder="{{item.price}}"></td>
-										<td class="column02"><input type="button" value="update" ng-click="updateItem(item._id,item)" class="btn-danger"></td>
-										<td><input type="button" value="delete" ng-click="deleteItem(item._id)" class="btn-danger"></td>
+										<td class="column05">{{item.productID}}</td>
+										<td class="column05"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>	                		
+										<td class="column05"><input type="text" ng-model="item.price" placeholder="{{item.price}}"></td>
+										<td class="column05"><input type="button" value="update" ng-click="updateItem(item._id,item)" class="btn-danger"></td>
+										<td class="column05"><input type="button" value="delete" ng-click="deleteItem(item._id)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
@@ -65,6 +65,7 @@
 	        </div>
 		</div>
 	</div>
+	<% include partials/footer %>
 </body>
 
 <script src="js/reports.js"></script>

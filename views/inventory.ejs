@@ -25,28 +25,38 @@
 		<% include partials/sidebar %>		
 
 		<div class="page-wrapper limiter">
+			<!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Inventory</h3> </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                    </ol>
+                </div>
+            </div>
+        <!-- End Bread crumb --> 
 			<div id="product-list" class="container-table">
 				<ul>
 					<li ng-repeat="product in products">
-						<h1>{{product.name}}</h1> <button ng-click="setID(product._id)"></button>
+						<h1>Shop name: {{product.name}}</h1>
 						<div class="wrap-table">
-								<table id="table">
+								<table>
 									<thead>
 										<tr class="row">
-											<th class="column02">Product ID</th>
-											<th class="column02">Product Name</th>
-											<th class="column02">Qty In Stock</th>
+											<th class="column04">Product ID</th>
+											<th class="column04">Product Name</th>
+											<th class="column04">Qty In Stock</th>
 											<!-- <th class="column02">Update</th> -->
-											<th class="column02">Delete</th>
+											<th class="column04">Delete</th>
 											<!-- <th class="column">Time Stamp</th> -->
 										</tr>
 									</thead>
 									<!-- LOOP OVER THE USERS IN $scope.users -->
 									<tbody>
 										<tr ng-repeat="item in product.item" class="row">
-										<td class="column02">{{item.productID}}</td>
-										<td class="column02"><input type="text" ng-model="item.productName" placeholder="{{item.productName}}"></td>
-										<td class="column02">
+										<td class="column04">{{item.productID}}</td>
+										<td class="column04">{{itemListName[item.productID]}}</td>
+										<td class="column04">
 											<!-- <input type="text" ng-model="item.quantity_in_stock" placeholder="{{item.quantity_in_stock}}"> -->
 											{{
 												(item.qty_init-
@@ -55,29 +65,30 @@
 											}}
 										</td>                		
 										<!-- <td class="column02"><input type="button" value="update" ng-click="updateShop(product._id,product)" class="btn-danger"></td> -->
-										<td class="column02"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
+										<td class="column04"><input type="button" value="delete" ng-click="deleteShop(item._id,product._id,product)" class="btn-danger"></td>
 										<!-- <td class="column">{{product.timestamp}}</td> -->
 									</tr>
 									</tbody>
 									
 								</table>
 								
-							</div>
+					</div>
 					</li>
 				</ul>
 				<div class="form">
 					<h4>Enter shop name:</h4>
 					<input type="text" name="name" ng-model="data.name">
-					<input type="button" class="btn btn-danger" ng-click="createShop()" value="createShop">
+					<button ng-click="createShop()" class="btn btn-success">CreateShop</button>
+					<!-- <input type="button" class="btn btn-success" ng-click="createShop()" value="createShop"> -->
 					<button class="btn btn-success"><a href='/additemtoshop'>AddItemToShop</a></button>
-				</divs>
+				</div>
 				<!-- <h1>{{data.name}}</h1> -->
-
 	        </div>
 		</div>
 	</div>
+	<% include partials/footer %>
+
 </body>
 
-<% include partials/footer %>
 
 </html>

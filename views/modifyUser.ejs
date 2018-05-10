@@ -23,20 +23,20 @@
 		                <table>
 		                	<thead>
 		                		<tr class="row">
-		                			<th class="column">Employee</th>
-		                			<th class="column">Position</th>
-		                			<th class="column">Location</th>
-		                			<th class="column">Modify</th>
-		                			<th class="column">Delete</th>
+		                			<th class="column05">Employee</th>
+		                			<th class="column05">Position</th>
+		                			<th class="column05">Location</th>
+		                			<th class="column05">Modify</th>
+		                			<th class="column05">Delete</th>
 		                		</tr>
 		                	</thead>
 		                	<!-- LOOP OVER THE USERS IN $scope.users -->
 		                	<tr ng-repeat="user in users" class="row">
-		                		<td class="column">{{user.username}}</td>
-		                		<td class="column"><input type="text" ng-model="user.role" placeholder="{{user.role}}"></td>
-		                		<td class="column"><input type="text" ng-model="user.shop" placeholder="{{user.shop}}"></td>
-		                		<td class="column"><input type="button" value="Update" ng-click="updateUser(user._id,user)" class="btn btn-warning"></td>
-		                		<td class="column"><input type="button" value="Detele" ng-click="deleteUser(user._id)" class="btn btn-danger"></td>
+		                		<td class="column05">{{user.username}}</td>
+		                		<td class="column05"><input type="text" ng-model="user.role" placeholder="{{user.role}}"></td>
+		                		<td class="column05"><input type="text" ng-model="user.shop" placeholder="{{user.shop}}"></td>
+		                		<td class="column05"><input type="button" value="Update" ng-click="updateUser(user._id,user)" class="btn btn-warning"></td>
+		                		<td class="column05"><input type="button" value="Detele" ng-click="deleteUser(user._id)" class="btn btn-danger"></td>
 		                	</tr>
 		                </table>
 
