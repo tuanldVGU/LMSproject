@@ -124,7 +124,7 @@
                                 <h4 class="card-title">Product Sale</h4>
                             <div class="card-body browser" >
                                 <div ng-repeat="item in items ">
-                                        <p class="f-w-600">{{item.productName}} <span class="pull-right">{{(withdraw[item.productID])*100/(init[item.productID]+deposit[item.productID])}}%</span></p>
+                                        <p class="f-w-600">{{item.productName}} <span class="pull-right">{{((withdraw[item.productID])*100/(init[item.productID]+deposit[item.productID]))| number : 2}}%</span></p>
                                         <div class="progress " >
                                             <div role="progressbar" ng-style="{width:(withdraw[item.productID])*100/(init[item.productID]+deposit[item.productID])  +'%'}" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
                                         </div>

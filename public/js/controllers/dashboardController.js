@@ -91,6 +91,7 @@ angular.module('dashboardController', ["chart.js"])
                 // $scope.series.push($scope.orders[0].item[0].producID);
                 //$scope.data.push([]);
                 for(var i=0;i<$scope.orders.length;i++)
+                    if(new Date($scope.orders[i].day).getMonth() == new Date().getMonth())
                         {
                             var check = true;
                             for(var j = 0 ; j<$scope.labels.length;j++)
@@ -124,7 +125,7 @@ angular.module('dashboardController', ["chart.js"])
                                 {
                                     if($scope.orders[i].item[j].productID == $scope.items[k].productID && $scope.orders[i].type=="withdraw")
                                     {
-                                        $scope.totalRevenue = $scope.totalRevenue+$scope.items[k].price*$scope.orders[i].item[j].quantity;
+                                        $scope.totalRevenue = $scope.totalRevenue+($scope.items[k].price*$scope.orders[i].item[j].quantity)*(1-$scope.orders[i].promotion);
                                         break;
                                     }
                                 }
