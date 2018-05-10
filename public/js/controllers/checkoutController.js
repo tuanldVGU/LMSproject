@@ -3,7 +3,7 @@ angular.module('checkoutController', [])
 		$scope.data = [];
         $scope.item = {};
         $scope.item_id = 0;
-        $scope.item_qty = 0;
+        $scope.item_qty = 1;
         $scope.subTotal = 0;
         $scope.Total = 0;
         $scope.Tax = 0;
@@ -84,6 +84,7 @@ angular.module('checkoutController', [])
                 $scope.Total = 0;
                 $scope.promotion = 0;
                 $scope.data = [];
+                $scope.item_qty = 1;
             }
         }
         

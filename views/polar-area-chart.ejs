@@ -11,7 +11,7 @@
 	<!-- Angular controller -->
 	<script src="/js/controllers/productController.js"></script>
 	<script src="/js/services/product.js"></script>
-	<script src="/js/productcore.js"></script>
+	<script src="/js/cores/productcore.js"></script>
 	
 	<!-- chart library -->
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>	 
@@ -40,7 +40,7 @@
 						<select name="shopName" ng-change="loadChartInfo(value)" ng-model="value" >
 							<option ng-repeat="product in products" ng.value="product.name">{{product.name}}</option>					
 						</select>
-						<input type="button" ng-click="loadChart()" value="loadChart">
+						<input type="button" ng-click="loadChart()" value="loadChart" class="btn btn-success">
 						<!-- <h1>{{shopName}}</h1> -->
 						<div style="width:100%; height:100%;">
 								<canvas id="myChart"></canvas>				

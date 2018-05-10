@@ -1,12 +1,7 @@
-
 <html ng-app="itemLMS">
         <head>
             <% include partials/header %>
-            <% include partials/customh %>
-        
-            <!-- Latest compiled JavaScript -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="/css/login.css">
         
             <!-- Angular controller -->
             <script src="/js/angular.min.js"></script>
@@ -17,6 +12,7 @@
             <link rel="stylesheet" type="text/css" href="/css/login.css">	
         </head>
         <body ng-controller="mainController">
+        <% include partials/nav %>
         <div class="login-page">
             <div class="form">
                 <h3>Add Item</h3><br>
@@ -30,3 +26,4 @@
             </div>
         </div>
         </body>
+</html>

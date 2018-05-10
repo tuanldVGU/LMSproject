@@ -70,16 +70,18 @@ app.use(function (req, res, next) {
 });
 
 // Restful api routes
-var routes = require('./routes/router')
+var routes = require('./routes/router');
 var users = require('./routes/users');
-var products = require('./routes/products')
-var orders = require('./routes/orderList')
-var items = require('./routes/item')
+var products = require('./routes/products');
+var orders = require('./routes/orderList');
+var items = require('./routes/item');
+var productLogs = require('./routes/productLog');
 app.use('/', routes);
 app.use('/api', users);
 app.use('/api', products);
 app.use('/api', orders);
 app.use('/api', items);
+app.use('/api',productLogs);
 
 
 // catch 404 and forward to error handler
@@ -96,7 +98,11 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-app.listen(PORT, function(){
+http.createServer(app).listen(PORT,function(){
 	console.log("App running on port "+ PORT);
-})
+});
+
+// app.listen(PORT, function(){
+// 	console.log("App running on port "+ PORT);
+// })
 

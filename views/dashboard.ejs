@@ -12,7 +12,8 @@
 	<!-- Angular controller -->
 	<script src="/js/controllers/dashboardController.js"></script>
 	<script src="/js/services/dashboard.js"></script>
-	<script src="/js/dashboardcore.js"></script>
+	<script src="/js/cores/dashboardcore.js"></script>
+
     <script src="/js/lib/chart.js"></script>
     <script src="/js/lib/angular-chart.min.js"></script>
 </head>
@@ -120,35 +121,14 @@
                     <!-- column -->
                     <div class="col-lg-4">
                         <div class="card">
-                                <h4 class="card-title">Product Availability</h4>
+                                <h4 class="card-title">Product Sale</h4>
                             <div class="card-body browser" >
                                 <div ng-repeat="item in items ">
-                                        <p class="f-w-600">{{item.productName}} <span class="pull-right">{{(init[item.productID]-withdraw[item.productID]+deposit[item.productID])*100/(init[item.productID]+deposit[item.productID])}}%</span></p>
+                                        <p class="f-w-600">{{item.productName}} <span class="pull-right">{{(withdraw[item.productID])*100/(init[item.productID]+deposit[item.productID])}}%</span></p>
                                         <div class="progress " >
-                                            <div role="progressbar" ng-style="{width:(init[item.productID]-withdraw[item.productID]+deposit[item.productID])*100/(init[item.productID]+deposit[item.productID])  +'%'}" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                            <div role="progressbar" ng-style="{width:(withdraw[item.productID])*100/(init[item.productID]+deposit[item.productID])  +'%'}" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
                                         </div>
                                 </div>
-                                
-<!-- 
-                                <p class="m-t-30 f-w-600">iBooks<span class="pull-right">90%</span></p>
-                                <div class="progress">
-                                    <div role="progressbar" style="width: 90%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                                </div>
-
-                                <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
-                                <div class="progress">
-                                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                                </div>
-
-                                <p class="m-t-30 f-w-600">Samsung<span class="pull-right">65%</span></p>
-                                <div class="progress">
-                                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-warning wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                                </div>
-
-								<p class="m-t-30 f-w-600">android<span class="pull-right">65%</span></p>
-                                <div class="progress m-b-30">
-                                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>

@@ -1,22 +1,29 @@
-<% layout('layout') %>
+<!DOCTYPE html>
+<html>
 <head>
+	<% include partials/header %>
 	<link rel="stylesheet" type="text/css" href="/css/login.css">	
 </head>
-<div class="login-page">
-	<div class="form">
-		<h3>Sign up</h3><br>
-		 <form class="register-form" action="/api/user/signup" method="post">
-		      <input type="text" name="username" placeholder="Username"/>
-		      <input type="password" name="password" placeholder="Password"/>
-		      <select name="role">
-		      	<option value="Owner">Owner</option>
-		      	<option value="Employee">Employee</option>
-		      </select>
-		      <select name="shop">
-		      	<option value="shop1">Shop1</option>
-		      	<option value="shop2">Shop2</option>
-		      </select>
-		      <button>Create</button>
-   		 </form>
-	</div>
-</div>
+<body>
+	<% include partials/nav %>
+	<div class="login-page">
+		<div class="form">
+			<h3>Sign up</h3><br>
+			 <form class="register-form" action="/api/user/signup" method="post">
+			      <input type="text" name="username" placeholder="Username"/>
+			      <input type="password" name="password" placeholder="Password"/>
+			      <select name="role">
+			      	<option value="Owner">Owner</option>
+			      	<option value="Employee">Employee</option>
+			      </select>
+			      <select name="shop">
+			      	<option value="shop1">Shop1</option>
+			      	<option value="shop2">Shop2</option>
+			      </select>
+			      <button>Create</button>
+	   		 </form>
+		</div>
+	</div>	
+</body>
+</html>
+

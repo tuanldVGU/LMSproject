@@ -38,9 +38,25 @@ angular.module('itemController', [])
 					
 					console.log('Error: ' + res);
 				});
+				$http.post('/api/productLog/',$scope.item)
+				.then(function(res){
+					$scope.abc = res.data;
+				})
+				.catch(function(res){
+					//console.log(res.data);
+					console.log("Error" + res)
+				})
 			}
 			$scope.updateItem = function(id,data){
 				$http.put('/api/item/'+id,data)
+				.then(function(res){
+					$scope.abc = res.data;
+				})
+				.catch(function(res){
+					//console.log(res.data);
+					console.log("Error" + res)
+				})
+				$http.post('/api/productLog/',data)
 				.then(function(res){
 					$scope.abc = res.data;
 				})

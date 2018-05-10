@@ -70,16 +70,18 @@
 										<th class="column02">ProductID</th>
 										<!-- <th class="column02">Update</th> -->
 										<th class="column02">Quantity</th>
+										<th class="column02">Shop</th>
 										<!-- <th class="column">Time Stamp</th> -->
 									</tr>
 								</thead>
 								<!-- LOOP OVER THE USERS IN $scope.users -->
 								<tbody>
 									<tr ng-repeat="items in itemSelected" class="row">
-									<td class="column02">{{items.day}}</td>
-									<td class="column02">{{items.type}}</td>
+									<td >{{items.day}}</td>
+									<td >{{items.type}}</td>
 									<td class="column02">{{items.productID}}</td>
 									<td class="column02">{{items.quantity}}</td>
+									<td class="column02">{{items.shop}}</td>
 								</tr>
 								</tbody>
 								

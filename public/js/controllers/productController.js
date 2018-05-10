@@ -11,11 +11,8 @@ angular.module('productController', [])
 		$scope.itemListName = [];
 		$scope.quantityItem = [];
 		$scope.counter = 0;		
-		$scope.withdraw = [];
-				$scope.deposit = [];
-				$scope.products = {};
+		$scope.products = {};
 		// show all the products
-		console.log("test"+$scope.productSelected)
 		$scope.selectProductID = function(id){
             console.log("test"+id)
             for(var i =0; i<$scope.items.length;i++)
@@ -44,50 +41,49 @@ angular.module('productController', [])
                 console.log('x');*/
                 //console.log( res.data);
 				//$scope.quantityItem = $scope.products.item;
-				$scope.withdraw = [];
-				$scope.deposit = [];
+				$scope.withdraw = new Array();
+				$scope.deposit = new Array();
 				var shopList = [];
 				//console.log($scope.products)
                 for(var i =0 ; i<$scope.products.length;i++)
                 {
-					$scope.withdraw.push([]);
-					$scope.deposit.push([]);
-					shopList[i] = $scope.products.name;
-					for(var j =0 ; j<$scope.products[i].item[j].length;j++)
+                	$scope.withdraw[i] = new Array();
+					$scope.deposit[i] = new Array();
+					shopList[i] = $scope.products[i].name;
+					for(var j = 0 ; j<$scope.products[i].item.length;j++)
 					{
-						$scope.withdraw[i].push("0");
-						$scope.deposit[i].push("0");
+						$scope.withdraw[i][$scope.products[i].item[j].productID]=0;
+						$scope.deposit[i][$scope.products[i].item[j].productID]=0;
 					}
-					console.log($scope.withdraw);
                 }
                 $scope.orders = res.data;
-                
                 for(var i = 0; i<$scope.orders.length;i++)
                 {
 					for (var k = 0; k< shopList.length;k++)
 					{
-						if($scope.orders[i].type == "withdraw")
+						if(($scope.orders[i].type == "withdraw") && ($scope.orders[i].shop == shopList[k]) )
 						{
 							
 							for (var j = 0; j<$scope.orders[i].item.length; j++)
 							{
-								console.log($scope.withdraw);
-								$scope.withdraw[k][$scope.orders[i].item[j].productID] = $scope.withdraw[k][$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity;
-								console.log($scope.withdraw);
+								$scope.withdraw[k][$scope.orders[i].item[j].productID] 
+								= $scope.withdraw[k][$scope.orders[i].item[j].productID] 
+								+ $scope.orders[i].item[j].quantity;
 							}
 							
 						}
-						if($scope.orders[i].type == "deposit")
+						if($scope.orders[i].type == "deposit" && ($scope.orders[i].shop == shopList[k]))
 						{
 							for (var j = 0; j<$scope.orders[i].item.length; j++)
 							{
-								$scope.deposit[k][$scope.orders[i].item[j].productID] = $scope.deposit[k][$scope.orders[i].item[j].productID] +$scope.orders[i].item[j].quantity
+								$scope.deposit[k][$scope.orders[i].item[j].productID] 
+								= $scope.deposit[k][$scope.orders[i].item[j].productID] 
+								+ $scope.orders[i].item[j].quantity;
 							}
 						}
 					}
                     
                 }
-				//console.log($scope.withdraw, $scope.deposit);
 			})
 		$http.get('/api/products')
 			.then(function(res){
@@ -107,12 +103,24 @@ angular.module('productController', [])
 				.then(function(res){
 					$scope.productNames = [];
 					$scope.qtyinstock = [];
-					
-					$scope.data = res.data;
-					angular.forEach($scope.data.item, function(value, key) {
+					console.log(res.data);
+					var ok = 0;
+	                for(var i =0 ; i<$scope.products.length;i++)
+	                {
+						if ($scope.products[i].name == res.data.name){
+							ok = i ;
+							break;
+						}
+	                }
+	                console.log(ok);
+					angular.forEach(res.data.item, function(value, key) {
 						$scope.productNames.push($scope.itemListName[value.productID]);
-						$scope.qtyinstock.push(value.quantity_in_stock);
-						
+						console.log(value.qty_init);
+						console.log($scope.withdraw[ok][value.productID]);
+						console.log($scope.deposit[ok][value.productID]);
+						var sum = value.qty_init-$scope.withdraw[ok][value.productID]+$scope.deposit[ok][value.productID];
+						console.log(sum);
+						$scope.qtyinstock.push(sum);
 					});
 					
 					loadChart($scope.productNames, $scope.qtyinstock);
@@ -141,7 +149,7 @@ angular.module('productController', [])
 						data: {
 							labels: productNames,
 							datasets: [{
-								label: '# of qty sold',
+								label: '# of qty_in_stock',
 								data: qtySold,
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
@@ -179,7 +187,6 @@ angular.module('productController', [])
 				$http.post('/api/product',$scope.data)
 				.then(function(res){
 					$scope.shop = res.data;
-					console.log($scope.data);
 				})
 				.catch(function(res){
 					//Export error
@@ -275,10 +282,6 @@ angular.module('productController', [])
 					console.log("Error" + res)
 				})
 			}
-			
-		
-
-
-	})
+})
 
 

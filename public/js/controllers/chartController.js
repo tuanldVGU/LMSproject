@@ -55,7 +55,7 @@ angular.module('chartController', ["chart.js"])
 					$scope.orders = res.data;
 					// $scope.series.push($scope.orders[0].item[0].producID);
 					//$scope.data.push([]);
-					var test = new Date($scope.orders[0].day)
+					// var test = new Date($scope.orders[0].day)
 					for(var i=0;i<$scope.orders.length;i++)
 					if(new Date($scope.orders[i].day) < timeE && new Date($scope.orders[i].day) > timeS)
 							{
@@ -66,6 +66,7 @@ angular.module('chartController', ["chart.js"])
 											type: $scope.orders[i].type,
 											productID : $scope.orders[i].item[j].productID,
 											quantity : $scope.orders[i].item[j].quantity,
+											shop: $scope.orders[i].shop
 										}
 									)
 								}

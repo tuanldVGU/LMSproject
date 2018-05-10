@@ -12,7 +12,7 @@
 	<script src="/js/angular.min.js"></script>
 	<script src="/js/controllers/checkoutController.js"></script>
 	<script src="/js/services/checkout.js"></script>
-	<script src="/js/checkoutcore.js"></script>
+	<script src="/js/cores/checkoutcore.js"></script>
 </head>
 <body class="fix-header fix-sidebar" ng-controller="mainController">
   
@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data" >
-                <td scope="col">{{item.id}}</td>
+                <td scope="col">{{$index}}</td>
                 <td scope="col">{{item.productID}}</td>
                 <td scope="col">{{item.productName}}</td>
                 <td scope="col">{{item.quantity}}</td>	                		
@@ -92,7 +92,7 @@
           </tr>
         </table>
          <!-- Table for Buttons  -->
-        <table>
+        <table class="table" id="rightTable">
           <tbody>
             <tr>
               <th>

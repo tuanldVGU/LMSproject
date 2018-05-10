@@ -9,6 +9,9 @@ nav ul li a{
 	color: white;
 }
 
+ul{
+}
+
 /*Table styling */
 
 /*Wrapping*/
@@ -33,17 +36,21 @@ nav ul li a{
 .limiter .wrap-table {
   width: 1000px;
   text-align: center;
+
 }
 
 /*Styling*/
 .limiter table {
   width: 100%;
   background-color: #fff;
+  border-collapse: collapse;
+  overflow-x: auto; 
 }
 
 .limiter th, td {
   font-weight: unset;
   padding-right: 10px;
+  width: 100%;
 }
 
 .limiter thead{
@@ -57,6 +64,10 @@ nav ul li a{
   text-align: center;
   color: #fff;
 
+}
+
+.limiter th:last-child {
+  text-align: center
 }
 
 .limiter td {
@@ -79,12 +90,16 @@ nav ul li a{
 }
 
 .limiter .column{
-	width: 195px;
+	width: 100%;
 	padding-left: 42px;
 }
-.limiter .column02{
-	width: 195px;
+.limiter .column05{
+	width: 20%;
 	padding-left: 42px;
+}
+.limiter .column04{
+  width: 25%;
+  padding-left: 42px;
 }
 
 ::-webkit-input-placeholder {
@@ -101,4 +116,8 @@ nav ul li a{
 
 :-ms-input-placeholder {  
    text-align: center; 
+}
+
+button a{
+  color: #fff;
 }

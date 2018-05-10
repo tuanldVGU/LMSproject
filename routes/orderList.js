@@ -4,8 +4,6 @@ var Order = require('../models/orderList');
 var checkAuth = require('../middleware/check-authE');
 /* GET ALL ORDER */
 router.get('/orders',checkAuth, function(req, res, next) {
-
-
     Order.find(function (err, products) {
       if (err) return next(err);
       res.json(products);

@@ -30,6 +30,7 @@ router.post('/product',checkAuth, function(req, res, next) {
     name: req.body.name,
     item:[]
   }
+  console.log(shop);
   Product.create(shop, function (err, post) {
     if (err) return next(err);
     res.json(post);

@@ -12,9 +12,9 @@
 	<script src="/js/angular.min.js"></script>
 	<script src="/js/controllers/checkoutController.js"></script>
 	<script src="/js/services/checkout.js"></script>
-	<script src="/js/checkoutcore.js"></script>
+	<script src="/js/cores/checkoutcore.js"></script>
 </head>
-<body class="fix-header fix-sidebar" ng-controller="mainController">
+<body class="fix-header fix-sidebar" ng-controller="mainController" ng-init="init('<%= shopName %>')">
   
   <!-- /* Start of Main Wrapper Div */ -->
   <div id="main-wrapper">
@@ -28,9 +28,9 @@
       </div>
       <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a>
+          <li class="breadcrumb-item"><a href="/home">Home</a>
           </li>
-          <li class="breadcrumb-item active">Checkout</li>
+          <li class="breadcrumb-item active"><%- shopName %></li>
         </ol>
       </div>
     </div>
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data" >
-                <td scope="col">{{item.id}}</td>
+                <td scope="col">{{$index}}</td>
                 <td scope="col">{{item.productID}}</td>
                 <td scope="col">{{item.productName}}</td>
                 <td scope="col">{{item.quantity}}</td>	                		
@@ -70,11 +70,11 @@
           </tr>
           <tr>
             <th scope="col">Promotion</th>
-            <td scope="col" id="promotion">0</td>
+            <td scope="col" id="promotion" ng-model="promotion">{{promotion*100}}</td>
           </tr>
           <tr>
             <th scope="col">Tax</th>
-            <td scope="col" id="tax">0</td>
+            <td scope="col" id="tax">{{Tax}}</td>
           </tr>
           <tr>
             <th scope="col">Item ID</th>
@@ -90,11 +90,11 @@
           </tr>
           <tr>
             <th scope="col">Total</th>
-            <td scope="col" id="sum">0</td>
+            <td scope="col" id="sum">{{Total}} </td>
           </tr>
         </table>
          <!-- Table for Buttons  -->
-        <table>
+        <table class="table" id="rightTable">
           <tbody>
             <tr>
               <th>
