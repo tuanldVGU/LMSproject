@@ -226,6 +226,7 @@ angular.module('productController', [])
 						}
 						$http.post('/api/order/',transaction)
 						.then(function(res){
+							if(!alert("Add Success")){window.location.reload();} 
 						})
 						break;
 					}
@@ -235,6 +236,7 @@ angular.module('productController', [])
 					$http.put('/api/productnew/'+id,$scope.item)
 				.then(function(res){
 					$scope.abc = res.data;
+					if(!alert("Add Success")){window.location.reload();} 
 				})
 				.catch(function(res){
 					//console.log(res.data);
@@ -242,6 +244,7 @@ angular.module('productController', [])
 				})
 
 				}
+				$window.alert(angularAlert);
 				
 			}
 			$scope.deleteShop = function(itemID, shopID,data){

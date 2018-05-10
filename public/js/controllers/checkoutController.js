@@ -68,6 +68,7 @@ angular.module('checkoutController', [])
                     
                 }
                 console.log($scope.orderListPaid);
+
             }
             $scope.promFunc = function(promotion){
                 $scope.promotion = promotion;
@@ -81,13 +82,15 @@ angular.module('checkoutController', [])
                 .then(function(res){
 
                 })
-                $scope.subTotal = 0;
-                $scope.tax = 0;
-                $scope.Total = 0;
-                $scope.promotion = 0;
-                $scope.data = [];
-                $scope.item_qty = 1;
+                // $scope.subTotal = 0;
+                // $scope.tax = 0;
+                // $scope.Total = 0;
+                // $scope.promotion = 0;
+                // $scope.data = [];
+                // $scope.item_qty = 1;
+                if(!alert("Pay Success")){window.location.reload();} 
             }
+
         }
         
 			
