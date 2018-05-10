@@ -256,7 +256,6 @@ angular.module('productController', [])
 						data.item.splice(i,1);
 					}
 				}
-				console.log(data);
 				$http.put('/api/product/'+shopID,data)
 				.then(function(res){
 					$scope.abc = res.data;

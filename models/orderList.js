@@ -11,6 +11,7 @@ var OrderSchema = new mongoose.Schema({
         ],
     day: {type: Date, default: Date.now},
     type: String,
+    promotion: Number
 });
 
 module.exports = mongoose.model('orderList', OrderSchema);

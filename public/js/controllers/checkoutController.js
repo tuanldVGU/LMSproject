@@ -71,8 +71,10 @@ angular.module('checkoutController', [])
             }
             $scope.promFunc = function(promotion){
                 $scope.promotion = promotion;
+                $scope.Total = $scope.subTotal + $scope.Tax -$scope.promotion*$scope.subTotal;
             }
             $scope.payFunc = function(id){
+                $scope.orderListPaid.promotion = $scope.promotion;
                 $scope.orderListPaid.shop = $scope.shopName;
                 $scope.orderListPaid.type = "withdraw";
                 $http.post('/api/order/',$scope.orderListPaid)

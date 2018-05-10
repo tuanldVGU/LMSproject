@@ -112,7 +112,7 @@
             </tr>
             <tr>
               <th>
-                <button type="button" class="btn" id="voucher_btn"  data-toggle="modal" data-target="#voucherModal">Add Voucher</button>
+                <button class="btn" id="voucher_btn" ><a href="/employee">Reset</a></button>
               </th>
               <th>
                 <button type="button" class="btn promBtn" ng-click="promFunc(0.5)">50%</button>
@@ -131,37 +131,6 @@
     </div>
 
   </div>
-  <!-- Modal for Pay button-->
-  <div  id="payModal" class="modal " role="dialog">
-    <div class="modal-dialog">    
-      <div class="modal-content">
-        <div class="modal-body">
-          <p id="pay_modal_value"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="closePayBtn">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> 
-<!-- End of Modal for Pay button-->
-<!-- Modal for Add Voucher button-->
-  <div id="voucherModal" class="modal " role="dialog">
-    <div class="modal-dialog">   
-      <div class="modal-content">      
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend"></div>
-            <input type="text" class="form-control" placeholder="Discount Percentage" aria-label="" aria-describedby="basic-addon1" id="voucherInput" style="width: 80px">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="voucherCloseBtn" class="btn btn-default" data-dismiss="modal" onclick="voucherFunct()">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End of Modal for Add Voucher button-->
   <!-- Modal for Camera-->
   <div id="camModal" class="modal " role="dialog">
     <div class="modal-dialog">    
@@ -176,7 +145,6 @@
     </div>
   </div> <!-- End of Modal for Camera -->  
                                      
-  <script type="text/javascript" src="/js/employee.js" ></script>
   <script type="text/javascript" src="/js/scanner.js" ></script>
   <script src="/js/quagga.min.js"></script>
 </body>

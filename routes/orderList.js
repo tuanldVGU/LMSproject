@@ -25,7 +25,8 @@ router.get('/orders',checkAuth, function(req, res, next) {
     var orderList = {
         shop: req.body.shop,
         item: req.body.item,
-        type: req.body.type
+        type: req.body.type,
+        promotion: req.body.promotion
     }
     Order.create(orderList, function (err, post) {
       if (err) return next(err);

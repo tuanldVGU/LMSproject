@@ -56,13 +56,15 @@ angular.module('chartController', ["chart.js"])
 					// $scope.series.push($scope.orders[0].item[0].producID);
 					//$scope.data.push([]);
 					// var test = new Date($scope.orders[0].day)
+
 					for(var i=0;i<$scope.orders.length;i++)
 					if(new Date($scope.orders[i].day) < timeE && new Date($scope.orders[i].day) > timeS)
 							{
+								var d = new Date($scope.orders[i].day)
 								for (var j=0; j<$scope.orders[i].item.length; j++){
 									$scope.itemSelected.push(
 										{
-											day: $scope.orders[i].day,
+											day: d.toISOString().split('T')[0],
 											type: $scope.orders[i].type,
 											productID : $scope.orders[i].item[j].productID,
 											quantity : $scope.orders[i].item[j].quantity,
