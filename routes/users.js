@@ -52,7 +52,7 @@ router.post("/users", function (req, res, next) {
 });
 
 // Sign up user
-router.post("/user/signup",checkAuth, function (req, res, next) {
+router.post("/user/signup", function (req, res, next) {
 
   if (req.body.username &&
     req.body.password &&
