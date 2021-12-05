@@ -20,8 +20,10 @@ Database and Models
 */
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+const serverPass = 'admin'; 
 // var url = 'mongodb://admin:admin@ds014578.mlab.com:14578/mylittleshop';
-var url = 'mongodb+srv://admin:admin@cluster0.sw1og.mongodb.net/myFirstDatabase&w=majority&ssl=true';
+var url = `mongodb+srv://admin:${serverPass}@cluster0.sw1og.mongodb.net/myFirstDatabase&w=majority&ssl=true`;
 mongoose.connect(url, {autoIndex: false});
 var db = mongoose.connection;
 
